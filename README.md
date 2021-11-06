@@ -31,3 +31,9 @@ sudo raspi-config
   sudo /bin/systemctl start grafana-server
   
   #grafana should now be available on port 3000
+
+
+# 4. OPTIONAL: LCD SCREEN
+git clone https://github.com/the-raspberry-pi-guy/lcd.git
+
+# see https://www.youtube.com/watch?v=3XLjVChVgec
