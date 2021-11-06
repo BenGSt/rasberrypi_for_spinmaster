@@ -7,7 +7,8 @@ for now I just used GUI
 
 # 2. **setup ssh**
 sudo raspi-config
-# under interface options enable ssh
+
+#under interface options enable ssh
 
 # 3. **install grafana**
   #Add the APT key used to authenticate packages:
