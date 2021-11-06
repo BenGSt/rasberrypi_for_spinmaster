@@ -6,7 +6,6 @@ raspberry pi setup for SpinMaster project
 for now I just used GUI 
 
 # 2. **setup ssh**
-
 sudo raspi-config
 
 #under interface options enable ssh
