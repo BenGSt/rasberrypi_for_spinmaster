@@ -2,9 +2,11 @@
 raspberry pi setup for SpinMaster project
 
 
-#1.**connect to network**
-#2. **setup ssh**
-#3. **install grafana **
+# 1.**connect to network**
+
+# 2. **setup ssh**
+
+# 3. **install grafana **
   #Add the APT key used to authenticate packages:
   wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
 
