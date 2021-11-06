@@ -36,4 +36,4 @@ sudo raspi-config
 # 4. OPTIONAL: LCD SCREEN
 git clone https://github.com/the-raspberry-pi-guy/lcd.git
 
-# see https://www.youtube.com/watch?v=3XLjVChVgec
+#see https://www.youtube.com/watch?v=3XLjVChVgec
