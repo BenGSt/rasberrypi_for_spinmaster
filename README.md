@@ -34,6 +34,22 @@ sudo raspi-config
 
 
 # 4. OPTIONAL: LCD SCREEN
-git clone https://github.com/the-raspberry-pi-guy/lcd.git
+
+#make lcd display IP on startup
+  #add systemd unit file
+  sudo cp /home/pi/spinmaster_lcd/spinmaster_lcd_show_ip_once.service /lib/systemd/system/
+  
+  #enable 
+  sudo systemctl daemon-reload
+  sudo systemctl enable spinmaster_lcd_show_ip_once.service
+  #to see the text on lcd start now or rebbot
+    #sudo systemctl start spinmaster_lcd_show_ip_once.service
+    #sudo reboot
+  
+
+
+
+
+#git clone https://github.com/the-raspberry-pi-guy/lcd.git
 
 #see https://www.youtube.com/watch?v=3XLjVChVgec
