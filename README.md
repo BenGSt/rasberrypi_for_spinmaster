@@ -35,7 +35,9 @@ for now I just used GUI
 
 # 4. OPTIONAL: LCD SCREEN
 
-#TODO make lcd display IP on startup - dosn't work yet
+#TODO make lcd display IP on startup - dosn't work yet - probably boot order issue
+
+#look at systemd-analyze
 
   #add systemd unit file
   
