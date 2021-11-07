@@ -1,0 +1,10 @@
+ [Unit]
+ Description=display IP on LCD (once - not a loop)
+ After=networking.service 
+
+ [Service]
+ Type=idle
+ ExecStart=/usr/bin/python /home/pi/spinmaster_lcd/spinmaster_lcd_show_ip_once.py
+
+ [Install]
+ WantedBy=networking.service
