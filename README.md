@@ -35,12 +35,12 @@ for now I just used GUI
 
 # 4. OPTIONAL: LCD SCREEN
 
-#TODO make lcd display IP on startup - dosn't work yet
+#TODO make the python script accept command line args for more flexibility 
 
   #add systemd unit file
   
      sudo cp /home/pi/rasberrypi_for_spinmaster/spinmaster_lcd/spinmaster_lcd_ip.service /lib/systemd/system/
-  
+  #note: should use relative path here for better portability  
   
   
   #enable 
