@@ -41,7 +41,7 @@ for now I just used GUI
 
   #add systemd unit file
   
-     sudo cp /home/pi/spinmaster_lcd/spinmaster_lcd_show_ip_once.service /lib/systemd/system/
+     sudo cp sudo cp /home/pi/rasberrypi_for_spinmaster/spinmaster_lcd/spinmaster_lcd_show_ip_once.py /lib/systemd/system/
   
   
   
