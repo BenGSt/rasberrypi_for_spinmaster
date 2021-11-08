@@ -1,0 +1,10 @@
+ [Unit]
+ Description=display IP on LCD (once - not a loop)
+ After=netwotk-online.target 
+
+ [Service]
+ Type=idle
+ ExecStart=/usr/bin/python /home/pi/rasberrypi_for_spinmaster/spinmaster_lcd/spinmaster_lcd_ip.py
+
+ [Install]
+ WantedBy=multi-user.target
