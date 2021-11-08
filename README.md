@@ -35,24 +35,22 @@ for now I just used GUI
 
 # 4. OPTIONAL: LCD SCREEN
 
-#TODO make lcd display IP on startup - dosn't work yet - probably boot order issue
-
-#look at systemd-analyze
+#TODO make lcd display IP on startup - dosn't work yet
 
   #add systemd unit file
   
-     sudo cp /home/pi/rasberrypi_for_spinmaster/spinmaster_lcd/spinmaster_lcd_show_ip_once.py /lib/systemd/system/
+     sudo cp /home/pi/spinmaster_lcd/spinmaster_lcd_ip.service /lib/systemd/system/
   
   
   
   #enable 
   
     sudo systemctl daemon-reload
-    sudo systemctl enable spinmaster_lcd_show_ip_once.service
+    sudo systemctl enable spinmaster_lcd_ip.service
   
   #to see the text on lcd start now or rebbot
   
-    #sudo systemctl start spinmaster_lcd_show_ip_once.service
+    #sudo systemctl start spinmaster_lcd_ip.service
     
     #sudo reboot
   
