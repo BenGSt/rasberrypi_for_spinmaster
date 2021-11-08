@@ -37,6 +37,14 @@ for now I just used GUI
 
 #TODO make the python script accept command line args for more flexibility 
 
+  #first run setup as explained in:
+
+	# https://github.com/the-raspberry-pi-guy/lcd.git
+	# https://www.youtube.com/watch?v=3XLjVChVgec
+  #the /the-raspberry-pi-guy/lcd repository is already in ./spinmaster_lcd/lcd
+
+
+
   #add systemd unit file
   
      sudo cp /home/pi/rasberrypi_for_spinmaster/spinmaster_lcd/spinmaster_lcd_ip.service /lib/systemd/system/
@@ -58,6 +66,3 @@ for now I just used GUI
 
 
 
-#git clone https://github.com/the-raspberry-pi-guy/lcd.git
-
-#see https://www.youtube.com/watch?v=3XLjVChVgec
