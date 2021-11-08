@@ -39,7 +39,7 @@ for now I just used GUI
 
   #add systemd unit file
   
-     sudo cp /home/pi/spinmaster_lcd/spinmaster_lcd_ip.service /lib/systemd/system/
+     sudo cp /home/pi/rasberrypi_for_spinmaster/spinmaster_lcd/spinmaster_lcd_ip.service /lib/systemd/system/
   
   
   
