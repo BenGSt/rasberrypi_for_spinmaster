@@ -1,7 +1,7 @@
 '''
 ------------------------------------------------------
 Final project - LCD display shell interface
-Authors:	Yoav Silberstein
+Authors:    Yoav Silberstein
 File:	    LCD_shell_interface.py
 Date:       17/11/2021  	
 ------------------------------------------------------
