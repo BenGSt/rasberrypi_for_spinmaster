@@ -2,7 +2,7 @@
 ------------------------------------------------------
 Final project - LCD display shell interface
 Authors:	Yoav Silberstein
-File:	    LCD_shell_interface.py.sv
+File:	    LCD_shell_interface.py
 Date:       17/11/2021  	
 ------------------------------------------------------
 '''
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     string_len = len(value)
 
     if(comand == "--print"):
-        # split the value to lines
+        # split value to lines
         buffer = 0
         while(string_len - LINE_WIDTH >= buffer):
             lines_arr.append(value[buffer: buffer + LINE_WIDTH])
