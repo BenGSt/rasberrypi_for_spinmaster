@@ -15,6 +15,7 @@ from datetime import datetime
 from subprocess import check_output
 
 import sys
+from colorama import Fore, Back, Style
 
 # If you use something from the driver library use the "display." prefix first
 display = drivers.Lcd()
@@ -70,16 +71,21 @@ def get_ip():
         print("Cleaning up!")
         display.lcd_clear()
 
+def help():
+    print(Fore.YELLOW + "--print " + Fore.WHITE + "\"text\" print \"text\" on LCD display")
+    print(Fore.YELLOW + "--get_ip " + Fore.WHITE + "print Raspberry pi ip on LCD display")
 
 if __name__ == "__main__":
 
     # consts
     LINE_WIDTH = 16 # number of letters per line
 
-   # [unused, comand, value] = sys.argv()
-    value = "dsjfkjdskfjkldsjfkljsdkfljdskljfkldsjfkljsdklfjklds"
-    comand = "--print"
+    comand = sys.argv[1]
+    value = ""
 
+    if(len(sys.argv) > 2):
+        value = sys.argv[2]
+    
     lines_arr = []
     string_len = len(value)
 
@@ -104,3 +110,6 @@ if __name__ == "__main__":
 
     if(comand == "--backlight_off"):
         LCD_backlight(0)
+
+    if(comand == "--help"):
+        help() 
