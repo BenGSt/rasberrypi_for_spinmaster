@@ -74,7 +74,7 @@ def get_ip():
 if __name__ == "__main__":
 
     # consts
-    LINE_WIDTH = 22 # number of letters per line
+    LINE_WIDTH = 16 # number of letters per line
 
    # [unused, comand, value] = sys.argv()
     value = "dsjfkjdskfjkldsjfkljsdkfljdskljfkldsjfkljsdklfjklds"
