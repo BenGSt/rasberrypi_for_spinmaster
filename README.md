@@ -37,6 +37,8 @@ for now I just used GUI
     sudo cp ./dashboard/grafana.ini /etc/grafana/grafana.ini
     sudo systemctl restart grafana-server.service
     
+  #TODO: add the built dashboards
+    
 # 4. Set up apache2 webserver to serve the SpinMaster web interface
     
     sudo apt install apache2
@@ -44,7 +46,11 @@ for now I just used GUI
     
   #Note you have to change the ip address in webpage_with_embedded_grafana_dashboard.html to machines ip.
   #TODO: figure out how to setup generic iframe with link without specific IP  (localhost dosn't work)
-    
+
+
+# 5.TODO: influxdb
+# 6.TODO: telegraf
+# 7.TODO: shellinabox
     
 # 5. OPTIONAL: LCD SCREEN
 
