@@ -35,9 +35,9 @@ for now I just used GUI
   #allow embedding by changing the line allow_embedding = false to allow_embedding = true in /etc/grafana/grafana.ini 
   
     sudo sed 's/;allow_embedding = false/allow_embedding = true/' /etc/grafana/grafana.ini > ./grafana.ini
-    sudo cp ./grafana.ini /etc/grafana/grafana.ini
     
-    sudo cat << EOF >> /etc/grafana/grafana.ini
+    
+    sudo cat << EOF >> ./grafana.ini
     
     ##############SPINMASTER####################
     allow_embedding = true
@@ -48,6 +48,7 @@ for now I just used GUI
     ###########################################
     EOF
     
+    sudo cp ./grafana.ini /etc/grafana/grafana.ini
     rm ./grafana.ini
     sudo systemctl restart grafana-server.service
 
