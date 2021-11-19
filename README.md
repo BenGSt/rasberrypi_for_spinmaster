@@ -36,6 +36,18 @@ for now I just used GUI
   
     sudo sed 's/;allow_embedding = false/allow_embedding = true/' /etc/grafana/grafana.ini > ./grafana.ini
     sudo cp ./grafana.ini /etc/grafana/grafana.ini
+    
+    sudo cat << EOF >> /etc/grafana/grafana.ini
+    
+    ##############SPINMASTER####################
+    allow_embedding = true
+    auth.anonymous
+    enabled = true
+    org_name = SpinMaster
+    org_role = Viewer
+    ###########################################
+    EOF
+    
     rm ./grafana.ini
     sudo systemctl restart grafana-server.service
 
