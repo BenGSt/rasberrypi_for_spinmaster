@@ -36,7 +36,13 @@ for now I just used GUI
     
     sudo cp ./dashboard/grafana.ini /etc/grafana/grafana.ini
     sudo systemctl restart grafana-server.service
-
+    
+# 4. Set up apache2 webserver to serve the SpinMaster web interface
+    
+    sudo apt install apache2
+    sudo cp ./dashboard/webpage_with_embedded_grafana_dashboard.html /var/www/html/index.html
+    
+    
 # 4. OPTIONAL: LCD SCREEN
 
 #TODO make the python script accept command line args for more flexibility 
