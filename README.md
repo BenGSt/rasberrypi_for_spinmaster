@@ -46,7 +46,7 @@ for now I just used GUI
   #TODO: figure out how to setup generic iframe with link without specific IP  (localhost dosn't work)
     
     
-# 4. OPTIONAL: LCD SCREEN
+# 5. OPTIONAL: LCD SCREEN
 
 #TODO make the python script accept command line args for more flexibility 
 
