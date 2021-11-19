@@ -32,24 +32,9 @@ for now I just used GUI
   
   #grafana should now be available on port 3000
   
-  #allow embedding by changing the line allow_embedding = false to allow_embedding = true in /etc/grafana/grafana.ini 
-  
-    sudo sed 's/;allow_embedding = false/allow_embedding = true/' /etc/grafana/grafana.ini > ./grafana.ini
+  #allow embedding by in /etc/grafana/grafana.ini 
     
-    
-    sudo cat << EOF >> ./grafana.ini
-    
-    ##############SPINMASTER####################
-    allow_embedding = true
-    auth.anonymous
-    enabled = true
-    org_name = SpinMaster
-    org_role = Viewer
-    ###########################################
-    EOF
-    
-    sudo cp ./grafana.ini /etc/grafana/grafana.ini
-    rm ./grafana.ini
+    sudo cp ./dashboard/grafana.ini /etc/grafana/grafana.ini
     sudo systemctl restart grafana-server.service
 
 # 4. OPTIONAL: LCD SCREEN
