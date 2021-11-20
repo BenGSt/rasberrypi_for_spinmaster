@@ -1,0 +1,15 @@
+https://simonhearne.com/2020/pi-influx-grafana/
+https://medium.com/@dorian599/iot-raspberry-pi-container-and-system-monitoring-with-influxdb-telegraf-and-grafana-a1767c38c109
+https://grafana.com/grafana/dashboards/10578/reviews
+
+create database home
+use home
+
+create user grafana with password '' with all privileges
+grant all privileges on home to grafana
+
+show users
+
+user admin
+---- -----
+grafana true
