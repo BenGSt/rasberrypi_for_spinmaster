@@ -45,6 +45,7 @@ for now I just used GUI
     sudo cp ./dashboard/webpage_with_embedded_grafana_dashboard.html /var/www/html/index.html
     
   #Note you have to change the ip address in webpage_with_embedded_grafana_dashboard.html to machines ip.
+  
   #TODO: figure out how to setup generic iframe with link without specific IP  (localhost dosn't work)
 
 
