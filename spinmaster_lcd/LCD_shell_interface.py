@@ -3,7 +3,7 @@
 Final project - LCD display shell interface
 Authors:    Yoav Silberstein
 File:	    LCD_shell_interface.py
-Date:       17/11/2021  	
+Date:       19/11/2021  	
 ------------------------------------------------------
 '''
 
@@ -16,6 +16,7 @@ from subprocess import check_output
 
 import sys
 from colorama import Fore, Back, Style
+import argparse
 
 # If you use something from the driver library use the "display." prefix first
 display = drivers.Lcd()
@@ -83,13 +84,18 @@ if __name__ == "__main__":
     comand = sys.argv[1]
     value = ""
 
-    if(len(sys.argv) > 2):
-        value = sys.argv[2]
+    parser = argparse.ArgumentParser(description='LCD display shell intrerface')
+    parser.add_argument('-p', '--print', type=str, metavar='', help='print text on LCD display')
+    parser.add_argument('-i', '--ip', type=str, metavar='', help='print Rasbperrt pi ip address')
+    args =  parser.parse_args
+
+  #  if(len(sys.argv) > 2):
+    value = args.print
     
     lines_arr = []
-    string_len = len(value)
+    string_len = len(args.print)
 
-    if(comand == "--print"):
+    if(string_len):
         # split value to lines
         buffer = 0
         while(string_len - LINE_WIDTH >= buffer):
