@@ -30,7 +30,7 @@ for now I just used GUI
     sudo /bin/systemctl enable grafana-server
     sudo /bin/systemctl start grafana-server
   
-  #grafana should now be available on port 3000
+  #grafana should now be available on port 3000 with username: admin, password: admin.
   
   #allow embedding by in /etc/grafana/grafana.ini 
     
@@ -49,7 +49,33 @@ for now I just used GUI
   #TODO: figure out how to setup generic iframe with link without specific IP  (localhost dosn't work)
 
 
-# 5.TODO: influxdb
+# 5. Install influxdb DB 
+   #add Influx repositories to apt:
+   
+    wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+    source /etc/os-release
+    echo "deb https://repos.influxdata.com/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+    
+   #Update apt with the new repos, & install.
+   
+    sudo apt update && sudo apt install -y influxdb
+    
+   #start the influxdb service and set it to run at boot:
+   
+    sudo systemctl unmask influxdb.service
+    sudo systemctl start influxdb
+    sudo systemctl enable influxdb.service
+    
+   #run the influx client and create a user
+   
+    influx
+    create database home
+    use home
+    create user grafana with password '' with all privileges
+    exit
+    
+   
+   
 # 6.TODO: telegraf
 # 7.TODO: shellinabox
     
