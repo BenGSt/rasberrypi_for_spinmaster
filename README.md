@@ -41,7 +41,7 @@ for now I just used GUI
     
 # 4. Set up apache2 webserver to serve the SpinMaster web interface
     
-    sudo apt install apache2
+    sudo apt install -y apache2
     sudo cp ./dashboard/webpage_with_embedded_grafana_dashboard.html /var/www/html/index.html
     
   #Note you have to change the ip address in webpage_with_embedded_grafana_dashboard.html to machines ip.
