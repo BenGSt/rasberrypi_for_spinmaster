@@ -86,7 +86,7 @@ for now I just used GUI
 	sudo apt-get install -y telegraf
 	
 	#Add the user telegraf to the video group to allow telegraf to recollect info of the GPU temperature
-	usermod -aG video telegraf
+	sudo usermod -aG video telegraf
 	
 	#Add capabilities to the “ping” binary to allow telegraf to execute ping checks
 	setcap 'cap_net_admin,cap_net_raw+ep' $(which ping)
