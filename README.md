@@ -72,11 +72,34 @@ for now I just used GUI
     create database home
     use home
     create user grafana with password '' with all privileges
+    grant all privileges on home to grafana
     exit
     
    
    
-# 6.TODO: telegraf
+# 6. telegraf - posts data to DB
+	curl -sL https://repos.influxdata.com/influxdb.key |sudo apt-key add -
+	DISTRIB_ID=$(lsb_release -c -s)
+	echo "deb https://repos.influxdata.com/debian ${DISTRIB_ID} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+	
+	sudo apt-get update
+	sudo apt-get install -y telegraf
+	
+	#Add the user telegraf to the video group to allow telegraf to recollect info of the GPU temperature
+	usermod -aG video telegraf
+	
+	#Add capabilities to the “ping” binary to allow telegraf to execute ping checks
+	setcap 'cap_net_admin,cap_net_raw+ep' $(which ping)
+	
+	sudo cp ./dashboard/telegraf.conf /etc/telegraf/telegraf.conf
+	sudo systemctl restart telegraf
+	
+   #add inluxdb data source via grafana web interface
+   
+   url: http://localhost:8086 , Database: home, User: grafana
+	
+	
+
 # 7.TODO: shellinabox
     
 # 5. OPTIONAL: LCD SCREEN
@@ -108,7 +131,9 @@ for now I just used GUI
     
     #sudo reboot
   
+# Useful tools:
 
+	sudo apt install i2c-tools
 
 
 
