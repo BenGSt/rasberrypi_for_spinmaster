@@ -45,7 +45,7 @@ while True:
 #            ads.gain = gain
 #            print(' | {:5} {:5.3f}'.format(chan.value, chan.voltage), end='')
 #        print()
-        time.sleep(3)
+        time.sleep(0.5)
 
         Vo = chan.value
         R2 = R1 * (27529 / Vo - 1.0)
