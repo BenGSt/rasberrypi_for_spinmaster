@@ -97,6 +97,10 @@ for now I just used GUI
    #add inluxdb data source via grafana web interface
    
    url: http://localhost:8086 , Database: home, User: grafana
+   
+   #example usage with [input.tail] set up in telegraf.conf :  
+   
+  	 python3 sensors/thermistor_adc/get_temp_test.py > /home/pi/thermistor_adc/thermistor_0.log &
 	
 	
 
