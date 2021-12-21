@@ -104,7 +104,9 @@ for now I just used GUI
 	
 	
 
-# 7.TODO: shellinabox
+# 7. shellinabox - web based SSH emulator
+
+	sudo apt-get install shellinabox
     
 # 5. OPTIONAL: LCD SCREEN
 
