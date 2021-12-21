@@ -89,7 +89,7 @@ for now I just used GUI
 	sudo usermod -aG video telegraf
 	
 	#Add capabilities to the “ping” binary to allow telegraf to execute ping checks
-	setcap 'cap_net_admin,cap_net_raw+ep' $(which ping)
+	sudo setcap 'cap_net_admin,cap_net_raw+ep' $(which ping)
 	
 	sudo cp ./dashboard/telegraf.conf /etc/telegraf/telegraf.conf
 	sudo systemctl restart telegraf
