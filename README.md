@@ -94,9 +94,9 @@ for now I just used GUI
 	sudo cp ./dashboard/telegraf.conf /etc/telegraf/telegraf.conf
 	sudo systemctl restart telegraf
 	
-   #add inluxdb data source via grafana web interface
+   #add inluxdb data source via grafana web interface:
    
-   url: http://localhost:8086 , Database: home, User: grafana
+   #url: http://localhost:8086 , Database: home, User: grafana
    
    #example usage with [input.tail] set up in telegraf.conf :  
    
