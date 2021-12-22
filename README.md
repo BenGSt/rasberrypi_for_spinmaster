@@ -89,18 +89,24 @@ for now I just used GUI
 	sudo usermod -aG video telegraf
 	
 	#Add capabilities to the “ping” binary to allow telegraf to execute ping checks
-	setcap 'cap_net_admin,cap_net_raw+ep' $(which ping)
+	sudo setcap 'cap_net_admin,cap_net_raw+ep' $(which ping)
 	
 	sudo cp ./dashboard/telegraf.conf /etc/telegraf/telegraf.conf
 	sudo systemctl restart telegraf
 	
-   #add inluxdb data source via grafana web interface
+   #add inluxdb data source via grafana web interface:
    
-   url: http://localhost:8086 , Database: home, User: grafana
+   #url: http://localhost:8086 , Database: home, User: grafana
+   
+   #example usage with [input.tail] set up in telegraf.conf :  
+   
+  	 python3 sensors/thermistor_adc/get_temp_test.py > /home/pi/thermistor_adc/thermistor_0.log &
 	
 	
 
-# 7.TODO: shellinabox
+# 7. shellinabox - web based SSH emulator
+
+	sudo apt-get install shellinabox
     
 # 5. OPTIONAL: LCD SCREEN
 

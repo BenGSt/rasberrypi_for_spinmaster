@@ -39,22 +39,34 @@ c3 = 2.019202697e-07
 
 
 while True:
-        ads.gain = gains[0]
-        print('volts={:5.3f}'.format(chan.voltage))
+	ads.gain = 1
+#        print('volts={:5.3f}'.format(chan.voltage))
 #        for gain in gains[1:]:
 #            ads.gain = gain
 #            print(' | {:5} {:5.3f}'.format(chan.value, chan.voltage), end='')
 #        print()
-        time.sleep(3)
+#        time.sleep(1)
+	
+	T_0 = 298.15 #25C in kelvin - refrence temp for R_0.
+	R_0 = 100000 # the thermistors resistance at T_0.
+	Beta = 3950 #beta factor
+	V_in = 5
+	V_out = chan.voltage
+	R_S = 100000 #the resistor between GND and Analog_in
+	R_T = (( V_in  / V_out) - 1) * R_S #the thermistor's resistance
+	T = 1 / ((1 / T_0) + (1/Beta) * log(R_T / R_0))
+	Tc = T - 273.15
+	print('Tc={:5.3f}'.format(Tc))
+	time.sleep(0.5)
 
-        Vo = chan.value
-        R2 = R1 * (27529 / Vo - 1.0)
+#        Vo = chan.value
+#        R2 = R1 * (27529 / Vo - 1.0)
 #        R2 = chan.voltage
-        logR2 = log(R2)
-        T = (1.0 / (c1 + c2*logR2 + c3*logR2*logR2*logR2))
-        Tc = T - 273.15
-        Tf = (Tc * 9.0)/ 5.0 + 32.0
+#        logR2 = log(R2)
+#        T = (1.0 / (c1 + c2*logR2 + c3*logR2*logR2*logR2))
+#        Tc = T - 273.15
+#        Tf = (Tc * 9.0)/ 5.0 + 32.0
 
 #        print("Tf: " + str(Tf), end =' ')
 #        print("Tc: " + str(Tc))
-        sys.stdout.flush()
+	sys.stdout.flush()
