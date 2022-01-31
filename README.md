@@ -107,7 +107,18 @@ for now I just used GUI
 # 7. shellinabox - web based SSH emulator
 
 	sudo apt-get install shellinabox
-    
+   
+# 8. set up ADC
+# 9. set up digital temperature sensors (DS18B20)
+  #enable one-wire interface 
+    # sudo raspi-config
+    #choose interface options -> 1-wire
+
+  #make sure internal pull up resistor is up (can also be done on python code) 
+    # raspi-gpio set 4 pu
+
+  #read temperatures (once for each sensor, assuming no other 1-w devices on machine)
+    #  i=0; for sensor in `realpath  /sys/bus/w1/devices/28*/temperature`; do echo Tc_digital_temp_sensor_$i `cat $sensor| sed 's/\([0-9][0-9]\)\(.*\)/\1\.\2/'`; i=$((i+1)); done
 # 5. OPTIONAL: LCD SCREEN
 
 #TODO make the python script accept command line args for more flexibility 
