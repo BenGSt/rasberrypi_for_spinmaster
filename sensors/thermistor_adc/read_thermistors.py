@@ -1,3 +1,11 @@
+'''
+------------------------------------------------------
+SpinMaster project - thermistor reading script
+Authors:    Ben Steinberg
+Date:       31/01/2022
+------------------------------------------------------
+'''
+
 import sys
 import time
 import board
@@ -17,6 +25,7 @@ def calculate_temperature(channel):
     R_T = ((V_in / V_out) - 1) * R_S  # the thermistor's resistance
     T = 1 / ((1 / T_0) + (1 / Beta) * log(R_T / R_0))
     Tc = T - 273.15
+
     return Tc
 
 
@@ -24,11 +33,9 @@ def print_temperatures(temperatures):
     for i in range(len(temperatures) - 1):
         print('Tc_thermistor{}={:5.3f}'.format(i, temperatures[i]), end='\t')
 
-
     i = len(temperatures) - 1
     print('Tc_thermistor{}={:5.3f}'.format(i, temperatures[i]))
     sys.stdout.flush()
-
 
 
 def main(loop_times=5, loop_forever=False, number_of_samples_to_average=5, sleep_time_between_sampling=0.5):
@@ -73,4 +80,4 @@ def main(loop_times=5, loop_forever=False, number_of_samples_to_average=5, sleep
             break
 
 if __name__ == "__main__":
-    main(loop_times=5, loop_forever=True, number_of_samples_to_average=50, sleep_time_between_sampling=0.5)
+    main(loop_times=5, loop_forever=False, number_of_samples_to_average=50, sleep_time_between_sampling=0)
