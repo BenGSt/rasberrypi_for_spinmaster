@@ -18,21 +18,21 @@ display = drivers.Lcd()
 try:
 #    print("Writing to display")
     while True:
-      	print("Writing to display")
-	display.lcd_display_extended_string(str(datetime.now()), 2)
-	display.lcd_display_string("   SpinMaster  ", 1)
+        print("Writing to display")
+        display.lcd_display_extended_string(str(datetime.now()), 2)
+        display.lcd_display_string("   SpinMaster  ", 1)
         sleep(5)
 
+        if len(check_output(["hostname", "-I"]).split()):
+                print("Got IP")
+                IP = check_output(["hostname", "-I"]).split()[0]
+                display.lcd_display_string("IP:" + str(IP), 2)
 
-	if len(check_output(["hostname", "-I"]).split()):
-		print("Got IP")
-		IP = check_output(["hostname", "-I"]).split()[0]
-	       	display.lcd_display_string("IP:" + str(IP), 2)
+        else:
+                print("No IP")
+                display.lcd_display_string("  Offline  ", 2)
 
-	else:
-		print("No IP")
-		display.lcd_display_string("  Offline  ", 2)
-	sleep(5)
+        sleep(5)
 
 
 except KeyboardInterrupt:
