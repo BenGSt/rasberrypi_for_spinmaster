@@ -21,7 +21,7 @@ def calculate_temperature(channel):
     return Tc
 
 
-def print_temperatures(temperatures, sleep_time=0.5):
+def print_temperatures(temperatures):
     for i in range(len(temperatures) - 1):
         print('Tc_thermistor{}={:5.3f}'.format(i, temperatures[i]), end='\t')
 
@@ -29,10 +29,10 @@ def print_temperatures(temperatures, sleep_time=0.5):
     i = len(temperatures) - 1
     print('Tc_thermistor{}={:5.3f}'.format(i, temperatures[i]))
     sys.stdout.flush()
-    time.sleep(sleep_time)
 
 
-def main(loop_times=5, loop_forever=False):
+
+def main(loop_times=5, loop_forever=False, number_of_samples_to_average=5, sleep_time_between_sampling=0.5):
     # Create the I2C bus
     i2c = busio.I2C(board.SCL, board.SDA)
 
@@ -57,12 +57,21 @@ def main(loop_times=5, loop_forever=False):
     # ADS1115 = 32767
     channels = [AnalogIn(ads, ADS.P0), AnalogIn(ads, ADS.P1), AnalogIn(ads, ADS.P2)]
 
+    average_temperatures = [0, 0, 0]
     while True:
-        temperatures = list(map(calculate_temperature, channels))
-        print_temperatures(temperatures=temperatures, sleep_time=0.5)
+        for _ in range(number_of_samples_to_average):
+            temperatures = list(map(calculate_temperature, channels))
+
+            for i in range(len(temperatures)):
+                average_temperatures[i] += (temperatures[i] / number_of_samples_to_average)
+
+        print_temperatures(average_temperatures)
+        average_temperatures = [0, 0, 0]
+
+        time.sleep(sleep_time_between_sampling)
         loop_times -= 1
         if loop_times == 0 and not loop_forever:
             break
 
 if __name__ == "__main__":
-    main(loop_times=5, loop_forever=True)
+    main(loop_times=5, loop_forever=True, number_of_samples_to_average=50, sleep_time_between_sampling=0.5)
