@@ -81,7 +81,7 @@ def main(loop_times=5, loop_forever=False, number_of_samples_to_average=5, sleep
                 average_temperatures[i] += (temperatures[i] / number_of_samples_to_average)
 
         # print_temperatures(average_temperatures)
-        print_temperatures_no_id(average_temperatures)
+        print_temperatures_no_id(average_temperatures) #printing one value for debug
         average_temperatures = [0, 0, 0]
 
         time.sleep(sleep_time_between_sampling)
