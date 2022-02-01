@@ -38,6 +38,15 @@ def print_temperatures(temperatures):
     sys.stdout.flush()
 
 
+def print_temperatures_no_id(temperatures):
+    # for i in range(len(temperatures) - 1):
+    #     print('{:.1f}'.format(temperatures[i]), end='\t')
+
+    i = len(temperatures) - 1
+    print('{:.1f}'.format(temperatures[i]))
+    sys.stdout.flush()
+
+
 def main(loop_times=5, loop_forever=False, number_of_samples_to_average=5, sleep_time_between_sampling=0.5):
     # Create the I2C bus
     i2c = busio.I2C(board.SCL, board.SDA)
@@ -71,7 +80,8 @@ def main(loop_times=5, loop_forever=False, number_of_samples_to_average=5, sleep
             for i in range(len(temperatures)):
                 average_temperatures[i] += (temperatures[i] / number_of_samples_to_average)
 
-        print_temperatures(average_temperatures)
+        # print_temperatures(average_temperatures)
+        print_temperatures_no_id(average_temperatures)
         average_temperatures = [0, 0, 0]
 
         time.sleep(sleep_time_between_sampling)
