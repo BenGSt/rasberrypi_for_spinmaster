@@ -80,8 +80,8 @@ def main(loop_times=5, loop_forever=False, number_of_samples_to_average=5, sleep
             for i in range(len(temperatures)):
                 average_temperatures[i] += (temperatures[i] / number_of_samples_to_average)
 
-        # print_temperatures(average_temperatures)
-        print_temperatures_no_id(average_temperatures) #printing one value for debug
+        print_temperatures(average_temperatures)
+        # print_temperatures_no_id(average_temperatures) #printing one value for debug
         average_temperatures = [0, 0, 0]
 
         time.sleep(sleep_time_between_sampling)
@@ -90,4 +90,4 @@ def main(loop_times=5, loop_forever=False, number_of_samples_to_average=5, sleep
             break
 
 if __name__ == "__main__":
-    main(loop_times=1, loop_forever=False, number_of_samples_to_average=50, sleep_time_between_sampling=0)
+    main(loop_times=10, loop_forever=False, number_of_samples_to_average=50, sleep_time_between_sampling=0)
