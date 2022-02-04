@@ -24,30 +24,28 @@ for now I just used GUI
     sudo apt-get update
     sudo apt-get install -y grafana
   
-  #To make sure Grafana starts up even if the Raspberry Pi is restarted,
-  #we need to enable and start the Grafana Systemctl service:
-  
+    # To make sure Grafana starts up even if the Raspberry Pi is restarted,
+    # we need to enable and start the Grafana Systemctl service:
     sudo /bin/systemctl enable grafana-server
     sudo /bin/systemctl start grafana-server
   
-  #grafana should now be available on port 3000 with username: admin, password: admin.
-  
-  #allow embedding by in /etc/grafana/grafana.ini 
-    
+    # grafana should now be available on port 3000 with username: admin, password: admin.
+   
+    # allow embedding by editing /etc/grafana/grafana.ini
     sudo cp ./dashboard/grafana.ini /etc/grafana/grafana.ini
     sudo systemctl restart grafana-server.service
     
-  #TODO: add the built dashboards
-    
-# 4. Set up apache2 webserver to serve the SpinMaster web interface
+  #Add the built dashboards (raspi monitoring, spinmaster) using GUI to import json
+    #TODO: automate this step
+# 4. Set up apache2 webserver to serve the SpinMaster web interface.
+
     
     sudo apt install -y apache2
     sudo cp ./dashboard/webpage_with_embedded_grafana_dashboard.html /var/www/html/index.html
     
-  #Note you have to change the ip address in webpage_with_embedded_grafana_dashboard.html to machines ip.
+    # Note you have to change the ip address in webpage_with_embedded_grafana_dashboard.html to machines ip.
+    # TODO: automate using generic, enviormental variable, or sed. 
   
-  #TODO: figure out how to setup generic iframe with link without specific IP  (localhost dosn't work)
-
 
 # 5. Install influxdb DB 
    #add Influx repositories to apt:
