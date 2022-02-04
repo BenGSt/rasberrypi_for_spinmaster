@@ -114,6 +114,10 @@ for now I just used GUI
     # sudo raspi-config
     #choose interface options -> 1-wire
 
+    # load modules to the kernel
+    sudo modprobe w1_therm
+    sudo modprobe w1_gpio
+
     # cat /boot/overlays/README  # documentation about the 'dtoverlay' feature and its syntax
     dtoverlay=w1-gpio,gpiopin=4
     
