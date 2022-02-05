@@ -87,7 +87,7 @@ arg_parse()
         ;;
       -op|--operation)
          OPERATION="$2"
-         if [[ "$OPERATION" == "ENABLE" || "$OPERATION" == "DISABLE" ]]
+         if [[ "$OPERATION" == "ENABLE" || "$OPERATION" == "DISABLE" || "$OPERATION" == 0 || "$OPERATION" == 1 ]]
          then
             shift # past argument
             shift # past value
@@ -136,7 +136,7 @@ set_duty_cycle()
 
 do_operation()
 {
-  if [[ "$OPERATION" == "ENABLE" ]]
+  if [[ "$OPERATION" == "ENABLE" || "$OPERATION" == 1 ]]
   then
     echo 1 > /sys/class/pwm/pwmchip0/pwm$CHANNEL/enable
     echo pwm$CHANNEL enabled
