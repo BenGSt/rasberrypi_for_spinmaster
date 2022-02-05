@@ -136,9 +136,11 @@ do_operation()
 {
   if [[ "$OPERATION" == "ENABLE" ]]
   then
-    echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
+    echo 1 > /sys/class/pwm/pwmchip0/pwm$CHANNEL/enable
+    echo pwm$CHANNEL enabled
   else
-    echo 0 > /sys/class/pwm/pwmchip0/pwm0/enable
+    echo 0 > /sys/class/pwm/pwmchip0/pwm$CHANNEL/enable
+    echo pwm$CHANNEL disabled
   fi
 }
 
