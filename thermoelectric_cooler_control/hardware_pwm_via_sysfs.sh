@@ -89,6 +89,7 @@ arg_parse()
             shift # past value
          else
             exit 1
+         fi
         ;;
       -*|--*)
         help
@@ -130,6 +131,7 @@ do_operation()
     echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
   else
     echo 0 > /sys/class/pwm/pwmchip0/pwm0/enable
+  fi
 }
 
 main "$@"
