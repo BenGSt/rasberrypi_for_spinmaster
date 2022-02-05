@@ -44,7 +44,6 @@ help()
 
     -op||--operation)
       one of:
-        export - creates the system files e.g. /sys/class/pwm/pwmchip0/pwm0/*
         enable - turns channel on
         disable - turns channel off.
 EOF
