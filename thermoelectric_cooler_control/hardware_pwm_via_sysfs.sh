@@ -48,10 +48,10 @@ EOF
 arg_parse()
 {
   #defaults
-  FREQUENCY = 10000
-  DUTY_CYCLE = 50
-  CHANNEL = 0
-  OPERATION = "enable"
+  FREQUENCY=10000
+  DUTY_CYCLE=50
+  CHANNEL=0
+  OPERATION="enable"
 
   while [[ $# -gt 0 ]]; do
     case $1 in
