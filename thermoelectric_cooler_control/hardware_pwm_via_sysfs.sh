@@ -76,11 +76,11 @@ arg_parse()
         ;;
       -*|--*)
         help()
-        exit(1)
+        exit
         ;;
       -h|--help)
         help()
-        exit(1)
+        exit
         ;;
     esac
   done
