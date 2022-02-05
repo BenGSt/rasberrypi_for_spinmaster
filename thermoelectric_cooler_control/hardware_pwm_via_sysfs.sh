@@ -69,7 +69,7 @@ arg_parse()
         shift # past argument
         shift # past value
         ;;
-      -op||--operation)
+      -op|--operation)
         OPERATION="$2"
         shift # past argument
         shift # past value
@@ -78,7 +78,7 @@ arg_parse()
         help()
         exit 1
         ;;
-      -h||--help)
+      -h|--help)
         help()
         exit 1
         ;;
