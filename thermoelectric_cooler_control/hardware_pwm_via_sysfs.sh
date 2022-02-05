@@ -82,7 +82,7 @@ arg_parse()
         shift # past value
         ;;
       -op|--operation)
-        OPERATION="$2"
+         OPERATION="$2"
          if [ "$OPERATION" == "ENABLE" || "$OPERATION" == "DISABLE" ]
          then
             shift # past argument
