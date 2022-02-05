@@ -119,6 +119,8 @@ set_period()
 {
   PERIOD=$((1000000000 / $FREQUENCY)) #in nanoseconds
   echo $PERIOD > /sys/class/pwm/pwmchip0/pwm0/period
+
+  echo PERIOD set to $PERIOD [ns]
 }
 
 
@@ -126,6 +128,8 @@ set_duty_cycle()
 {
   DUTY_CYCLE_NANOSEC=$((PERIOD * (DUTY_CYCLE / 100)))
   echo $DUTY_CYCLE_NANOSEC > /sys/class/pwm/pwmchip0/pwm0/duty_cycle
+
+  echo DUTY_CYCLE set to $DUTY_CYCLE_DUTY_CYCLE_NANOSEC [ns]
 }
 
 do_operation()
