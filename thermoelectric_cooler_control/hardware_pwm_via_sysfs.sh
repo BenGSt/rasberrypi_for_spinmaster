@@ -17,10 +17,10 @@ main()
   set_duty_cycle
   do_operation
 
-  echo PERIOD=$(cat /sys/class/pwm/pwmchip0/pwm$CHANNEL/period) [ns]
-  echo DUTY_CYCLE=$(cat /sys/class/pwm/pwmchip0/pwm$CHANNEL/duty_cycle) [ns]
-  echo CHANNEL=$CHANNEL
-  echo OPERATION=$OPERATION
+  echo PERIOD = $(cat /sys/class/pwm/pwmchip0/pwm$CHANNEL/period) [ns]
+  echo DUTY_CYCLE = $(cat /sys/class/pwm/pwmchip0/pwm$CHANNEL/duty_cycle) [ns]
+  echo CHANNEL = $CHANNEL
+  echo OPERATION = $OPERATION
 }
 
 help()
