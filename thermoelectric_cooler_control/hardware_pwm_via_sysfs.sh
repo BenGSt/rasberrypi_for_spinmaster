@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
-exit 1
+
 main()
 {
   arg_parse "$@"
@@ -77,11 +77,11 @@ arg_parse()
         ;;
       -*|--*)
         help();
-        exit
+        exit 1
         ;;
       -h|--help)
         help();
-        exit
+        exit 1
         ;;
     esac
   done
