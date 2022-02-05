@@ -75,11 +75,11 @@ arg_parse()
         shift # past value
         ;;
       -*|--*)
-        help()
+        help();
         exit
         ;;
       -h|--help)
-        help()
+        help();
         exit
         ;;
     esac
