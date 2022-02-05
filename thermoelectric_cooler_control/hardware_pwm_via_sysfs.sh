@@ -3,7 +3,14 @@
 
 main()
 {
+
   arg_parse "$@"
+
+  echo FREQUENCY=$FREQUENCY
+  echo DUTY_CYCLE=$DUTY_CYCLE
+  echo CHANNEL=$CHANNEL
+  echo OPERATION=$OPERATION
+
   export_channel
   set_period
   set_duty_cycle
