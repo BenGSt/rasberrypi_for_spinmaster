@@ -83,7 +83,7 @@ arg_parse()
         ;;
       -op|--operation)
         OPERATION="$2"
-         if ["$OPERATION" == "enable" || "$OPERATION" == "disable"]
+         if [ "$OPERATION" == "enable" || "$OPERATION" == "disable" ]
          then
             shift # past argument
             shift # past value
@@ -126,7 +126,7 @@ set_duty_cycle()
 
 do_operation()
 {
-  if ["$OPERATION" == "enable"]
+  if [ "$OPERATION" == "enable" ]
   then
     echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
   else
