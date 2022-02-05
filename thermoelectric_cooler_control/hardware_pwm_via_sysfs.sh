@@ -6,10 +6,7 @@ main()
 
   arg_parse "$@"
 
-  echo FREQUENCY=$FREQUENCY
-  echo DUTY_CYCLE=$DUTY_CYCLE
-  echo CHANNEL=$CHANNEL
-  echo OPERATION=$OPERATION
+
 
   if [ ! -d "/sys/class/pwm/pwmchip0/pwm$CHANNEL" ]
   then
@@ -20,6 +17,10 @@ main()
   set_duty_cycle
   do_operation
 
+  echo PERIOD=$(cat /sys/class/pwm/pwmchip0/pwm$CHANNEL/period) [ns]
+  echo DUTY_CYCLE=$(cat /sys/class/pwm/pwmchip0/pwm$CHANNEL/duty_cycle) [ns]
+  echo CHANNEL=$CHANNEL
+  echo OPERATION=$OPERATION
 }
 
 help()
@@ -127,7 +128,6 @@ set_period()
 set_duty_cycle()
 {
   DUTY_CYCLE_NANOSEC=$((PERIOD * DUTY_CYCLE / 100))
-  echo calculated DUTY_CYCLE_NANOSEC $DUTY_CYCLE_NANOSEC
 
   echo $DUTY_CYCLE_NANOSEC > /sys/class/pwm/pwmchip0/pwm0/duty_cycle
 
