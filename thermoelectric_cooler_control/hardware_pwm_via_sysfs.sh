@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+exit 1
 main()
 {
   arg_parse "$@"
