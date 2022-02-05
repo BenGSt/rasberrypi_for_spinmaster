@@ -4,6 +4,11 @@
 main()
 {
   arg_parse "$@"
+  export_channel
+  set_period
+  set_duty_cycle
+  do_operation
+
 }
 
 help()
@@ -85,6 +90,28 @@ arg_parse()
         ;;
     esac
   done
+
+
 }
+
+export_channel()
+{
+  echo $CHANNEL  > /sys/class/pwm/pwmchip0/export
+}
+
+
+set_period()
+{
+  PERIOD=$((1000000000 / $FREQUENCY)) #in nanoseconds
+  echo $PERIOD > /sys/class/pwm/pwmchip0/pwm0/period
+}
+
+
+set_duty_cycle()
+{
+  DUTY_CYCLE_NANOSEC=$((PERIOD * (DUTY_CYCLE / 100)))
+  echo $DUTY_CYCLE_NANOSEC > /sys/class/pwm/pwmchip0/pwm0/duty_cycle
+}
+
 
 main "$@"
