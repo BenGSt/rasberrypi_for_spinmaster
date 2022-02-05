@@ -87,4 +87,4 @@ arg_parse()
   done
 }
 
-main
+main "$@"
