@@ -11,7 +11,7 @@ main()
   echo CHANNEL=$CHANNEL
   echo OPERATION=$OPERATION
 
-  if [ ! -f "/sys/class/pwm/pwmchip0/pwm$CHANNEL" ]
+  if [ ! -d "/sys/class/pwm/pwmchip0/pwm$CHANNEL" ]
   then
     export_channel
   fi
