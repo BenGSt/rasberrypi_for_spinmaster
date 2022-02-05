@@ -119,5 +119,13 @@ set_duty_cycle()
   echo $DUTY_CYCLE_NANOSEC > /sys/class/pwm/pwmchip0/pwm0/duty_cycle
 }
 
+do_operation()
+{
+  if ["$OPERATION" == "enable"]
+  then
+    echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable
+  else
+    echo 0 > /sys/class/pwm/pwmchip0/pwm0/enable
+}
 
 main "$@"
