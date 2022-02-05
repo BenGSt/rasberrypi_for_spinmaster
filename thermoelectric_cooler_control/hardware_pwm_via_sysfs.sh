@@ -11,7 +11,10 @@ main()
   echo CHANNEL=$CHANNEL
   echo OPERATION=$OPERATION
 
-  export_channel
+  if not [ -f "/sys/class/pwm/pwmchip0/pwm$CHANNEL" ]
+    export_channel
+  fi
+
   set_period
   set_duty_cycle
   do_operation
