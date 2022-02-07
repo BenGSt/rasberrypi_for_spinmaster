@@ -2,7 +2,7 @@
 
 main()
 {
-  OUT_FILE = results.csv
+  OUT_FILE=TEC_test_results_`date +"%m-%d-%Y"`.csv
   FREQUENCY=20000
 
   echo Frequency"\t"Duty_Cycle"\t"Temp"\t"Room_Temp | tee $OUT_FILE# header
