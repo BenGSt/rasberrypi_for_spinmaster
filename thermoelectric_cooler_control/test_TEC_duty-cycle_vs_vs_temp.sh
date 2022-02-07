@@ -18,6 +18,6 @@ main()
 
     echo $FREQUENCY"\t"$DUTY_CYCLE"\t$"$TEMP"\t"$ROOM_TEMP | tee $OUT_FILE
   done
-}}
+}
 
 main
