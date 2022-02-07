@@ -2,10 +2,11 @@
 
 main()
 {
-  OUT_FILE=TEC_test_results_`date +"%m-%d-%Y"`.csv
+  mkdir TEC_test_results
+  OUT_FILE=TEC_test_results/TEC_test_results_`date +"%m-%d-%Y"`.csv
   FREQUENCY=20000
 
-  echo Frequency"\t"Duty_Cycle"\t"Temp"\t"Room_Temp | tee $OUT_FILE# header
+  printf Frequency"\t"Duty_Cycle"\t"Temp"\t"Room_Temp"\n" | tee -a $OUT_FILE  # header
 
 
   for DUTY_CYCLE in `seq 5 5 100`
@@ -16,7 +17,7 @@ main()
     TEMP=`python ../sensors/thermistor_adc/read_thermistors.py | cut -f 2 | awk -F"=" '{print $2}'`
     ROOM_TEMP=`python ../sensors/thermistor_adc/read_thermistors.py | cut -f 3 | awk -F"=" '{print $2}'`
 
-    echo $FREQUENCY"\t"$DUTY_CYCLE"\t$"$TEMP"\t"$ROOM_TEMP | tee $OUT_FILE
+    printf $FREQUENCY"\t"$DUTY_CYCLE"\t"$TEMP"\t"$ROOM_TEMP"\n" | tee -a $OUT_FILE
   done
 }
 
