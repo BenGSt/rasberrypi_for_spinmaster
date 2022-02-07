@@ -142,7 +142,7 @@ set_duty_cycle()
   done
 
 
-  printf "DUTY_CYCLE=%d[ns]" $DUTY_CYCLE_NANOSEC
+  printf "DUTY_CYCLE=%d[ns]\t" $DUTY_CYCLE_NANOSEC
 }
 
 do_operation()
