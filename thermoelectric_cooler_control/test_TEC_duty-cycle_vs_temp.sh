@@ -20,7 +20,7 @@ main()
 
     #get readings from DB (mean of last 1m)
     TEMP=`sudo influx -execute "SELECT mean("Tc_thermistor1") FROM "exe_thermistors_logfmt" WHERE time >= now() - 1m and time <= now() GROUP BY time(1m) fill(null)" -database="home" |awk 'NR==4 {printf("%.1f", $2)}'`
-    ROOM_TEMP=`sudo influx -execute "SELECT mean("Tc_thermistor2") FROM "exe_thermistors_logfmt" WHERE time >= now() - 1m and time <= now() GROUP BY time(1m) fill(null)" -database="home" |awk 'NR==4 {printf("%.1f", $2)}'`
+    ROOM_TEMP=`sudo influx -execute "SELECT mean("Tc_thermistor0") FROM "exe_thermistors_logfmt" WHERE time >= now() - 1m and time <= now() GROUP BY time(1m) fill(null)" -database="home" |awk 'NR==4 {printf("%.1f", $2)}'`
 
     printf $FREQUENCY"\t"$DUTY_CYCLE"\t"$TEMP"\t"$ROOM_TEMP"\n" | tee -a $OUT_FILE
   done
