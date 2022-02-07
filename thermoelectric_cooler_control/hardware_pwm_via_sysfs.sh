@@ -13,9 +13,9 @@ main()
     export_channel
   fi
 
-  printf Hardware PWM:
-  printf CHANNEL=$CHANNEL,
-  printf OPERATION=$OPERATION,
+  printf "Hardware PWM:\t"
+  printf CHANNEL=$CHANNEL"\t"
+  printf OPERATION=$OPERATION"\t"
 
   set_period
   set_duty_cycle
@@ -128,7 +128,7 @@ set_period()
     echo $PERIOD > /sys/class/pwm/pwmchip0/pwm$CHANNEL/period
   done
 
-  printf PERIOD=$PERIOD [ns],
+  printf PERIOD=$PERIOD [ns]"\t"
 }
 
 
@@ -142,7 +142,7 @@ set_duty_cycle()
   done
 
 
-  printf DUTY_CYCLE=$DUTY_CYCLE_NANOSEC [ns],
+  printf DUTY_CYCLE=$DUTY_CYCLE_NANOSEC [ns]"\t"
 }
 
 do_operation()
