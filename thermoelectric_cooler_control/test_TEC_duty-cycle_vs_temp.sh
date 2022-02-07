@@ -12,7 +12,7 @@ main()
   for DUTY_CYCLE in `seq 5 5 100`
   do
     ./hardware_pwm_via_sysfs.sh --channel 0 --operation ENABLE --frequency $FREQUENCY --duty-cycle $DUTY_CYCLE
-    sleep 10s # 5m
+    sleep 5m
 
     #using the python script messed up readings
 #    TEMP=`sudo -u pi python /home/pi/raspberrypi_for_SpinMaster/sensors/thermistor_adc/read_thermistors.py | cut -f 2 | awk -F"=" '{print $2}'`
