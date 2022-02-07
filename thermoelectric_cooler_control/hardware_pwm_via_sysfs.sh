@@ -128,7 +128,7 @@ set_period()
     echo $PERIOD > /sys/class/pwm/pwmchip0/pwm$CHANNEL/period
   done
 
-  printf PERIOD=$PERIOD "[ns]\t"
+  printf "PERIOD=%d[ns]\t" $PERIOD
 }
 
 
@@ -142,7 +142,7 @@ set_duty_cycle()
   done
 
 
-  printf DUTY_CYCLE=$DUTY_CYCLE_NANOSEC "[ns]\t"
+  printf "DUTY_CYCLE=%d[ns]" $DUTY_CYCLE_NANOSEC
 }
 
 do_operation()
