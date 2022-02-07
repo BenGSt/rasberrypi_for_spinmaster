@@ -17,7 +17,7 @@ main()
     ROOM_TEMP=`python ../sensors/thermistor_adc/read_thermistors.py | cut -f 3 | awk -F"=" '{print $2}'`
 
     echo $FREQUENCY"\t"$DUTY_CYCLE"\t$"$TEMP"\t"$ROOM_TEMP | tee $OUT_FILE
-
+  done
 }}
 
 main
