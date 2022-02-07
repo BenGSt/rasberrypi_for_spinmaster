@@ -128,7 +128,7 @@ set_period()
     echo $PERIOD > /sys/class/pwm/pwmchip0/pwm$CHANNEL/period
   done
 
-  printf PERIOD=$PERIOD [ns]"\t"
+  printf PERIOD=$PERIOD "[ns]\t"
 }
 
 
@@ -142,7 +142,7 @@ set_duty_cycle()
   done
 
 
-  printf DUTY_CYCLE=$DUTY_CYCLE_NANOSEC [ns]"\t"
+  printf DUTY_CYCLE=$DUTY_CYCLE_NANOSEC "[ns]\t"
 }
 
 do_operation()
@@ -150,10 +150,10 @@ do_operation()
   if [[ "$OPERATION" == "ENABLE" || "$OPERATION" == 1 ]]
   then
     echo 1 > /sys/class/pwm/pwmchip0/pwm$CHANNEL/enable
-    echo pwm$CHANNEL enabled
+    echo enabled
   else
     echo 0 > /sys/class/pwm/pwmchip0/pwm$CHANNEL/enable
-    echo pwm$CHANNEL disabled
+    echo disabled
   fi
 }
 
