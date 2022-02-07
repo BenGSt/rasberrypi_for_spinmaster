@@ -122,7 +122,7 @@ set_period()
 {
   PERIOD=$((1000000000 / $FREQUENCY)) #in nanoseconds
 
-  while [[! `cat /sys/class/pwm/pwmchip0/pwm$CHANNEL/period` != $PERIOD ]]
+  while [[ `cat /sys/class/pwm/pwmchip0/pwm$CHANNEL/period` != $PERIOD ]]
   do
     echo $PERIOD > /sys/class/pwm/pwmchip0/pwm$CHANNEL/period
   done
@@ -135,7 +135,7 @@ set_duty_cycle()
 {
   DUTY_CYCLE_NANOSEC=$((PERIOD * DUTY_CYCLE / 100))
 
-  while [[! `cat /sys/class/pwm/pwmchip0/pwm0/duty_cycle` != $DUTY_CYCLE_NANOSEC ]]
+  while [[ `cat /sys/class/pwm/pwmchip0/pwm0/duty_cycle` != $DUTY_CYCLE_NANOSEC ]]
   do
     echo $DUTY_CYCLE_NANOSEC > /sys/class/pwm/pwmchip0/pwm0/duty_cycle
   done
