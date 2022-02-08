@@ -25,7 +25,7 @@ main()
     printf $FREQUENCY"\t"$DUTY_CYCLE"\t"$TEMP"\t"$ROOM_TEMP"\n" | tee -a $OUT_FILE
   done
 
-  ./hardware_pwm_via_sysfs.sh --channel 0 --operation DISABLE
+  ./hardware_pwm_via_sysfs.sh --channel 0  --frequency $FREQUENCY --duty-cycle $DUTY_CYCLE --operation DISABLE
 }
 
 arg_parse()
