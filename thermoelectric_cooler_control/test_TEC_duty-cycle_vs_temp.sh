@@ -9,8 +9,8 @@ main()
 
   printf Frequency"\t"Duty_Cycle"\t"Temp"\t"Room_Temp"\n" | tee -a $OUT_FILE  # header
 
-  # trying to change frequency without disabling first may cause error.
-   ./hardware_pwm_via_sysfs.sh --channel 0 --operation DISABLE --frequency $FREQUENCY --duty-cycle $DUTY_CYCLE
+#  # trying to change frequency without disabling first may cause error.
+#   ./hardware_pwm_via_sysfs.sh --channel 0 --operation DISABLE --frequency $FREQUENCY --duty-cycle $DUTY_CYCLE
 
   for DUTY_CYCLE in `seq 5 5 100`
   do
