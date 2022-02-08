@@ -16,8 +16,8 @@ main()
 
   PERIOD=$((1000000000 / $FREQUENCY)) #in nanoseconds
   DUTY_CYCLE_NANOSEC=$((PERIOD * DUTY_CYCLE / 100))
+  PREVIOUS_DUTY_CYCLE=`cat /sys/class/pwm/pwmchip0/pwm0/duty_cycle`
 
-#  PREVIOUS_DUTY_CYCLE=`cat /sys/class/pwm/pwmchip0/pwm0/duty_cycle`
   if [[ $PERIOD < $PREVIOUS_DUTY_CYCLE ]]
   then
     set_duty_cycle
