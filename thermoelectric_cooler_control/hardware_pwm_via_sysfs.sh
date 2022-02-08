@@ -20,11 +20,11 @@ main()
 
   if [[ $PERIOD < $PREVIOUS_DUTY_CYCLE ]]
   then
-    echo PERIOD < PREVIOUS_DUTY_CYCLE
+    echo PERIOD "<" PREVIOUS_DUTY_CYCLE
     set_duty_cycle
     set_period
   else #if [[ $PREVIOUS_PERIOD < $DUTY_CYCLE_NANOSEC ]]
-    echo PREVIOUS_PERIOD < DUTY_CYCLE_NANOSEC
+    echo PREVIOUS_PERIOD "<" DUTY_CYCLE_NANOSEC
     set_period
     set_duty_cycle
   fi
