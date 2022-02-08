@@ -3,10 +3,7 @@
 
 main()
 {
-
   arg_parse "$@"
-
-
 
   if [ ! -d "/sys/class/pwm/pwmchip0/pwm$CHANNEL" ]
   then
@@ -21,18 +18,16 @@ main()
   DUTY_CYCLE_NANOSEC=$((PERIOD * DUTY_CYCLE / 100))
 
 #  PREVIOUS_DUTY_CYCLE=`cat /sys/class/pwm/pwmchip0/pwm0/duty_cycle`
-#  if [[ $PERIOD < $PREVIOUS_DUTY_CYCLE ]]
-#  do
-#    set_duty_cycle
+  if [[ $PERIOD < $PREVIOUS_DUTY_CYCLE ]]
+  then
+    set_duty_cycle
+    set_period
+  else #if [[ $PREVIOUS_PERIOD < $DUTY_CYCLE_NANOSEC ]]
+    set_period
+    set_duty_cycle
+  fi
 
-
-  set_duty_cycle
-  set_period
   do_operation
-
-#  echo PERIOD = $(cat /sys/class/pwm/pwmchip0/pwm$CHANNEL/period) [ns]
-#  echo DUTY_CYCLE = $(cat /sys/class/pwm/pwmchip0/pwm$CHANNEL/duty_cycle) [ns]
-
 }
 
 help()
