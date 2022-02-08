@@ -17,8 +17,17 @@ main()
   printf CHANNEL=$CHANNEL"\t"
   printf OPERATION=$OPERATION"\t"
 
-  set_period
+  PERIOD=$((1000000000 / $FREQUENCY)) #in nanoseconds
+  DUTY_CYCLE_NANOSEC=$((PERIOD * DUTY_CYCLE / 100))
+
+#  PREVIOUS_DUTY_CYCLE=`cat /sys/class/pwm/pwmchip0/pwm0/duty_cycle`
+#  if [[ $PERIOD < $PREVIOUS_DUTY_CYCLE ]]
+#  do
+#    set_duty_cycle
+
+
   set_duty_cycle
+  set_period
   do_operation
 
 #  echo PERIOD = $(cat /sys/class/pwm/pwmchip0/pwm$CHANNEL/period) [ns]
@@ -121,8 +130,6 @@ export_channel()
 
 set_period()
 {
-  PERIOD=$((1000000000 / $FREQUENCY)) #in nanoseconds
-
   while [[ `cat /sys/class/pwm/pwmchip0/pwm$CHANNEL/period` != $PERIOD ]]
   do
     echo $PERIOD > /sys/class/pwm/pwmchip0/pwm$CHANNEL/period
@@ -134,13 +141,10 @@ set_period()
 
 set_duty_cycle()
 {
-  DUTY_CYCLE_NANOSEC=$((PERIOD * DUTY_CYCLE / 100))
-
   while [[ `cat /sys/class/pwm/pwmchip0/pwm0/duty_cycle` != $DUTY_CYCLE_NANOSEC ]]
   do
     echo $DUTY_CYCLE_NANOSEC > /sys/class/pwm/pwmchip0/pwm0/duty_cycle
   done
-
 
   printf "DUTY_CYCLE=%d[ns]\t" $DUTY_CYCLE_NANOSEC
 }
