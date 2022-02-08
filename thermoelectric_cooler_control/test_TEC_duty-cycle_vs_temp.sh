@@ -2,7 +2,7 @@
 
 main()
 {
-
+  arg_parse "$@"
   mkdir TEC_test_results
   OUT_FILE=TEC_test_results/TEC_test_results_`date +"%m-%d-%Y"`.csv
 #  FREQUENCY=20000
