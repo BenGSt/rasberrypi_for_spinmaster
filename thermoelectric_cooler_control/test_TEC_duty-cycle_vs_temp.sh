@@ -5,7 +5,7 @@ main()
   arg_parse "$@"
 
   mkdir TEC_test_results
-  OUT_FILE=TEC_test_results/TEC_test_results_`date +"%m-%d-%Y"`.csv
+  OUT_FILE=TEC_test_results/TEC_test_results_`date +"%m-%d-%Y"`_$FREQUENCY.csv
 
   printf Frequency"\t"Duty_Cycle"\t"Temp"\t"Room_Temp"\n" | tee -a $OUT_FILE  # header
 
