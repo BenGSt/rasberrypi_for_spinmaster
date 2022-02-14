@@ -13,3 +13,23 @@ show users
 user admin
 ---- -----
 grafana true
+
+##############################################################################
+#apache2 enable cgi scripts
+cd /etc/apache2/mods-enabled
+sudo ln -s ../mods-available/cgi.load
+
+mkdir /usr/local/apache2/
+mkdir /usr/local/apache2/cgi-bin
+
+#edit  /etc/apache2/sites-available/000-default.conf
+
+#add:
+
+        ScriptAlias /cgi-bin/ /usr/local/apache2/cgi-bin/
+
+        <Directory /usr/local/apache2/cgi-bin/>
+                Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+                AddHandler cgi-script .cgi .pl
+                Require all granted
+        </Directory>
