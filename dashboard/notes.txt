@@ -33,3 +33,8 @@ mkdir /usr/local/apache2/cgi-bin
                 AddHandler cgi-script .cgi .pl
                 Require all granted
         </Directory>
+
+#allow apache user www-data sudo privileges (not secure!)
+ sudo cat /etc/sudoers.d/010_pi-nopasswd
+    #add line:
+    #www-data ALL=(ALL) NOPASSWD: ALL
