@@ -45,7 +45,25 @@ for now I just used GUI
     
     # Note you have to change the ip address in webpage_with_embedded_grafana_dashboard.html to machines ip.
     # TODO: automate using generic, enviormental variable, or sed. 
+
+    # apache2 enable cgi scripts
+    cd /etc/apache2/mods-enabled
+    sudo ln -s ../mods-available/cgi.load
+    
+    sudo mkdir /usr/local/apache2/
+    sudo mkdir /usr/local/apache2/cgi-bin
+
+    # edit  /etc/apache2/sites-available/000-default.conf
+    sudo cp ./dashboard/apache_000-default.conf  /etc/apache2/sites-available/000-default.conf
   
+    #allow apache user www-data sudo privileges (not secure!)
+        #sudo cat /etc/sudoers.d/010_pi-nopasswd
+        #add line:
+        #www-data ALL=(ALL) NOPASSWD: ALL
+
+    # copy cgi-bin scripts (backend of our webpage) 
+    cp ./dashboard/cgi-bin/* /usr/local/apache2/cgi-bin/
+
 
 # 5. Install influxdb DB 
    #add Influx repositories to apt:
