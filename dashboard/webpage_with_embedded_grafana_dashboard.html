@@ -177,37 +177,40 @@
     </h2>
 
     <div class="content">
-          <form action="/cgi-bin/hello_perl.pl" method="get" class="form">
-      <div class="form">
-        <label for="FM target temperature">FM target temperature [deg C]:</label>
-        <input type="text" name="fm_target_temperature" id="FM target temperature" required>
-      </div>
+      <form action="/cgi-bin/hello_perl.pl" method="get" class="form">
+        <div class="form">
+          <label for="FM target temperature">FM target temperature [deg C]:</label>
+          <input type="text" name="fm_target_temperature" id="FM target temperature" required>
+        </div>
 
-      <div class="form">
-        <label for="ReservoirTargetTemp">Reservoir target temperatue [deg C]: </label>
-        <input type="text" name="ReservoirTargetTem" id="ReservoirTargetTemp" required>
-      </div>
+        <div class="form">
+          <label for="ReservoirTargetTemp">Reservoir target temperatue [deg C]: </label>
+          <input type="text" name="ReservoirTargetTem" id="ReservoirTargetTemp" required>
+        </div>
 
-      <div class="form">
-        <label for="FlowRate">Flow Rate [?]: </label>
-        <input type="text" name="FlowRate" id="FlowRate" required>
-      </div>
+        <div class="form">
+          <label for="FlowRate">Flow Rate [?]: </label>
+          <input type="text" name="FlowRate" id="FlowRate" required>
+        </div>
 
-      <div class="form">
-        <label for="RunTime">Run Time [?]: </label>
-        <input type="text" name="RunTime" id="RunTime" required>
-      </div>
+        <div class="form">
+          <label for="RunTime">Run Time [?]: </label>
+          <input type="text" name="RunTime" id="RunTime" required>
+        </div>
 
-      <div class="form">
-        <input type="submit" value="Run">
-        <form action="/cgi-bin/stop_spinmaster_service.pl" method="get" class="form">
-          <input type="button" value="Stop">
-        </form>
-      </div>
+        <div class="form">
+          <input type="submit" value="Run">
 
+        </div>
   </form>
 
-    </div>
+      <form action="/cgi-bin/stop_spinmaster_service.pl" method="post" class="form">
+          <div class="form">
+          <input type="submit" value="Stop">
+          </div>
+      </form>
+   </div>
+
   </section>
 
   <section class="accordion">
