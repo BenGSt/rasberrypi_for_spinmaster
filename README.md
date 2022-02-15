@@ -64,6 +64,13 @@ for now I just used GUI
     # copy cgi-bin scripts (backend of our webpage) 
     cp ./dashboard/cgi-bin/* /usr/local/apache2/cgi-bin/
 
+# perl
+    # first perl needs to be installed if it isnt already (my raspberrypios came with it installed)
+    # second the CGI module meeds to be installed
+        sudo perl -e shell -MCPAN
+        # follow config instructions as needed
+        install CGI
+        exit
 
 # 5. Install influxdb DB 
    #add Influx repositories to apt:
