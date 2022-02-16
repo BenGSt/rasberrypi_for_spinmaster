@@ -12,7 +12,7 @@ $url = "/index.html";
 print "Location: $url\n\n";
 
 #exec("sudo systemctl start telegraf.service");
-exec(`sudo echo fm_target_temperature: $fm_target_temperature`);
+exec(`sudo echo fm_target_temperature: $fm_target_temperature  > /home/pi/cgi_test.txt`);
 exit;
 
 #print "Content-type: text/html\n\n";
