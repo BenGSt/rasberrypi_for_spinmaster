@@ -114,16 +114,21 @@ for now I just used GUI
 	#Add capabilities to the “ping” binary to allow telegraf to execute ping checks
 	sudo setcap 'cap_net_admin,cap_net_raw+ep' $(which ping)
 	
-	sudo cp ./dashboard/telegraf.conf /etc/telegraf/telegraf.conf
-	sudo systemctl restart telegraf
+    # we'll have one service for raspberrypi monitoring dashboard, and another for the spinmaster dashboard 
+        #(the spinmaster query is too frequent to use in the same config)
 	
-   #add inluxdb data source via grafana web interface:
+    # raspberrypi monitoring config - always on 
+    sudo cp ./dashboard/telegraf.conf /etc/telegraf/telegraf.conf
+	sudo systemctl restart telegraf
+
+    # add another telegraf service for the spinmaster data
+	sudo cp ./dashboard/telegraf_spinmaster.service /usr/lib/systemd/system/telegraf_spinmaster.service
+    sudo systemctl daemon-reload
    
-   #url: http://localhost:8086 , Database: home, User: grafana
-   
-   #example usage with [input.tail] set up in telegraf.conf :  
-   
-  	 python3 sensors/thermistor_adc/get_temp_test.py > /home/pi/thermistor_adc/thermistor_0.log &
+    #add inluxdb data source via grafana web interface:
+     #url: http://localhost:8086 , Database: home, User: grafana
+     #example usage with [input.tail] set up in telegraf.conf :
+  	     python3 sensors/thermistor_adc/get_temp_test.py > /home/pi/thermistor_adc/thermistor_0.log &
 	
 	
 
