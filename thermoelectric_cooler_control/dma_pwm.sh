@@ -108,11 +108,11 @@ arg_parse()
 #        ;;
       -*|--*)
         help
-#        exit 1
+        exit 1
         ;;
       -h|--help)
         help
-#        exit 1
+        exit 1
         ;;
     esac
   done
@@ -142,3 +142,6 @@ start_PWM()
 {
   pigs p $1 $2 # Start PWM on GPIO $1 with $2 dutycycle
 }
+
+
+main "$@"
