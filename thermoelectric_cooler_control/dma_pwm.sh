@@ -13,9 +13,10 @@ main()
     sudo pigpiod -s 2 # sample rate 2 [us]
   fi
 
-  printf "DMA PWM:\t"
+  printf "Setting DMA PWM:\t"
   printf GPIO_PIN=$GPIO"\t"
-  printf OPERATION=$OPERATION"\t"
+  printf "Frequency=%d[Hz]\n" $1
+
 
 
   set_duty_cycle_range 100 # set duty cycle range 0-100 (default is 0-255)
@@ -129,7 +130,7 @@ set_frequency()
 #  done
 #
   pigs pfs $GPIO $1 # $1 is frequency
-  printf "Frequency=%d[Hz]\t" $1
+
 }
 
 
