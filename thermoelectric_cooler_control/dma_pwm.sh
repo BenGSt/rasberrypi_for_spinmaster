@@ -7,7 +7,7 @@ main()
 {
   arg_parse "$@"
 
-  if ! ps aux | grep pigpiod
+  if ! ps aux | grep pigpiod | grep -v grep
   then
     echo starting pigpiod deamon
     sudo pigpiod -s 2 # sample rate 2 [us]
