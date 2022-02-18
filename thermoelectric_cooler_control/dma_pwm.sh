@@ -71,6 +71,7 @@ help()
     -p|--gpio)
       the pin to set.
 
+  Use "sudo killall pigpiod" to kill the deamon.
 EOF
 }
 
@@ -97,16 +98,6 @@ arg_parse()
         shift # past argument
         shift # past value
         ;;
-#      -op|--operation)
-#         OPERATION="$2"
-#         if [[ "$OPERATION" == "ENABLE" || "$OPERATION" == "DISABLE" || "$OPERATION" == 0 || "$OPERATION" == 1 ]]
-#         then
-#            shift # past argument
-#            shift # past value
-#         else
-#            exit 1
-#         fi
-#        ;;
       -*|--*)
         help
         exit 1
@@ -121,27 +112,34 @@ arg_parse()
 
 }
 
+get_freq()
+{
+  return pigs pfg $GPIO
+}
 
 set_frequency()
 {
-#  while [[ get_freq != $1]]
-#  do
-#    pigs pfs $GPIO $1 # $1 is frequency
-#  done
-#
-  pigs pfs $GPIO $1 # $1 is frequency
-
+  while [[ `pigs pfg $GPIO` != $1 ]] #loop to make sure value was set
+  do
+    pigs pfs $GPIO $1 # $1 is frequency
+  done
 }
 
 
 set_duty_cycle_range()
 {
+  while [[ `pigs prg $GPIO` != $1 ]] #loop to make sure value was set
+  do
    pigs prs $GPIO $1 # set duty cycle range 0-$1 (default is 0-255)
+  done
 }
 
 start_PWM()
 {
-  pigs p $1 $2 # Start PWM on GPIO $1 with $2 dutycycle
+  while [[ `pigs gdc $GPIO` != $2 ]] #loop to make sure value was set
+  do
+    pigs p $1 $2 # Start PWM on GPIO $1 with $2 dutycycle
+  done
 }
 
 
