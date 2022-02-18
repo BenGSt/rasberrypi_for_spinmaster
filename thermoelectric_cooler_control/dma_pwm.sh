@@ -14,9 +14,9 @@ main()
   fi
 
   printf "Setting DMA PWM:\t"
-  printf GPIO_PIN=$GPIO"\t"
-  printf "Frequency=%d[Hz]\n" $FREQUENCY
-
+  printf "GPIO Pin=%d\t" $GPIO
+  printf "Frequency=%d[Hz]\t" $FREQUENCY
+  printf "Duty Cycle=%d[Hz]\n" $FREQUENCY
 
 
   set_duty_cycle_range 100 # set duty cycle range 0-100 (default is 0-255)
