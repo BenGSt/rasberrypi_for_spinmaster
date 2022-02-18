@@ -105,7 +105,7 @@ arg_parse()
 #         else
 #            exit 1
 #         fi
-        ;;
+#        ;;
       -*|--*)
         help
         exit 1
