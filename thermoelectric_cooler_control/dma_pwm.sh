@@ -15,7 +15,7 @@ main()
 
   printf "Setting DMA PWM:\t"
   printf GPIO_PIN=$GPIO"\t"
-  printf "Frequency=%d[Hz]\n" $1
+  printf "Frequency=%d[Hz]\n" $FREQUENCY
 
 
 
