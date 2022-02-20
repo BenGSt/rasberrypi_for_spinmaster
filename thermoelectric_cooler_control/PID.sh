@@ -52,14 +52,11 @@ main()
 
       if bc -l <<< "output > max_pwm_duty_cycle"
         then
-          echo max_pwm_duty_cycle: $max_pwm_duty_cycle
-        output_pwm_duty_cycle=100
-        echo output_pwm_duty_cycle: $output_output_pwm_duty_cycle
+        output_pwm_duty_cycle=$max_pwm_duty_cycle
       else
         output_pwm_duty_cycle=$(bc -l <<< "scale=0; $output / 1")
       fi
-
-      echo output_pwm_duty_cycle=$output_output_pwm_duty_cycle
+      echo output_pwm_duty_cycle=$output_pwm_duty_cycle
 
       sleep $dt
 
