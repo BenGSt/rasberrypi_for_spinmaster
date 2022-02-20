@@ -70,9 +70,9 @@ apply_output()
     else
       output_pwm_duty_cycle=$(bc -l <<< "scale=0; $output / 1")
     fi
-    echo applying  $dma_pwm_script --frequency $pwm_frequency --dc $output_pwm_duty_cycle --gpio $pwm_gpio
+    echo applying  $dma_pwm_script --frequency $pwm_frequency --duty-cycle $output_pwm_duty_cycle --gpio $pwm_gpio
 
-    $dma_pwm_script --frequency $pwm_frequency --dc $output_pwm_duty_cycle --gpio $pwm_gpio
+    $dma_pwm_script --frequency $pwm_frequency --duty-cycle $output_pwm_duty_cycle --gpio $pwm_gpio
 }
 
 arg_parse()
