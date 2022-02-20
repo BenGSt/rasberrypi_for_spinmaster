@@ -11,7 +11,7 @@ my $run_time=$cgi->param('run_time');
 $url = "/index.html";
 print "Location: $url\n\n";
 
-exec("sudo systemctl start telegraf.service");
+exec("sudo systemctl start telegraf_spinmaster.service");
 #exec(`sudo bash -c "echo fm_target_temperature: $fm_target_temperature  > /home/pi/cgi_test.txt"`);
 exit;
 
