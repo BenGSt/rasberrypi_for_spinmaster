@@ -49,6 +49,15 @@ main()
       previous_error=$error
       echo previous_error=$error
 
+      if [[ output -gt 100]]
+        then
+        output_pwm_duty_cycle=100
+      else
+        output_pwm_duty_cycle=$(bc -l <<< "scale=0; $output / 1")
+      fi
+
+      echo output_pwm_duty_cycle=$output_output_pwm_duty_cycle
+
       sleep $dt
 
     i=$(( i - 1 ))
