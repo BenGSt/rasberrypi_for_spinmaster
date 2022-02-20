@@ -38,7 +38,7 @@ main()
       proportional=error
       integral=$(( (integral + error) * dt ))
       derivative=$(( (error - previous_error) / dt ))
-      output= $(( Kp * proportional + Ki * integral + Kd * derivative))
+      output=$(( Kp * proportional + Ki * integral + Kd * derivative))
       previous_error=error
   #    sleep dt
     done
