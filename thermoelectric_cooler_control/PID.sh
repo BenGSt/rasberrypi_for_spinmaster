@@ -54,6 +54,7 @@ main()
         then
           echo max_pwm_duty_cycle: $max_pwm_duty_cycle
         output_pwm_duty_cycle=$max_pwm_duty_cycle
+        echo output_pwm_duty_cycle: $output_output_pwm_duty_cycle
       else
         output_pwm_duty_cycle=$(bc -l <<< "scale=0; $output / 1")
       fi
