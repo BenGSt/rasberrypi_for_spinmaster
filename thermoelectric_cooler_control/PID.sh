@@ -54,7 +54,7 @@ main()
       previous_error=$error
       echo previous_error=$error
 
-
+      apply_output
 
       sleep $dt
 
