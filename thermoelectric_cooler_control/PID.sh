@@ -84,7 +84,14 @@ arg_parse()
         shift # past argument
         shift # past value
         ;;
-
+      -*|--*)
+        help
+        exit 1
+        ;;
+      -h|--help)
+        help
+        exit 1
+        ;;
     esac
   done
 }
