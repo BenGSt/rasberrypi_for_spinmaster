@@ -1,5 +1,9 @@
 #!/usr/bin/bash
 
+dma_pwm_script=./dma_pwm.sh
+pwm_frequency=20000
+pwm_gpio=18
+
 help()
 {
   cat << EOF
@@ -50,13 +54,7 @@ main()
       previous_error=$error
       echo previous_error=$error
 
-      if [[ $(bc -l <<< "$output > $max_pwm_duty_cycle") -gt 0 ]]
-        then
-        output_pwm_duty_cycle=$max_pwm_duty_cycle
-      else
-        output_pwm_duty_cycle=$(bc -l <<< "scale=0; $output / 1")
-      fi
-      echo output_pwm_duty_cycle=$output_pwm_duty_cycle
+
 
       sleep $dt
 
@@ -64,6 +62,18 @@ main()
     done
 }
 
+apply_output()
+{
+    if [[ $(bc -l <<< "$output > $max_pwm_duty_cycle") -gt 0 ]]
+      then
+      output_pwm_duty_cycle=$max_pwm_duty_cycle
+    else
+      output_pwm_duty_cycle=$(bc -l <<< "scale=0; $output / 1")
+    fi
+    echo applying  $dma_pwm_script --frequency $pwm_frequency --dc $output_pwm_duty_cycle --gpio $pwm_gpio
+
+    $dma_pwm_script --frequency $pwm_frequency --dc $output_pwm_duty_cycle --gpio $pwm_gpio
+}
 
 arg_parse()
 {
