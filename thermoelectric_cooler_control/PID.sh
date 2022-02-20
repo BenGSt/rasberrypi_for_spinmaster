@@ -1,5 +1,30 @@
 #!/usr/bin/bash
 
+help()
+{
+  cat << EOF
+  A PID control script for TECs in the SpinMaster project.
+  Author: Ben Steinberg (2022).
+
+  USAGE: $0 <options>
+
+  options:
+      -n|--thermistor_num)
+
+      -dt|--time_element_dt)
+
+      -avg|--averaging-time)
+
+      -t|--desired_temperature)
+
+      -Kp|--proportional_coefficient)
+
+      -Ki|--integral_coefficient)
+
+      -Kd|--derivative_coefficient)
+EOF
+}
+
 main()
 {
   arg_parse "$@"
