@@ -9,11 +9,15 @@ main()
     sudo systemctl start telegraf_spinmaster.service
 
     #start TEC cooling
+      pid_tec.sh --thermistor_num 0 --averaging-time 5s --time_element_dt 5s --desired_temperature -Kp -Ki -Kd
+      pid_tec.sh --thermistor_num 1 --averaging-time 5s --time_element_dt 5s --desired_temperature -Kp -Ki -Kd
+
     #sart TEC heating
 
     #sart pump
       dma_pwm.sh --frequency $PUMP_PWM_FREQUENCY --duty-cycle $PUMP_PWM_DUTYCYCLE --gpio $PUMP_PWM_GPIO
-    if [[use laser]]
+
+    if [[ use_laser ]]
       #start laser
 
 
