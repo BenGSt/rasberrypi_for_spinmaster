@@ -50,7 +50,7 @@ main()
       previous_error=$error
       echo previous_error=$error
 
-      if bc -l <<< "output > max_pwm_duty_cycle"
+      if bc -l <<< "$output > $max_pwm_duty_cycle"
         then
         output_pwm_duty_cycle=$max_pwm_duty_cycle
       else
