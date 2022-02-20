@@ -40,7 +40,7 @@ main()
       echo derivative=$(( (error - previous_error) / dt ))
       echo output=$(( Kp * proportional + Ki * integral + Kd * derivative))
       echo previous_error=error
-      sleep dt
+      sleep $dt
     done
 }
 
