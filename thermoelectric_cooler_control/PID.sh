@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-dma_pwm_script=./dma_pwm.sh
+dma_pwm_script=thermoelectric_cooler_control/dma_pwm.sh
 pwm_frequency=20000
 pwm_gpio=18
 
