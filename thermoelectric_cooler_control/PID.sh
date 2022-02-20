@@ -31,7 +31,7 @@ main()
   previous_error=0
   integral=0
 
-  while 1
+  while [[ 1 ]]
     do
       measured_temp=`influx -execute "SELECT mean(\"Tc_thermistor$THERMISTOR_NUM\") FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $AVG_TIME and time <= now() GROUP BY time(1m) fill(null)" -database="home" |awk 'NR==4 {printf("%.1f", $2)}'`
       error=$(( setpoint − measured_value ))
