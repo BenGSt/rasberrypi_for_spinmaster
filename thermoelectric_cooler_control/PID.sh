@@ -37,7 +37,7 @@ main()
       error=$(( setpoint - measured_temp ))
       proportional=error
       integral=$(( (integral + error) * dt ))
-      derivative$(( (error - previous_error) / dt ))
+      derivative=$(( (error - previous_error) / dt ))
       output= $(( Kp * proportional + Ki * integral + Kd * derivative))
       previous_error=error
   #    sleep dt
