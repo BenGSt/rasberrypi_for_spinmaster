@@ -44,7 +44,7 @@ main()
       derivative=$( bc -l <<< "($error - $previous_error) / $dt" )
       echo derivative=$( bc -l <<< "($error - $previous_error) / $dt" )
       output=$(bc -l <<< "$Kp * $proportional + $Ki * $integral + $Kd * $derivative")
-       output=$(bc -l <<< "$Kp * $proportional + $Ki * $integral + $Kd * $derivative")
+      echo output=$(bc -l <<< "$Kp * $proportional + $Ki * $integral + $Kd * $derivative")
       previous_error=$error
       echo previous_error=$error
 
