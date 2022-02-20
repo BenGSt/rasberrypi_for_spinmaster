@@ -30,6 +30,7 @@ main()
   arg_parse "$@"
   previous_error=0
   integral=0
+  max_pwm_duty_cycle=100
 
   i=3
   while [[ i -gt 0 ]]
@@ -49,9 +50,9 @@ main()
       previous_error=$error
       echo previous_error=$error
 
-      if [[ output -gt 100]]
+      if [[ output -gt max_pwm_duty_cycle ]]
         then
-        output_pwm_duty_cycle=100
+        output_pwm_duty_cycle=max_pwm_duty_cycle
       else
         output_pwm_duty_cycle=$(bc -l <<< "scale=0; $output / 1")
       fi
