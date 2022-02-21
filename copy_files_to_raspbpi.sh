@@ -11,3 +11,8 @@ sudo cp ./dashboard/apache_000-default.conf  /etc/apache2/sites-available/000-de
 
 #resart apache
 sudo apachectl -k graceful
+
+#lcd service
+sudo cp ./spinmaster_lcd/spinmaster_lcd_ip.service /lib/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl restart spinmaster_lcd_ip.service
