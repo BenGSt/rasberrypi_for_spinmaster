@@ -67,10 +67,16 @@ def main(loop_times=5, loop_forever=False, number_of_samples_to_average=5, sleep
     ads = ADS.ADS1115(i2c)
     ads.gain = 1
 
+    ads2 = ADS.ADS1115(i2c=i2c, address=0x49, gain=1)
+
+
+
     # Create channels on Pins 0,1,2
     # Max counts for ADS1015 = 2047
     # ADS1115 = 32767
-    channels = [AnalogIn(ads, ADS.P0), AnalogIn(ads, ADS.P1), AnalogIn(ads, ADS.P2)]
+    # channels = [AnalogIn(ads, ADS.P0), AnalogIn(ads, ADS.P1), AnalogIn(ads, ADS.P2)] #with only one adc
+    channels = [AnalogIn(ads, ADS.P0), AnalogIn(ads, ADS.P1), AnalogIn(ads, ADS.P2),
+                AnalogIn(ads2, ADS.P0), AnalogIn(ads2, ADS.P1)]
 
     average_temperatures = [0, 0, 0]
     while True:

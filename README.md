@@ -138,6 +138,8 @@ for now I just used GUI
    
 # 8. set up ADC
 
+# pigpio for dma pwm
+    
 
 # 9. set up digital temperature sensors (DS18B20)
   #enable one-wire interface 
