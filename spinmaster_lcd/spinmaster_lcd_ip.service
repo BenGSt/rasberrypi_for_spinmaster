@@ -5,6 +5,7 @@
  [Service]
  Type=idle
  ExecStart=/usr/bin/python3 /home/pi/raspberrypi_for_SpinMaster/spinmaster_lcd/spinmaster_lcd_ip.py
+ Restart=on-failure
 
  [Install]
  WantedBy=multi-user.target
