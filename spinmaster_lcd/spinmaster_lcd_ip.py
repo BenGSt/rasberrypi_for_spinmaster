@@ -23,7 +23,7 @@ try:
         display.lcd_display_string("   SpinMaster  ", 1)
         sleep(5)
 
-        if len(check_output(["hostname", "-I"]).split()[0]):
+        if len(check_output(["hostname", "-I"]).split()):
                 print("Got IP")
                 IP = check_output(["hostname", "-I"]).split()[0].decode('UTF-8')
                 display.lcd_display_string("                ", 2)
