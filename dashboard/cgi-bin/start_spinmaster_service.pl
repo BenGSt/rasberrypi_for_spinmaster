@@ -11,28 +11,8 @@ my $run_time=$cgi->param('run_time');
 $url = "/index.html";
 print "Location: $url\n\n";
 
+#exec("sudo spinmaster_main.sh --fm_target_temperature $fm_target_temperature --reservoir_target_temperature $reservoir_target_temperature --flow_rate $flow_rate --run_time $run_time");
 exec("sudo systemctl start telegraf_spinmaster.service");
 #exec(`sudo bash -c "echo fm_target_temperature: $fm_target_temperature  > /home/pi/cgi_test.txt"`);
 exit;
-
-#print "Content-type: text/html\n\n";
-#print <<ENDHTML;
-#<HTML>
-#<HEAD>
-#<TITLE>CGI Test</TITLE>
-#</HEAD>
-#<BODY>
-#fm_target_temperature:  $fm_target_temperature
-#<BR>
-#reservoir_target_temperature:  $reservoir_target_temperature
-#<BR>
-#flow_rate:  $flow_rate
-#<BR>
-#run_time:  $run_time
-#<BR>
-#<A HREF="/index.html">Return to Control Panel</A>
-#</BODY>
-#</HTML>
-
-#ENDHTML
 

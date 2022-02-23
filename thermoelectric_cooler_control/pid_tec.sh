@@ -2,7 +2,7 @@
 
 dma_pwm_script=thermoelectric_cooler_control/dma_pwm.sh
 pwm_frequency=20000
-pwm_gpio=18
+#pwm_gpio=18
 
 help()
 {
@@ -13,6 +13,8 @@ help()
   USAGE: $0 <options>
 
   options:
+      -h|--heating-mode)
+
       -n|--thermistor_num)
 
       -dt|--time_element_dt)
@@ -26,6 +28,9 @@ help()
       -Ki|--integral_coefficient)
 
       -Kd|--derivative_coefficient)
+
+      -p|--pwm_gpio)
+
 EOF
 }
 
@@ -41,7 +46,12 @@ main()
     do
       measured_temp=`influx -execute "SELECT mean(\"Tc_thermistor$THERMISTOR_NUM\") FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $AVG_TIME and time <= now() GROUP BY time(1m) fill(null)" -database="home" |awk 'NR==4 {printf("%.1f", $2)}'`
       echo measured_temp=`influx -execute "SELECT mean(\"Tc_thermistor$THERMISTOR_NUM\") FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $AVG_TIME and time <= now() GROUP BY time(1m) fill(null)" -database="home" |awk 'NR==4 {printf("%.1f", $2)}'`
-      error=$(bc -l <<< "$measured_temp - $setpoint" )
+      if [[ HEATING_MODE == 1 ]]
+      then
+        error=$(bc -l <<< "$measured_temp - $setpoint" )
+      else
+        error=$(bc -l <<< "$setpoint - $measured_temp" )
+      fi
       echo error=$(bc -l <<< "$setpoint - $measured_temp" )
       proportional=$error
       echo proportional=$error
@@ -111,6 +121,15 @@ arg_parse()
         ;;
       -Kd|--derivative_coefficient)
         Kd="$2"
+        shift # past argument
+        shift # past value
+        ;;
+       -h|--heating-mode)
+        HEATING_MODE=1
+        shift # past argument
+        ;;
+       -p|--gpio)
+        pwm_gpio="$2"
         shift # past argument
         shift # past value
         ;;
