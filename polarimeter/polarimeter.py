@@ -1,7 +1,8 @@
 # polarimeter.py
 # Last modified: 23.02.22 16:15
 
-
+#NOTE: for this to work on raspberry pi add  line:
+# 'SUBSYSTEM=="usb", MODE="0666", GROUP="usbusers"' >> /etc/udev/rules.d/99-com.rules
 import pyvisa
 import time
 import math
