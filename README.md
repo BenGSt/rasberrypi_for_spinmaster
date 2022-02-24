@@ -139,7 +139,11 @@ for now I just used GUI
 # 8. set up ADC
 
 # pigpio for dma pwm
-    
+    wget https://github.com/joan2937/pigpio/archive/master.zip
+    unzip master.zip
+    cd pigpio-master
+    make
+    sudo make install
 
 # 9. set up digital temperature sensors (DS18B20)
   #enable one-wire interface 
