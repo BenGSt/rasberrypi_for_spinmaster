@@ -66,7 +66,7 @@ main()
       previous_error=$error
       echo previous_error=$error
 
-#      apply_output
+      apply_output
 
       sleep $dt
 
@@ -84,7 +84,7 @@ apply_output()
     fi
     echo applying  $dma_pwm_script --frequency $pwm_frequency --duty-cycle $output_pwm_duty_cycle --gpio $pwm_gpio
 
-    $dma_pwm_script --frequency $pwm_frequency --duty-cycle $output_pwm_duty_cycle --gpio $pwm_gpio
+#    $dma_pwm_script --frequency $pwm_frequency --duty-cycle $output_pwm_duty_cycle --gpio $pwm_gpio
 }
 
 arg_parse()
