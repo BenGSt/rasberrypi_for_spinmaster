@@ -42,8 +42,8 @@ main()
   integral=0
   max_pwm_duty_cycle=100
 
-  i=3
-  while [[ i -gt 0 ]]
+#  i=3
+  while [[ 1 ]]
     do
       measured_temp=`influx -execute "SELECT mean(\"Tc_thermistor$THERMISTOR_NUM\") FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $AVG_TIME and time <= now() GROUP BY time(1m) fill(null)" -database="home" |awk 'NR==4 {printf("%.1f", $2)}'`
       echo measured_temp=`influx -execute "SELECT mean(\"Tc_thermistor$THERMISTOR_NUM\") FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $AVG_TIME and time <= now() GROUP BY time(1m) fill(null)" -database="home" |awk 'NR==4 {printf("%.1f", $2)}'`
@@ -65,11 +65,11 @@ main()
       previous_error=$error
       echo previous_error=$error
 
-      apply_output
+#      apply_output
 
       sleep $dt
 
-    i=$(( i - 1 ))
+#    i=$(( i - 1 ))
     done
 }
 
