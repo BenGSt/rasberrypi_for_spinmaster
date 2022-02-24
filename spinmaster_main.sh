@@ -19,9 +19,8 @@ PID_HEATING_Kp=
 PID_HEATING_Ki=
 PID_HEATING_Kd=
 
-main()
+startup()
 {
-  #startup
     begin_date_time=get_datetime
 
     #start telegraf (posts measurements to DB)
