@@ -38,7 +38,7 @@ class PAX1000Controller:
         dev = dev.split("\'")
         print(dev[1], "DEVICE")
         # self.PAX1000 = rm.open_resource(dev[1])
-        self.PAX1000 = rm.open_resource('/dev/usbtmc0/')
+        self.PAX1000 = rm.open_resource('/dev/usbtmc0')
 
     def Meassmode(self):
         self.PAX1000.write('SENSe:CALCulate:MODe 5\n')
