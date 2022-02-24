@@ -5,9 +5,9 @@
 import pyvisa
 import time
 import math
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from datetime import datetime
-import winsound
+# import winsound
 
 
 # plots labels
@@ -135,57 +135,59 @@ time_l, azimuth_l, ellipse_l, DOP_l = sample(0.1, 0.02)
 #def plots(time_lst, azimuth, ellipse, DOP):
 # the func is ploting and saving the vectors that are given to it
 # Graph of azimuth angle
-plot1 = plt.figure(1)
-plt.plot(time_l, azimuth_l, linewidth=LINE_WIDTH)
-file_name1 = 'azimuth angle' + time_stump + '.png'
-plt.savefig(file_name1)
-# naming the x axis
-plt.xlabel(X_LABEL_TIME, fontdict=LABEL_FONT)
-# naming the y axis
-plt.ylabel(Y_LABEL_AZIMUTH, fontdict=LABEL_FONT)
-# giving a title to my graph
-plt.title(TITLE_LABEL_AZIMUTH, fontdict=TITLE_FONT)
-plt.grid()
-
-# Graph of ellipse angle
-plot2 = plt.figure(2)
-plt.plot(time_l, ellipse_l, linewidth=LINE_WIDTH)
-file_name2 = 'ellipse angle' + time_stump + '.png'
-plt.savefig(file_name2)
-# giving a title to my graph
-plt.title(TITLE_LABEL_ELLIPSE, fontdict=TITLE_FONT)
-# naming the x axis
-plt.xlabel(X_LABEL_TIME, fontdict=LABEL_FONT)
-# naming the y axis
-plt.ylabel(Y_LABEL_ELLIPSE, fontdict=LABEL_FONT)
-
-# Graph of DOP angle
-plot3 = plt.figure(3)
-plt.plot(time_l, DOP_l, linewidth=LINE_WIDTH)
-file_name3 = 'DOP' + time_stump + '.png'
-
-plt.savefig(file_name3)
-# giving a title to my graph
-plt.title(TITLE_LABEL_DOP, fontdict=TITLE_FONT)
-# naming the x axis
-plt.xlabel(X_LABEL_TIME, fontdict=LABEL_FONT)
-# naming the y axis
-plt.ylabel(Y_LABEL_DOP, fontdict=LABEL_FONT)
-
-
-plt.show()
-plt.show()
-plt.show()
-
-print('Done')
-for i in range(200, 1200, 50):
-    winsound.Beep(i, 300)
-    time.sleep(0.3)
-
-winsound.Beep(1200, 2000)
+# plot1 = plt.figure(1)
+# plt.plot(time_l, azimuth_l, linewidth=LINE_WIDTH)
+# file_name1 = 'azimuth angle' + time_stump + '.png'
+# plt.savefig(file_name1)
+# # naming the x axis
+# plt.xlabel(X_LABEL_TIME, fontdict=LABEL_FONT)
+# # naming the y axis
+# plt.ylabel(Y_LABEL_AZIMUTH, fontdict=LABEL_FONT)
+# # giving a title to my graph
+# plt.title(TITLE_LABEL_AZIMUTH, fontdict=TITLE_FONT)
+# plt.grid()
+#
+# # Graph of ellipse angle
+# plot2 = plt.figure(2)
+# plt.plot(time_l, ellipse_l, linewidth=LINE_WIDTH)
+# file_name2 = 'ellipse angle' + time_stump + '.png'
+# plt.savefig(file_name2)
+# # giving a title to my graph
+# plt.title(TITLE_LABEL_ELLIPSE, fontdict=TITLE_FONT)
+# # naming the x axis
+# plt.xlabel(X_LABEL_TIME, fontdict=LABEL_FONT)
+# # naming the y axis
+# plt.ylabel(Y_LABEL_ELLIPSE, fontdict=LABEL_FONT)
+#
+# # Graph of DOP angle
+# plot3 = plt.figure(3)
+# plt.plot(time_l, DOP_l, linewidth=LINE_WIDTH)
+# file_name3 = 'DOP' + time_stump + '.png'
+#
+# plt.savefig(file_name3)
+# # giving a title to my graph
+# plt.title(TITLE_LABEL_DOP, fontdict=TITLE_FONT)
+# # naming the x axis
+# plt.xlabel(X_LABEL_TIME, fontdict=LABEL_FONT)
+# # naming the y axis
+# plt.ylabel(Y_LABEL_DOP, fontdict=LABEL_FONT)
+#
+#
+# plt.show()
+# plt.show()
+# plt.show()
+#
+# print('Done')
+# for i in range(200, 1200, 50):
+#     winsound.Beep(i, 300)
+#     time.sleep(0.3)
+#
+# winsound.Beep(1200, 2000)
 
 # function to show the plot
 
+
+print(azimuth_l)
 polarimeter.Close()
 
 
