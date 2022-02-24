@@ -53,7 +53,7 @@ main()
       else
         error=$(bc -l <<< "$setpoint - $measured_temp" )
       fi
-      echo error=$(bc -l <<< "$setpoint - $measured_temp" )
+      echo error=$error
       proportional=$error
       echo proportional=$error
       integral=$(bc -l <<< "($integral + $error) * $dt" )
