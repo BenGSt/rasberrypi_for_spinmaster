@@ -67,6 +67,8 @@ main()
       echo previous_error=$error
 
       apply_output
+      echo /####################################
+      echo
 
       sleep $dt
 
