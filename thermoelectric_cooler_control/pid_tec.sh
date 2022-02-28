@@ -55,9 +55,9 @@ main()
 
       if [[ $HEATING_MODE == 1 ]]
       then
-        error=$(bc -l <<< "$measured_temp - $setpoint" )
-      else
         error=$(bc -l <<< "$setpoint - $measured_temp" )
+      else
+        error=$(bc -l <<< "$measured_temp - $setpoint" )
       fi
 #      error=$(bc -l <<< "$measured_temp - $setpoint" ) ##debug
       echo error=$error
