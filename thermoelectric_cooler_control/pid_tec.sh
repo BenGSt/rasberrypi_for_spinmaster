@@ -95,7 +95,7 @@ apply_output()
     then
       echo "output < 0"
       echo applying  $dma_pwm_script --frequency $pwm_frequency --duty-cycle 0 --gpio $pwm_gpio
-      $dma_pwm_script --frequency $pwm_frequency --duty-cycle $output_pwm_duty_cycle --gpio $pwm_gpio
+      $dma_pwm_script --frequency $pwm_frequency --duty-cycle 0 --gpio $pwm_gpio
     else
       echo applying  $dma_pwm_script --frequency $pwm_frequency --duty-cycle $output_pwm_duty_cycle --gpio $pwm_gpio
       $dma_pwm_script --frequency $pwm_frequency --duty-cycle $output_pwm_duty_cycle --gpio $pwm_gpio
