@@ -70,6 +70,7 @@ main()
       echo /####################################
       echo
 
+      echo sleep $dt
       sleep $dt
 
 #    i=$(( i - 1 ))
