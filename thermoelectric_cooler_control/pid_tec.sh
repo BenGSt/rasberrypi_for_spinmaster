@@ -30,7 +30,7 @@ help()
 
       -Kd|--derivative_coefficient)
 
-      -p|--pwm_gpio)
+      -p|--gpio)
 
 EOF
 }
