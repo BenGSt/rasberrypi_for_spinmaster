@@ -19,7 +19,7 @@ def calculate_temperature(channel):
     T_0 = 298.15  # 25C in kelvin - reference temp for R_0.
     R_0 = 100000  # the thermistor's resistance at T_0.
     Beta = 3950  # beta factor
-    V_in = 5
+    V_in = 5.17
 
 
     # try:
