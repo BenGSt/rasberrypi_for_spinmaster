@@ -22,7 +22,7 @@ def calculate_temperature(channel):
     V_in = 5
     V_out = channel.voltage
     if V_out == 0:
-        return None
+        return -1000
     R_S = 100000  # the resistor between GND and Analog_in
     R_T = ((V_in / V_out) - 1) * R_S  # the thermistor's resistance
     T = 1 / ((1 / T_0) + (1 / Beta) * log(R_T / R_0))
