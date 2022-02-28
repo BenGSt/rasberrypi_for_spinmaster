@@ -86,7 +86,7 @@ apply_output()
     fi
     echo applying  $dma_pwm_script --frequency $pwm_frequency --duty-cycle $output_pwm_duty_cycle --gpio $pwm_gpio
 
-#    $dma_pwm_script --frequency $pwm_frequency --duty-cycle $output_pwm_duty_cycle --gpio $pwm_gpio
+    $dma_pwm_script --frequency $pwm_frequency --duty-cycle $output_pwm_duty_cycle --gpio $pwm_gpio
 }
 
 arg_parse()
