@@ -17,7 +17,7 @@ ads = ADS.ADS1115(i2c)
 #Create a sinlge ended channel on Pin 0
 #Max counts for ADS1015 = 2047
 #ADS1115 = 32767
-chan = AnalogIn(ads, ADS.P3)
+chan = AnalogIn(ads, ADS.P0)
 
 #The ADS1015 and ADS1115 both have the same gain options.
 #
