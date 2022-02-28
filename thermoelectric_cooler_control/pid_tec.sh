@@ -53,7 +53,7 @@ main()
         exit 1
       fi
 
-      if [[ HEATING_MODE == 1 ]]
+      if [[ $HEATING_MODE == 1 ]]
       then
         error=$(bc -l <<< "$measured_temp - $setpoint" )
       else
