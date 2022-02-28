@@ -59,12 +59,12 @@ main()
       else
         error=$(bc -l <<< "$measured_temp - $setpoint" )
       fi
-#      error=$(bc -l <<< "$measured_temp - $setpoint" ) ##debug
+
       echo error=$error
       proportional=$error
       echo proportional=$error
-      integral=$(bc -l <<< "($integral + $error) * $dt" )
-      echo integral=$(bc -l <<< "($integral + $error) * $dt" )
+      integral=$(bc -l <<< "$integral + ($error * $dt)" )
+      echo integral=$(bc -l <<< "$integral + ($error * $dt)" )
       derivative=$( bc -l <<< "($error - $previous_error) / $dt" )
       echo derivative=$( bc -l <<< "($error - $previous_error) / $dt" )
       output=$(bc -l <<< "$Kp * $proportional + $Ki * $integral + $Kd * $derivative")
@@ -93,8 +93,8 @@ apply_output()
     fi
     if [[ $(bc -l <<< "$output < 0 ") -gt 0 ]]
     then
-      echo output < 0
-      echo skipping this itteration
+      echo "output < 0"
+      echo applying  $dma_pwm_script --frequency $pwm_frequency --duty-cycle 0 --gpio $pwm_gpio
     else
       echo applying  $dma_pwm_script --frequency $pwm_frequency --duty-cycle $output_pwm_duty_cycle --gpio $pwm_gpio
       $dma_pwm_script --frequency $pwm_frequency --duty-cycle $output_pwm_duty_cycle --gpio $pwm_gpio
