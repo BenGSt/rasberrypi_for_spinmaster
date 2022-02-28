@@ -53,7 +53,7 @@ main()
       else
         error=$(bc -l <<< "$setpoint - $measured_temp" )
       fi
-      error=$(bc -l <<< "$measured_temp - $setpoint" ) ##debug
+#      error=$(bc -l <<< "$measured_temp - $setpoint" ) ##debug
       echo error=$error
       proportional=$error
       echo proportional=$error
