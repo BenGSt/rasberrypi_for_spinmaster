@@ -28,7 +28,7 @@ def long_string(display, text='', num_line=1, num_cols=16):
             display.lcd_display_string(text_to_print, num_line)
             sleep(1)
             display.lcd_display_string("                ", num_line)
-            sleep(1)
+            sleep(0.2)
 
         sleep(1)
     else:
