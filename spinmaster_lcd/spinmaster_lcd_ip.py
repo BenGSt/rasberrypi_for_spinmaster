@@ -9,14 +9,10 @@ import drivers
 from time import sleep
 from datetime import datetime
 from subprocess import check_output
+import os
+
 display = drivers.Lcd()
-
-
-#display.lcd_display_string("   SpinMaster  ", 1)
-#display.lcd_display_string("IP:" + str(IP), 2)
-
 try:
-#    print("Writing to display")
     while True:
         print("Writing to display")
         display.lcd_display_extended_string(str(datetime.now()), 2)
@@ -28,12 +24,18 @@ try:
                 IP = check_output(["hostname", "-I"]).split()[0].decode('UTF-8')
                 display.lcd_display_string("                ", 2)
                 display.lcd_display_string(str(IP), 2)
-
         else:
                 print("No IP")
                 display.lcd_display_string("  Offline  ", 2)
 
         sleep(5)
+
+        if "SPINMASTER_RUNNING" in os.environ:
+            display.lcd_display_string("Running separation", 2)
+        else:
+            display.lcd_display_string("    Standby    ", 2)
+
+        sleep(2)
 
 
 except:
