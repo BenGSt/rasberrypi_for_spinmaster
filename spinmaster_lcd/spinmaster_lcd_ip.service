@@ -1,5 +1,5 @@
  [Unit]
- Description=display IP on LCD (runs in a loop)
+ Description= SpinMaster LCD display
  After=netwotk-online.target 
 
  [Service]
@@ -8,7 +8,7 @@
  EnvironmentFile=/home/pi/raspberrypi_for_SpinMaster/spinmaster_lcd/enviroment_variables_for_lcd_service
  Type=idle
  Restart=always
- RestartSec=12
+ RestartSec=1
 
  [Install]
  WantedBy=multi-user.target

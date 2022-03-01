@@ -13,29 +13,29 @@ import os
 
 display = drivers.Lcd()
 try:
-    while True:
-        print("Writing to display")
-        display.lcd_display_extended_string(str(datetime.now()), 2)
-        display.lcd_display_string("   SpinMaster  ", 1)
-        sleep(5)
 
-        if len(check_output(["hostname", "-I"]).split()):
-                print("Got IP")
-                IP = check_output(["hostname", "-I"]).split()[0].decode('UTF-8')
-                display.lcd_display_string("                ", 2)
-                display.lcd_display_string(str(IP), 2)
-        else:
-                print("No IP")
-                display.lcd_display_string("  Offline  ", 2)
+    print("Writing to display")
+    display.lcd_display_extended_string(str(datetime.now()), 2)
+    display.lcd_display_string("   SpinMaster  ", 1)
+    sleep(5)
 
-        sleep(5)
+    if len(check_output(["hostname", "-I"]).split()):
+            print("Got IP")
+            IP = check_output(["hostname", "-I"]).split()[0].decode('UTF-8')
+            display.lcd_display_string("                ", 2)
+            display.lcd_display_string(str(IP), 2)
+    else:
+            print("No IP")
+            display.lcd_display_string("  Offline  ", 2)
 
-        if int(os.environ.get("SPINMASTER_RUNNING")) != 0:
-            display.lcd_display_string("Running separation", 2)
-        else:
-            display.lcd_display_string("    Standby    ", 2)
+    sleep(5)
 
-        sleep(2)
+    if int(os.environ.get("SPINMASTER_RUNNING")) != 0:
+        display.lcd_display_string("Running separation", 2)
+    else:
+        display.lcd_display_string("    Standby    ", 2)
+
+    sleep(2)
 
 
 except:
