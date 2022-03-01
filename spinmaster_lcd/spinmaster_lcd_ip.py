@@ -14,7 +14,7 @@ import os
 display = drivers.Lcd()
 first_run = False
 try:
-    if "SPINMASTER_LCD_FIRST_RUN" not in os.environ:
+    if "SPINMASTER_LCD_FIRST_RUN" not in os.environ: #TODO make this not happen every time
         display.lcd_display_string("   SpinMaster  ", 1)
         os.putenv("SPINMASTER_LCD_FIRST_RUN", "1")
     display.lcd_display_extended_string(str(datetime.now()), 2)
@@ -32,7 +32,7 @@ try:
     sleep(5)
 
     if int(os.environ.get("SPINMASTER_RUNNING")) != 0:
-        display.lcd_display_string("Running separation", 2)
+        display.lcd_display_string("    Running    ", 2)
     else:
         display.lcd_display_string("    Standby    ", 2)
 
