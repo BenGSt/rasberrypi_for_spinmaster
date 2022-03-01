@@ -12,11 +12,12 @@ from subprocess import check_output
 import os
 
 display = drivers.Lcd()
+first_run = False
 try:
-
-    print("Writing to display")
+    if not first_run:
+        display.lcd_display_string("   SpinMaster  ", 1)
+        first_run = True
     display.lcd_display_extended_string(str(datetime.now()), 2)
-    display.lcd_display_string("   SpinMaster  ", 1)
     sleep(5)
 
     if len(check_output(["hostname", "-I"]).split()):
