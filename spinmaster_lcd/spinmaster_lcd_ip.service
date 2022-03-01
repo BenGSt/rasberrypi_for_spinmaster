@@ -7,8 +7,8 @@
  ExecStart=/usr/bin/python3 /home/pi/raspberrypi_for_SpinMaster/spinmaster_lcd/spinmaster_lcd_ip.py
  EnvironmentFile=/home/pi/raspberrypi_for_SpinMaster/spinmaster_lcd/enviroment_variables_for_lcd_service
  Type=idle
- Restart=on-failure
- RestartSec=10
+ Restart=always
+ RestartSec=12
 
  [Install]
  WantedBy=multi-user.target
