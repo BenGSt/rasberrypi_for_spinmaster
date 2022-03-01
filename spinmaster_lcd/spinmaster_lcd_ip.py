@@ -50,7 +50,9 @@ try:
 
     sleep(5)
 
-    if int(os.environ.get("SPINMASTER_RUNNING")) != 0:
+    #change with: echo SPINMASTER_RUNNING=1 > ./spinmaster_lcd/enviroment_variables_for_lcd_service
+    #TODO: don't overwrite entire file just edit line
+    if "SPINMASTER_RUNNING" in os.environ and int(os.environ.get("SPINMASTER_RUNNING")) != 0:
         display.lcd_display_string("    Running    ", 2)
     else:
         display.lcd_display_string("    Standby    ", 2)
