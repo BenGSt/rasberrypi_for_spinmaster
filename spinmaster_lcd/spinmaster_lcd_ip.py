@@ -30,7 +30,7 @@ try:
 
         sleep(5)
 
-        if os.environ.get("SPINMASTER_RUNNING"):
+        if os.environ.get("SPINMASTER_RUNNING") != 0:
             display.lcd_display_string("Running separation", 2)
         else:
             display.lcd_display_string("    Standby    ", 2)
