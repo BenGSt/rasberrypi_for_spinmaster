@@ -26,7 +26,7 @@ def long_string(display, text='', num_line=1, num_cols=16):
         for i in range(len(text) - num_cols + 1):
             text_to_print = text[i:i + num_cols]
             display.lcd_display_string(text_to_print, num_line)
-            sleep(0.6)
+            sleep(0.2)
         sleep(2)
     else:
         display.lcd_display_string(text, num_line)
@@ -54,7 +54,7 @@ try:
         display.lcd_display_string("    Running    ", 2)
     else:
         display.lcd_display_string("    Standby    ", 2)
-        long_string(display, "Please see web based control panel at IP:", 2)
+        long_string(display, "Please see web based control panel at the displayed IP", 2)
 
     sleep(2)
 
