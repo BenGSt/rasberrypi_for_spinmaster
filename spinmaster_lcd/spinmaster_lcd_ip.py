@@ -14,9 +14,9 @@ import os
 display = drivers.Lcd()
 first_run = False
 try:
-    if not first_run:
+    if "SPINMASTER_LCD_FIRST_RUN" not in os.environ:
         display.lcd_display_string("   SpinMaster  ", 1)
-        first_run = True
+        os.putenv("SPINMASTER_LCD_FIRST_RUN", "1")
     display.lcd_display_extended_string(str(datetime.now()), 2)
     sleep(5)
 
