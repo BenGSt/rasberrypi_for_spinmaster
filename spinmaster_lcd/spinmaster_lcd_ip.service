@@ -4,7 +4,7 @@
 
  [Service]
  User=pi
- ExecStart=/usr/bin/python /home/pi/raspberrypi_for_SpinMaster/spinmaster_lcd/spinmaster_lcd_ip.py
+ ExecStart=/usr/bin/python3 /home/pi/raspberrypi_for_SpinMaster/spinmaster_lcd/spinmaster_lcd_ip.py
  Type=idle
  Restart=on-failure
  RestartSec=10
