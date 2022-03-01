@@ -58,7 +58,7 @@ try:
     else:
         display.lcd_display_string("    Standby    ", 2)
         sleep(2)
-        long_string(display, "Please see web  based control panel at the displayed IP", 2)
+        long_string(display, "Please see web based control panel at displayed IP", 2)
 
     sleep(2)
 
