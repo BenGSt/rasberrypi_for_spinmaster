@@ -49,7 +49,7 @@ main()
       echo measured_temp=$measured_temp
       if [[ !($measured_temp) ]]
         then
-        echo $(echo $0 | awk -F / '{print $NF}'): Error: no measured_temp \(exit 1\)
+        echo Error: $(echo $0 | awk -F / '{print $NF}'): no measured_temp \(exit 1\)
         exit 1
       fi
 
