@@ -1,27 +1,40 @@
 #!/usr/bin/bash
 
-PUMP_PWM_GPIO=
-FM_LEFT_THERMISTOR_NUM=0
+PUMP_PWM_GPIO=18
 FM_LEFT_PWM_GPIO=17
-FM_RIGHT_THERMISTOR_NUM=1
 FM_RIGHT_PWM_GPIO=27
-RESERVOIR_HEATER_THERMISTOR_NUM=2
 RESERVOIR_HEATER_PWM_GPIO=22
+
+FM_LEFT_THERMISTOR_NUM=0
+FM_RIGHT_THERMISTOR_NUM=1
+RESERVOIR_HEATER_THERMISTOR_NUM=3
 
 PID_MEASURMENT_AVG_TIME=5s
 PID_TIME_ELEMENT_DT=5s
 
-PID_COOLING_Kp=
-PID_COOLING_Ki=
-PID_COOLING_Kd=
+PID_COOLING_Kp=10
+PID_COOLING_Ki=0.2
+PID_COOLING_Kd=0
 
 PID_HEATING_Kp=
 PID_HEATING_Ki=
 PID_HEATING_Kd=
 
+PUMP_PWM_FREQUENCY=20000
+
+main()
+{
+  trap shutdown EXIT #shutdown executed on exit from the shell
+  arg_parse "$@"
+  startup
+  sleep $RUN_TIME
+  shutdown
+}
+
+
 startup()
 {
-    begin_date_time=get_datetime
+    begin_date_time=$(date +%s)
 
     #start telegraf (posts measurements to DB)
     sudo systemctl start telegraf_spinmaster.service
@@ -35,32 +48,49 @@ startup()
 
     #sart TEC heating
       pid_tec.sh --gpio $RESERVOIR_HEATER_PWM_GPIO --heating-mode --thermistor_num 1 --averaging-time $PID_MEASURMENT_AVG_TIME \
-                  --time_element_dt 5s --desired_temperature -Kp $PID_HEATING_Kp -Ki $PID_HEATING_Ki -Kd $PID_HEATING_Kd
+                  --time_element_dt 5s --desired_temperature $RESERVOIR_TARGET_TEMP -Kp $PID_HEATING_Kp -Ki $PID_HEATING_Ki -Kd $PID_HEATING_Kd
 
     #sart pump
+#      TODO: PUMP_PWM_DUTYCYCLE = f($FLOW_RATE)
+      PUMP_PWM_DUTYCYCLE=$FLOW_RATE
       dma_pwm.sh --frequency $PUMP_PWM_FREQUENCY --duty-cycle $PUMP_PWM_DUTYCYCLE --gpio $PUMP_PWM_GPIO
 
-    if [[ use_laser ]]
+    #TODO: if [[ use_laser ]]
       #start laser
 
 }
 
 
-
 shutdown()
 {
-    while [[current time < end_time]]
-      sleep 5m
-
+    end_date_time=$(date +%s)
+    run_time=$(($end_date_time - $begin_date_time))
     #stop all PWMs
-    sudo killall pigpio
+    for pin in $PUMP_PWM_GPIO $FM_LEFT_PWM_GPIO $FM_RIGHT_PWM_GPIO $RESERVOIR_HEATER_PWM_GPIO
+    do
+      pigs w $pin 0 #write 0 to pin
+    done
 
     #stop telegraf (posts measurements to DB)
     sudo systemctl stop telegraf_spinmaster.service
 
 
     # issue report
+    $time_grouping="2s"
+    influx -execute "SELECT mean(*) FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $run_time  and time <= now() GROUP BY time($time_grouping) fill(null)" -database="home"
     #save the run's data}
+}
+
+
+help()
+{
+  cat << EOF
+    --fm_target_temperature
+    --reservoir_target_temperature
+    --flow_rate
+    --run_time
+    -h|--help
+EOF
 }
 
 
@@ -75,7 +105,21 @@ arg_parse()
         shift # past argument
         shift # past value
         ;;
-
+      --reservoir_target_temperature)
+        RESERVOIR_TARGET_TEMP="$2"
+        shift # past argument
+        shift # past value
+        ;;
+      --flow_rate)
+        FLOW_RATE="$2"
+        shift # past argument
+        shift # past value
+        ;;
+      --run_time)
+        RUN_TIME="$2"
+        shift # past argument
+        shift # past value
+        ;;
       -*|--*)
         help
         exit 1
