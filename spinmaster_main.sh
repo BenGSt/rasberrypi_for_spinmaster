@@ -64,12 +64,9 @@ startup()
 
 shutdown()
 {
-  echo shutdown #debug
     end_date_time=$(date +%s)
-    if [[ $begin_date_time ]] #fixes $0 -h error
-    then
-      run_time=$(($end_date_time - $begin_date_time))
-    fi
+    run_time=$(($end_date_time - $begin_date_time))
+    echo finished spinmaster run. runtime: $run_time
 
     #stop all PWMs
     for pin in $PUMP_PWM_GPIO $FM_LEFT_PWM_GPIO $FM_RIGHT_PWM_GPIO $RESERVOIR_HEATER_PWM_GPIO
