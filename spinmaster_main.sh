@@ -21,13 +21,14 @@ PID_HEATING_Ki=
 PID_HEATING_Kd=
 
 PUMP_PWM_FREQUENCY=20000
+TEC_PWM_FREQUENCY=20000
 
 GROUP_BY_TIME_FINAL_REPORT_DATA="2s"
 
 
 main()
 {
-  set -eE
+  set -eE # exit on any command failure
   arg_parse "$@"
   print_start_message
   trap shutdown EXIT #shutdown executed on exit from the shell
