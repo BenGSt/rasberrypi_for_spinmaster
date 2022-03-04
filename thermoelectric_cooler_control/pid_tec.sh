@@ -49,7 +49,7 @@ main()
       echo measured_temp=$measured_temp
       if [[ !($measured_temp) ]]
         then
-        echo Error: $(echo $0 | awk -F / '{print $NF}'): no measured temp \(exit 1\)
+        echo Error: $(echo $0 | awk -F / '{print $NF}'): No measured temp, check ADC and thermistors. \(exit 1\)
         exit 1
       fi
 
