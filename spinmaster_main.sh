@@ -64,7 +64,11 @@ startup()
 shutdown()
 {
     end_date_time=$(date +%s)
-    run_time=$(($end_date_time - $begin_date_time))
+    if [[ $begin_date_time ]] #fixes $0 -h error
+    then
+      run_time=$(($end_date_time - $begin_date_time))
+    fi
+
     #stop all PWMs
     for pin in $PUMP_PWM_GPIO $FM_LEFT_PWM_GPIO $FM_RIGHT_PWM_GPIO $RESERVOIR_HEATER_PWM_GPIO
     do
