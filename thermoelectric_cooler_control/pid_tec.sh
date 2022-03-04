@@ -49,7 +49,7 @@ main()
       echo measured_temp=$measured_temp
       if [[ !($measured_temp) ]]
         then
-        echo $0: Error: no measured_temp (exit 1)
+        echo $0: Error: no measured_temp \(exit 1\)
         exit 1
       fi
 
