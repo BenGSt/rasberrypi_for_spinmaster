@@ -106,7 +106,7 @@ arg_parse()
       --fm_target_temperature)
         FM_TARGET_TEMP="$2"
         FM_TEMP_LEFT=$FM_TARGET_TEMP
-        FM_TEMP_RIGHT$FM_TARGET_TEMP
+        FM_TEMP_RIGHT=$FM_TARGET_TEMP
         shift # past argument
         shift # past value
         ;;
