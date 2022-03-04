@@ -24,8 +24,8 @@ PUMP_PWM_FREQUENCY=20000
 
 main()
 {
-  trap shutdown EXIT #shutdown executed on exit from the shell
   arg_parse "$@"
+  trap shutdown EXIT #shutdown executed on exit from the shell
   startup
   sleep $RUN_TIME
   shutdown
