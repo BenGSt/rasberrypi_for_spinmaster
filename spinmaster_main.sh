@@ -64,6 +64,7 @@ startup()
 
 shutdown()
 {
+  echo shutdown #debug
     end_date_time=$(date +%s)
     if [[ $begin_date_time ]] #fixes $0 -h error
     then
