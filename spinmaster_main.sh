@@ -22,8 +22,17 @@ PID_HEATING_Kd=
 
 PUMP_PWM_FREQUENCY=20000
 
+GROUP_BY_TIME_FINAL_REPORT_DATA="2s"
+
+
 main()
 {
+  echo \################################################
+  echo Starting spinmaster run with parameters:
+  ( set -o posix ; set ) #print all variables declared in this script
+  echo Thank you for flying SpinMaster, have a nice day!
+  echo \################################################
+  echo
   arg_parse "$@"
   trap shutdown EXIT #shutdown executed on exit from the shell
   startup
@@ -42,14 +51,14 @@ startup()
 
     #start TEC cooling
       pid_tec.sh --gpio $FM_LEFT_PWM_GPIO --thermistor_num $FM_LEFT_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
-                   --time_element_dt 5s --desired_temperature $FM_TEMP_LEFT -Kp $PID_COOLING_Kp -Ki $PID_COOLING_Ki -Kd $PID_COOLING_Kd
+                   --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $FM_TEMP_LEFT -Kp $PID_COOLING_Kp -Ki $PID_COOLING_Ki -Kd $PID_COOLING_Kd
 
       pid_tec.sh --gpio $FM_RIGHT_PWM_GPIO --thermistor_num $FM_RIGHT_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
-                   --time_element_dt 5s --desired_temperature $FM_TEMP_RIGHT -Kp $PID_COOLING_Kp -Ki $PID_COOLING_Ki -Kd $PID_COOLING_Kd
+                   --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $FM_TEMP_RIGHT -Kp $PID_COOLING_Kp -Ki $PID_COOLING_Ki -Kd $PID_COOLING_Kd
 
     #sart TEC heating
       pid_tec.sh --gpio $RESERVOIR_HEATER_PWM_GPIO --heating-mode --thermistor_num 1 --averaging-time $PID_MEASURMENT_AVG_TIME \
-                  --time_element_dt 5s --desired_temperature $RESERVOIR_TARGET_TEMP -Kp $PID_HEATING_Kp -Ki $PID_HEATING_Ki -Kd $PID_HEATING_Kd
+                  --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $RESERVOIR_TARGET_TEMP -Kp $PID_HEATING_Kp -Ki $PID_HEATING_Ki -Kd $PID_HEATING_Kd
 
     #sart pump
 #      TODO: PUMP_PWM_DUTYCYCLE = f($FLOW_RATE)
@@ -65,10 +74,10 @@ startup()
 shutdown()
 {
     end_date_time=$(date +%s)
-    run_time=$(($end_date_time - $begin_date_time))
+    ran_time=$(($end_date_time - $begin_date_time))
     echo
     echo \################################################
-    echo Finished spinmaster run. Ran for: $run_time sec
+    echo Finished spinmaster run. Ran for: $ran_time sec
     echo Thank you for flying SpinMaster, have a nice day!
     echo \################################################
 
@@ -83,8 +92,8 @@ shutdown()
 
 
     # issue report
-    time_grouping="2s"
-    influx -execute "SELECT mean(*) FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $run_time  and time <= now() GROUP BY time($time_grouping) fill(null)" -database="home"
+
+    influx -execute "SELECT mean(*) FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $ran_time  and time <= now() GROUP BY time($GROUP_BY_TIME_FINAL_REPORT_DATA) fill(null)" -database="home"
     #save the run's data}
 }
 
