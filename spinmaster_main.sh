@@ -28,7 +28,7 @@ main()
   trap shutdown EXIT #shutdown executed on exit from the shell
   startup
   sleep $RUN_TIME
-  shutdown
+#  shutdown
 }
 
 
