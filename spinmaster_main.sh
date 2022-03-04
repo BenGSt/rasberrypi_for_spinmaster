@@ -97,13 +97,13 @@ print_start_message()
   echo \################################################
   echo Starting SpinMaster run with the following parameters:
   echo
-  echo   #command line args
+  echo   \#command line args
   echo   FM_TARGET_TEMP=$FM_TARGET_TEMP
   echo   RESERVOIR_TARGET_TEMP=$RESERVOIR_TARGET_TEMP
   echo   FLOW_RATE=$FLOW_RATE
   echo   RUN_TIME=$RUN_TIME
   echo
-  echo   #set in script
+  echo   \#set in script
   echo   PUMP_PWM_GPIO=$PUMP_PWM_GPIO
   echo   FM_LEFT_PWM_GPIO=$FM_LEFT_PWM_GPIO
   echo   FM_RIGHT_PWM_GPIO=$FM_RIGHT_PWM_GPIO
