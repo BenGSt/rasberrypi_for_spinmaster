@@ -131,3 +131,5 @@ arg_parse()
     esac
   done
 }
+
+main "$@"
