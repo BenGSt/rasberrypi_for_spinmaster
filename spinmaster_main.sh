@@ -27,8 +27,8 @@ GROUP_BY_TIME_FINAL_REPORT_DATA="2s"
 
 main()
 {
-  print_start_message
   arg_parse "$@"
+  print_start_message
   trap shutdown EXIT #shutdown executed on exit from the shell
   startup
   sleep $RUN_TIME
