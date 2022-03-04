@@ -27,39 +27,7 @@ GROUP_BY_TIME_FINAL_REPORT_DATA="2s"
 
 main()
 {
-  echo \################################################
-  echo Starting spinmaster run with parameters:
-#  ( set -o posix ; set ) #print all variables declared in this script
-  echo   FM_TARGET_TEMP=$FM_TARGET_TEMP
-  echo   RESERVOIR_TARGET_TEMP=$RESERVOIR_TARGET_TEMP
-  echo   FLOW_RATE=$FLOW_RATE
-  echo   RUN_TIME=$RUN_TIME
-  echo
-  echo   PUMP_PWM_GPIO=$PUMP_PWM_GPIO
-  echo   FM_LEFT_PWM_GPIO=$FM_LEFT_PWM_GPIO
-  echo   FM_RIGHT_PWM_GPIO=$FM_RIGHT_PWM_GPIO
-  echo   RESERVOIR_HEATER_PWM_GPIO=$RESERVOIR_HEATER_PWM_GPIO
-  echo
-  echo   FM_LEFT_THERMISTOR_NUM=$FM_LEFT_THERMISTOR_NUM
-  echo   FM_RIGHT_THERMISTOR_NUM=$FM_RIGHT_THERMISTOR_NUM
-  echo   RESERVOIR_HEATER_THERMISTOR_NUM=$RESERVOIR_HEATER_THERMISTOR_NUM
-  echo
-  echo   PID_MEASURMENT_AVG_TIME=$PID_MEASURMENT_AVG_TIME
-  echo   PID_TIME_ELEMENT_DT=$PID_TIME_ELEMENT_DT
-  echo
-  echo   PID_COOLING_Kp=$PID_COOLING_Kp
-  echo   PID_COOLING_Ki=$PID_COOLING_Ki
-  echo   PID_COOLING_Kd=$PID_COOLING_Kd
-  echo
-  echo   PID_HEATING_Kp=$PID_HEATING_Kp
-  echo   PID_HEATING_Ki=$PID_HEATING_Ki
-  echo   PID_HEATING_Kd=$PID_HEATING_Kd
-  echo
-  echo   PUMP_PWM_FREQUENCY=$PUMP_PWM_FREQUENCY
-  echo   GROUP_BY_TIME_FINAL_REPORT_DATA=$GROUP_BY_TIME_FINAL_REPORT_DATA
-  echo Good luck...
-  echo \################################################
-  echo
+  print_start_message
   arg_parse "$@"
   trap shutdown EXIT #shutdown executed on exit from the shell
   startup
@@ -124,6 +92,44 @@ shutdown()
     #save the run's data}
 }
 
+print_start_message()
+{
+  echo \################################################
+  echo Starting spinmaster run with parameters:
+  echo
+  echo   #command line args
+  echo   FM_TARGET_TEMP=$FM_TARGET_TEMP
+  echo   RESERVOIR_TARGET_TEMP=$RESERVOIR_TARGET_TEMP
+  echo   FLOW_RATE=$FLOW_RATE
+  echo   RUN_TIME=$RUN_TIME
+  echo
+  echo   #set in script
+  echo   PUMP_PWM_GPIO=$PUMP_PWM_GPIO
+  echo   FM_LEFT_PWM_GPIO=$FM_LEFT_PWM_GPIO
+  echo   FM_RIGHT_PWM_GPIO=$FM_RIGHT_PWM_GPIO
+  echo   RESERVOIR_HEATER_PWM_GPIO=$RESERVOIR_HEATER_PWM_GPIO
+  echo
+  echo   FM_LEFT_THERMISTOR_NUM=$FM_LEFT_THERMISTOR_NUM
+  echo   FM_RIGHT_THERMISTOR_NUM=$FM_RIGHT_THERMISTOR_NUM
+  echo   RESERVOIR_HEATER_THERMISTOR_NUM=$RESERVOIR_HEATER_THERMISTOR_NUM
+  echo
+  echo   PID_MEASURMENT_AVG_TIME=$PID_MEASURMENT_AVG_TIME
+  echo   PID_TIME_ELEMENT_DT=$PID_TIME_ELEMENT_DT
+  echo
+  echo   PID_COOLING_Kp=$PID_COOLING_Kp
+  echo   PID_COOLING_Ki=$PID_COOLING_Ki
+  echo   PID_COOLING_Kd=$PID_COOLING_Kd
+  echo
+  echo   PID_HEATING_Kp=$PID_HEATING_Kp
+  echo   PID_HEATING_Ki=$PID_HEATING_Ki
+  echo   PID_HEATING_Kd=$PID_HEATING_Kd
+  echo
+  echo   PUMP_PWM_FREQUENCY=$PUMP_PWM_FREQUENCY
+  echo   GROUP_BY_TIME_FINAL_REPORT_DATA=$GROUP_BY_TIME_FINAL_REPORT_DATA
+  echo Good luck...
+  echo \################################################
+  echo
+}
 
 help()
 {
