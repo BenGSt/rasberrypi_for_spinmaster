@@ -27,6 +27,7 @@ GROUP_BY_TIME_FINAL_REPORT_DATA="2s"
 
 main()
 {
+  set -eE
   arg_parse "$@"
   print_start_message
   trap shutdown EXIT ERR #shutdown executed on exit from the shell
