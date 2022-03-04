@@ -95,7 +95,7 @@ shutdown()
 print_start_message()
 {
   echo \################################################
-  echo Starting spinmaster run with parameters:
+  echo Starting SpinMaster run with the following parameters:
   echo
   echo   #command line args
   echo   FM_TARGET_TEMP=$FM_TARGET_TEMP
