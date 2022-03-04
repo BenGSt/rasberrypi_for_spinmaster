@@ -80,7 +80,7 @@ shutdown()
 
 
     # issue report
-    $time_grouping="2s"
+    time_grouping="2s"
     influx -execute "SELECT mean(*) FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $run_time  and time <= now() GROUP BY time($time_grouping) fill(null)" -database="home"
     #save the run's data}
 }
