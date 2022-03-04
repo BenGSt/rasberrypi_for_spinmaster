@@ -29,8 +29,9 @@ main()
 {
   echo \################################################
   echo Starting spinmaster run with parameters:
-  ( set -o posix ; set ) #print all variables declared in this script
-  echo Thank you for flying SpinMaster, have a nice day!
+#  ( set -o posix ; set ) #print all variables declared in this script
+  echo $(declare -p)
+  echo Good luck...
   echo \################################################
   echo
   arg_parse "$@"
