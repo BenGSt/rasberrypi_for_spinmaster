@@ -126,6 +126,7 @@ print_start_message()
   echo
   echo   PUMP_PWM_FREQUENCY=$PUMP_PWM_FREQUENCY
   echo   GROUP_BY_TIME_FINAL_REPORT_DATA=$GROUP_BY_TIME_FINAL_REPORT_DATA
+  echo
   echo Good luck...
   echo \################################################
   echo
