@@ -34,6 +34,7 @@ main()
 
 startup()
 {
+    export PATH="/home/pi/raspberrypi_for_SpinMaster/thermoelectric_cooler_control:$PATH"
     begin_date_time=$(date +%s)
 
     #start telegraf (posts measurements to DB)
