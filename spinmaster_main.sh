@@ -66,8 +66,11 @@ shutdown()
 {
     end_date_time=$(date +%s)
     run_time=$(($end_date_time - $begin_date_time))
+    echo
+    echo \################################################
     echo Finished spinmaster run. Ran for: $run_time sec
-    echo Thank you for flying SpinMaster.
+    echo Thank you for flying SpinMaster, have a nice day!
+    echo \################################################
 
     #stop all PWMs
     for pin in $PUMP_PWM_GPIO $FM_LEFT_PWM_GPIO $FM_RIGHT_PWM_GPIO $RESERVOIR_HEATER_PWM_GPIO
