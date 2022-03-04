@@ -30,7 +30,7 @@ main()
   set -eE
   arg_parse "$@"
   print_start_message
-  trap shutdown EXIT ERR #shutdown executed on exit from the shell
+  trap shutdown EXIT #shutdown executed on exit from the shell
   startup
   sleep $RUN_TIME
 #  shutdown
