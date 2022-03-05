@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="pi@192.168.43.25:22 (2)" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="pi@192.168.205.145:22" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
+      <paths name="pi@192.168.205.145:22">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/pycharm_project_300" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="pi@192.168.43.25:22">
         <serverdata>
           <mappings>
@@ -13,6 +20,13 @@
         <serverdata>
           <mappings>
             <mapping deploy="/tmp/pycharm_project_363" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="s.benjamin@zeus.technion.ac.il:22 password">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
