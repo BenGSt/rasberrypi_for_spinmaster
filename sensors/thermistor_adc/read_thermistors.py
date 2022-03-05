@@ -28,7 +28,7 @@ def calculate_temperature(channel):
         print("can't read ADC")
         return -1000
 
-    if V_out == 0:
+    if -0.05 < V_out < 0.05:
         return -1000
 
     # V_out = channel.voltage #debug
