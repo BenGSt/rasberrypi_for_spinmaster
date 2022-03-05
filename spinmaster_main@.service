@@ -3,4 +3,4 @@ Description=Test passing multiple arguments
 
 [Service]
 Environment="SCRIPT_ARGS=%I"
-ExecStart=echo $SCRIPT_ARGS
+ExecStart=echo ${SCRIPT_ARGS}
