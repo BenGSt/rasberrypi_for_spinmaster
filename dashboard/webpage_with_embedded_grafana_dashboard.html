@@ -1,11 +1,243 @@
+<!DOCTYPE html>
 <html>
-  <head><h1 align="center">SpinMaster Web Interface</h1></head>
-  <br><br><br>
+  <head>
+    <style>
+      body {
+        background-color: #111217;
+        align-content: center;
+      }
+      h1   {
+        color: #CCCCDD;
+        font-size: 50px;
+        text-align: center;
+      }
+
+
+
+      p  {
+        color: #CCCCDD;
+        font-size: 35px;
+        text-align: center;
+
+      }
+
+      form.form {
+        display: table;
+        text-align: center;
+        width: 50%; margin-left : 25%;
+
+      }
+
+      div.form {
+          display: table-row;
+          color: #CCCCDD;
+          /*padding-right: 10px;*/
+
+      }
+
+      .form label, input {
+          display: table-cell;
+          margin-bottom: 10px;
+          padding-right: 5px;
+          font-size: 30px;
+
+          color: #CCCCDD;
+          /*color: yellow;*/
+      }
+
+     .form  label {
+          /*background-color: #111217;*/
+          background-color: yellow;
+
+      }
+
+     .form input {
+        background-color: dimgrey;
+       /*background-color: yellow;*/
+        /*margin-left : 25vw;*/
+        width: auto;
+      }
+
+      iframe {
+        width: 100%;
+      }
+
+      /*Accordian  */
+      .accordion > input[name="collapse"] {
+        display: none;
+      }
+
+      .accordion .content {
+        background: #111217;
+        overflow: hidden;
+        height: 0;
+        /*transition: 0.5s;*/
+        /*box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);*/
+      }
+      /*.accordion label {*/
+      /*  color: #CCCCDD;*/
+      /*  !*cursor: pointer;*!*/
+      /*  !*font-weight: normal;*!*/
+      /*  !*padding: 10px;*!*/
+      /*  !*background: #b0100c;*!*/
+      /*  align-content: center;*/
+      /*  text-align-all: center;*/
+      /*  horiz-align: center;*/
+      /*  !*display: block;*!*/
+      /*}*/
+
+      .accordion  label{
+        background: #252525;
+        color: #CCCCDD;
+        font-size: 35px;
+        text-align: center;
+        horiz-align: center;
+        display: block;
+      }
+
+
+      .accordion label:hover,
+      .accordion label:focus {
+        background: #CCCCDD;
+        color: black;
+        text-align: center;
+        display: block;
+      }
+
+      /*.accordion .handle label:before {*/
+      /*  font-family: FontAwesome;*/
+      /*  content: "\f107";*/
+      /*  display: inline-block;*/
+      /*  margin-right: 10px;*/
+      /*  font-size: 1em;*/
+      /*  line-height: 1.556em;*/
+      /*  vertical-align: middle;*/
+      /*  horiz-align: center;*/
+      /*  transition: 0.4s;*/
+      /*}*/
+
+      /*.accordion > input[name="collapse"]:checked ~ .handle label:before {*/
+      /*    transform: rotate(180deg);*/
+      /*    transform-origin: center;*/
+      /*    transition: 0.4s;*/
+      /*}*/
+
+      .accordion > input[name="collapse"]:checked ~ .content {
+        height: auto;
+        transition: height 0.5s;
+        text-align: center;
+      }
+
+    </style>
+  </head>
+<!--  <head><h1 align="center">SpinMaster Web Interface</h1></head>-->
+
+
   <body>
-<iframe src="https://192.168.43.25:4200" scrolling="yes" width="2000" height="400"  frameborder="0"></iframe>
-<br><br><br>
-<iframe src="http://192.168.43.25:3000" scrolling="yes" width="2000" height="3000"  frameborder="0"></iframe>
-<br><br><br>
+    <h1>SpinMaster Control Panel</h1>
+    <br><br><br>
+
+
+<!--  <iframe src="https://192.168.43.25:4200" scrolling="yes" width="2000" height="400"  frameborder="0"></iframe>-->
+<!--  <br><br><br>-->
+<!--  <iframe src="http://192.168.43.25:3000" scrolling="yes" width="2000" height="3000"  frameborder="0"></iframe>-->
+<!--  <br><br><br>-->
+
+
+
+<!--folding accordion layout for different sections-->
+  <section class="accordion">
+    <input type="checkbox" name="collapse" id="about" checked="checked">
+    <h2 class="handle">
+      <label  for="about">
+      About SpinMaster
+      </label>
+    </h2>
+
+    <div class="content">
+      <p>SpinMaster is a machine for the separation of chiral molecule enantiomers, based on selective spin crystallization technology.</p>
+      <p> An undergraduate project by Ben Steinberg, Yoav Silberstein, and Daniel Fuchs,
+        with the guidance of Omer (fill),
+        Dr. Shira (fill), and Prof. Yossi Paltiel.  </p>
+      <p> Department of applied physics, the Hebrew University, Jerusalem, Isarel, 2022. </p>
+
+      <br>
+      <p>Sorce code and documentaion can be found at our
+        <a href="https://github.com/BenGSt/raspberrypi_for_SpinMaster/wiki">github repo.</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="accordion">
+    <input type="checkbox" name="collapse" id="set_parameters">
+    <h2 class="handle">
+      <label for="set_parameters">
+       Set Parameters
+      </label>
+    </h2>
+
+    <div class="content">
+      <form action="/cgi-bin/start_spinmaster_service.pl" method="get" class="form">
+        <div class="form">
+          <label for="FM target temperature">FM target temperature [deg C]:</label>
+          <input type="text" name="fm_target_temperature" id="FM target temperature" required>
+        </div>
+
+        <div class="form">
+          <label for="ReservoirTargetTemp">Reservoir target temperatue [deg C]: </label>
+          <input type="text" name="reservoir_target_temperature" id="ReservoirTargetTemp" required>
+        </div>
+
+        <div class="form">
+          <label for="FlowRate">Flow Rate [?]: </label>
+          <input type="text" name="flow_rate" id="FlowRate" required>
+        </div>
+
+        <div class="form">
+          <label for="RunTime">Run Time [?]: </label>
+          <input type="text" name="run_time" id="RunTime" required>
+        </div>
+
+        <div class="form">
+          <input type="submit" value="Run">
+
+        </div>
+  </form>
+
+      <form action="/cgi-bin/stop_spinmaster_service.pl" method="post" class="form">
+          <div class="form">
+          <input type="submit" value="Stop">
+          </div>
+      </form>
+   </div>
+
+  </section>
+
+  <section class="accordion">
+    <input type="checkbox" name="collapse" id="terminal">
+    <h2 class="handle">
+      <label for="terminal">
+       Terminal
+      </label>
+    </h2>
+
+    <div class="content">
+      <iframe src="https://192.168.43.25:4200" scrolling="yes"  height="400" frameborder="0"></iframe>
+    </div>
+  </section>
+
+  <section class="accordion">
+    <input type="checkbox" name="collapse" id="dashboard">
+    <h2 class="handle">
+      <label for="dashboard">
+       Dashboard
+      </label>
+    </h2>
+
+    <div class="content">
+      <iframe src="http://192.168.43.25:3000" scrolling="yes" height="2000" frameborder="0"></iframe>
+    </div>
+  </section>
 
   </body>
 </html>

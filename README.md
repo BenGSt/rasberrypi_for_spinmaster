@@ -24,30 +24,53 @@ for now I just used GUI
     sudo apt-get update
     sudo apt-get install -y grafana
   
-  #To make sure Grafana starts up even if the Raspberry Pi is restarted,
-  #we need to enable and start the Grafana Systemctl service:
-  
+    # To make sure Grafana starts up even if the Raspberry Pi is restarted,
+    # we need to enable and start the Grafana Systemctl service:
     sudo /bin/systemctl enable grafana-server
     sudo /bin/systemctl start grafana-server
   
-  #grafana should now be available on port 3000 with username: admin, password: admin.
-  
-  #allow embedding by in /etc/grafana/grafana.ini 
-    
+    # grafana should now be available on port 3000 with username: admin, password: admin.
+   
+    # allow embedding by editing /etc/grafana/grafana.ini
     sudo cp ./dashboard/grafana.ini /etc/grafana/grafana.ini
     sudo systemctl restart grafana-server.service
     
-  #TODO: add the built dashboards
-    
-# 4. Set up apache2 webserver to serve the SpinMaster web interface
+  #Add the built dashboards (raspi monitoring, spinmaster) using GUI to import json
+    #TODO: automate this step
+# 4. Set up apache2 webserver to serve the SpinMaster web interface.
+
     
     sudo apt install -y apache2
     sudo cp ./dashboard/webpage_with_embedded_grafana_dashboard.html /var/www/html/index.html
     
-  #Note you have to change the ip address in webpage_with_embedded_grafana_dashboard.html to machines ip.
-  
-  #TODO: figure out how to setup generic iframe with link without specific IP  (localhost dosn't work)
+    # Note you have to change the ip address in webpage_with_embedded_grafana_dashboard.html to machines ip.
+    # TODO: automate using generic, enviormental variable, or sed. 
 
+    # apache2 enable cgi scripts
+    cd /etc/apache2/mods-enabled
+    sudo ln -s ../mods-available/cgi.load
+    
+    sudo mkdir /usr/local/apache2/
+    sudo mkdir /usr/local/apache2/cgi-bin
+
+    # edit  /etc/apache2/sites-available/000-default.conf
+    sudo cp ./dashboard/apache_000-default.conf  /etc/apache2/sites-available/000-default.conf
+  
+    #allow apache user www-data sudo privileges (not secure!)
+        #sudo cat /etc/sudoers.d/010_pi-nopasswd
+        #add line:
+        #www-data ALL=(ALL) NOPASSWD: ALL
+
+    # copy cgi-bin scripts (backend of our webpage) 
+    cp ./dashboard/cgi-bin/* /usr/local/apache2/cgi-bin/
+
+# perl
+    # first perl needs to be installed if it isnt already (my raspberrypios came with it installed)
+    # second the CGI module meeds to be installed
+        sudo perl -e shell -MCPAN
+        # follow config instructions as needed
+        install CGI
+        exit
 
 # 5. Install influxdb DB 
    #add Influx repositories to apt:
@@ -91,23 +114,58 @@ for now I just used GUI
 	#Add capabilities to the “ping” binary to allow telegraf to execute ping checks
 	sudo setcap 'cap_net_admin,cap_net_raw+ep' $(which ping)
 	
-	sudo cp ./dashboard/telegraf.conf /etc/telegraf/telegraf.conf
-	sudo systemctl restart telegraf
+    # we'll have one service for raspberrypi monitoring dashboard, and another for the spinmaster dashboard 
+        #(the spinmaster query is too frequent to use in the same config)
 	
-   #add inluxdb data source via grafana web interface:
+    # raspberrypi monitoring config - always on 
+    sudo cp ./dashboard/telegraf.conf /etc/telegraf/telegraf.conf
+	sudo systemctl restart telegraf
+
+    # add another telegraf service for the spinmaster data
+	sudo cp ./dashboard/telegraf_spinmaster.service /usr/lib/systemd/system/telegraf_spinmaster.service
+    sudo systemctl daemon-reload
    
-   #url: http://localhost:8086 , Database: home, User: grafana
-   
-   #example usage with [input.tail] set up in telegraf.conf :  
-   
-  	 python3 sensors/thermistor_adc/get_temp_test.py > /home/pi/thermistor_adc/thermistor_0.log &
+    #add inluxdb data source via grafana web interface:
+     #url: http://localhost:8086 , Database: home, User: grafana
+     #example usage with [input.tail] set up in telegraf.conf :
+  	     python3 sensors/thermistor_adc/get_temp_test.py > /home/pi/thermistor_adc/thermistor_0.log &
 	
 	
 
 # 7. shellinabox - web based SSH emulator
 
 	sudo apt-get install shellinabox
+   
+# 8. set up ADC
+
+# pigpio for dma pwm
+    wget https://github.com/joan2937/pigpio/archive/master.zip
+    unzip master.zip
+    cd pigpio-master
+    make
+    sudo make install
+
+# 9. set up digital temperature sensors (DS18B20)
+  #enable one-wire interface 
+    # sudo raspi-config
+    #choose interface options -> 1-wire
+
+    # load modules to the kernel
+    sudo modprobe w1_therm
+    sudo modprobe w1_gpio
+
+    # cat /boot/overlays/README  # documentation about the 'dtoverlay' feature and its syntax
+    dtoverlay=w1-gpio,gpiopin=4
     
+    # make sure internal pull up resistor is up (can also be done on python code) 
+    sudo raspi-gpio set 4 pu
+
+    # at this point machine may need to be rebooted
+
+  #read temperatures (once for each sensor, assuming no other 1-w devices on machine)
+    #  i=0; for sensor in `realpath  /sys/bus/w1/devices/28*/temperature`; do echo Tc_digital_temp_sensor_$i `cat $sensor| sed 's/\([0-9][0-9]\)\(.*\)/\1\.\2/'`; i=$((i+1)); done
+
+
 # 5. OPTIONAL: LCD SCREEN
 
 #TODO make the python script accept command line args for more flexibility 

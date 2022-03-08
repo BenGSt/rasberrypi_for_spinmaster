@@ -1,10 +1,14 @@
  [Unit]
- Description=display IP on LCD (once - not a loop)
+ Description= SpinMaster LCD display
  After=netwotk-online.target 
 
  [Service]
+ User=pi
+ ExecStart=/usr/bin/python3 /home/pi/raspberrypi_for_SpinMaster/spinmaster_lcd/spinmaster_lcd_ip.py
+ EnvironmentFile=/home/pi/raspberrypi_for_SpinMaster/spinmaster_lcd/enviroment_variables_for_lcd_service
  Type=idle
- ExecStart=/usr/bin/python /home/pi/rasberrypi_for_spinmaster/spinmaster_lcd/spinmaster_lcd_ip.py
+ Restart=always
+ RestartSec=0
 
  [Install]
  WantedBy=multi-user.target
