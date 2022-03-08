@@ -3,7 +3,7 @@ sudo cp ./dashboard/cgi-bin/* /usr/local/apache2/cgi-bin/
 sudo chmod a+x /usr/local/apache2/cgi-bin/*
 
 #control panel web page
-sed "s/192\.[0-9]*\.[0-9]*\.[0-9]*/$(hostname -I | tr -d [:blank:])/" ./dashboard/webpage_with_embedded_grafana_dashboard.html  > /tmp/dashboard.html
+sed "s/192\.[0-9]*\.[0-9]*\.[0-9]*/$(hostname -I |cut -f 1| tr -d [:blank:])/" ./dashboard/webpage_with_embedded_grafana_dashboard.html  > /tmp/dashboard.html
 sudo cp /tmp/dashboard.html /var/www/html/index.html
 
 # edit  /etc/apache2/sites-available/000-default.conf
