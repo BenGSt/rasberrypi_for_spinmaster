@@ -49,7 +49,7 @@ try:
             print("No IP")
             display.lcd_display_string("  Offline  ", 2)
 
-    sleep(5)
+    sleep(10)
 
     #change with: echo SPINMASTER_RUNNING=1 > ./spinmaster_lcd/enviroment_variables_for_lcd_service
     #TODO: don't overwrite entire file just edit line
