@@ -16,10 +16,22 @@ my $run_time=$cgi->param('run_time');
 #END
 
 
+#my $filename = 'c:\temp\test3.txt';
+#
+#open(FH, '>', $filename) or die $!;
+#
+#print FH $str;
+#
+#close(FH);
+
 
 $url = "/index.html";
 print "Location: $url\n\n";
-exec(`sudo bash -c "echo fm_target_temperature=$fm_target_temperature reservoir_target_temperature=$reservoir_target_temperature flow_rate=$flow_rate run_time=$run_time | sed 's/ /\n/g' > /home/pi/spinmaster_service_env_file"`);
+
+exec(`sudo bash -c "echo fm_target_temperature=$fm_target_temperature > /home/pi/spinmaster_service_env_file"`);
+exec(`sudo bash -c "echo reservoir_target_temperature=$reservoir_target_temperature >> /home/pi/spinmaster_service_env_file"`);
+exec(`sudo bash -c "echo flow_rate=$flow_rate > /home/pi/spinmaster_service_env_file >> /home/pi/spinmaster_service_env_file"`);
+exec(`sudo bash -c "echo  run_time=$run_time > /home/pi/spinmaster_service_env_file >> /home/pi/spinmaster_service_env_file"`);
 #TODO: write spinmaster_main.service and pass params etc.
 #exec("sudo spinmaster_main.sh --fm_target_temperature $fm_target_temperature --reservoir_target_temperature $reservoir_target_temperature --flow_rate $flow_rate --run_time $run_time");
 exec("sudo systemctl start telegraf_spinmaster.service");
