@@ -23,12 +23,11 @@ print FH $str;
 close(FH);
 
 system("cat<<END > /tmp/spin_master_service_environment_file2
-fm_target_temperature=$fm_target_temperature
 reservoir_target_temperature=$reservoir_target_temperature
 flow_rate=$flow_rate
 run_time=$run_time
 END
-")
+");
 
 $url = "/index.html";
 print "Location: $url\n\n";
