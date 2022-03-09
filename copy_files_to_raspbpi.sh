@@ -14,6 +14,6 @@ sudo apachectl -k graceful
 
 #spinmaster systemd services
 sudo cp ./spinmaster_lcd/spinmaster_lcd_ip.service /lib/systemd/system/
-sudo cp  spinmaster_main@.service /lib/systemd/system/
+sudo cp  ./run/spinmaster_main.service /lib/systemd/system/
 sudo systemctl daemon-reload
 sudo systemctl restart spinmaster_lcd_ip.service
