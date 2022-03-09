@@ -1,0 +1,6 @@
+[Unit]
+Description=Test passing multiple arguments
+
+[Service]
+EnvironmentFile=/tmp/spin_master_service_environment_file
+ExecStart=sudo spinmaster_main.sh --fm_target_temperature $fm_target_temperature --reservoir_target_temperature $reservoir_target_temperature --flow_rate $flow_rate --run_time $run_time

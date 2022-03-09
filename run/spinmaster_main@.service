@@ -1,6 +1,0 @@
-[Unit]
-Description=Test passing multiple arguments
-
-[Service]
-EnvironmentFile=./spinmaster_main_args
-ExecStart=echo
