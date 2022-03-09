@@ -32,6 +32,7 @@ exec(`sudo bash -c "echo fm_target_temperature=$fm_target_temperature > /home/pi
 exec(`sudo bash -c "echo reservoir_target_temperature=$reservoir_target_temperature >> /home/pi/spinmaster_service_env_file"`);
 exec(`sudo bash -c "echo flow_rate=$flow_rate >> /home/pi/spinmaster_service_env_file"`);
 exec(`sudo bash -c "echo  run_time=$run_time  >> /home/pi/spinmaster_service_env_file"`);
+#sleep 0.5
 #TODO: write spinmaster_main.service and pass params etc.
 #exec("sudo spinmaster_main.sh --fm_target_temperature $fm_target_temperature --reservoir_target_temperature $reservoir_target_temperature --flow_rate $flow_rate --run_time $run_time");
 exec("sudo systemctl start spinmaster_main.service");
