@@ -18,7 +18,7 @@ run_time=$run_time
 END
 
 my $filename = '/tmp/spin_master_service_environment_file';
-open(FH, '>', $filename) or die $! "died";
+open(FH, '>', $filename) or die $! , "died";
 print FH $str;
 close(FH);
 
