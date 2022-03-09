@@ -1,5 +1,4 @@
 #!/usr/bin/perl
-use warnings;
 use CGI qw(:standard);
 
 my $cgi=new CGI; #read in parameters
