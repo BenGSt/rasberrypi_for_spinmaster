@@ -23,7 +23,7 @@ my $run_time=$cgi->param('run_time');
 #close(FH);
 
 
-$url = "/index.html";
+my $url = "/index.html";
 print "Location: $url\n\n";
 
 system("echo fm_target_temperature=$fm_target_temperature > /tmp/spin_master_service_environment_file");
