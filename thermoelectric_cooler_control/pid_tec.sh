@@ -37,6 +37,7 @@ EOF
 
 main()
 {
+  #TODO: turn off pwm when exiting script
   arg_parse "$@"
   previous_error=0
   integral=0
