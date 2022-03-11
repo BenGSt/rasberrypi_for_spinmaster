@@ -6,7 +6,7 @@ After=network.target
 [Service]
 EnvironmentFile=-/etc/default/telegraf
 User=pi
-ExecStartPre=python3 /home/pi/raspberrypi_for_SpinMaster/sensors/polarimeter/polarimeter.py > /tmp/polarimeter.log &
+ExecStart=python3 /home/pi/raspberrypi_for_SpinMaster/sensors/polarimeter/polarimeter.py > /tmp/polarimeter.log &
 
 ExecStart=/usr/bin/telegraf -config /home/pi/raspberrypi_for_SpinMaster/dashboard/telegraf_polarimeter.conf
 ExecReload=/bin/kill -HUP $MAINPID
