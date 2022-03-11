@@ -1,20 +1,23 @@
 # polarimeter.py
-# Last modified: 23.02.22 16:15
+# Last modified: 10.03.22 11:00
 
-#NOTE: for this to work on raspberry pi add  line:
-# 'SUBSYSTEM=="usb", MODE="0666", GROUP="usbusers"' >> /etc/udev/rules.d/99-com.rules
+
 import pyvisa
 import time
 import math
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from datetime import datetime
-# import winsound
+import winsound
+import os
+import pandas as pd
 
+
+MEASUREMENT_TITLE = "water_"
 
 # plots labels
 X_LABEL_TIME = 'Time [s]'
 Y_LABEL_AZIMUTH = 'Azimuth angle [degrees]'
-Y_LABEL_ELLIPSE = 'Ellipse angle[degrees]'
+Y_LABEL_ELLIPSE = 'Ellipse angle [degrees]'
 Y_LABEL_DOP = 'Degree of polarization [%]'
 
 TITLE_LABEL_AZIMUTH = 'Azimuth angle VS. time'
@@ -26,20 +29,19 @@ LINE_WIDTH = '2'
 TITLE_FONT = {'family': 'serif', 'color': 'black', 'size': 20}
 LABEL_FONT = {'family': 'serif', 'color': 'black', 'size': 18}
 
-date_object = str(datetime.now())
+date_object = str(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 time_stump = str(date_object.replace(':', '.'))
 
-MINUTE = 60  # 1 minute is 60 seconds
+SECONDS = 10  # running time
 
 
 class PAX1000Controller:
     def __init__(self):
-        rm = pyvisa.ResourceManager('@py')
+        rm = pyvisa.ResourceManager()
         dev = str(rm.list_resources())
         dev = dev.split("\'")
         print(dev[1], "DEVICE")
-        # self.PAX1000 = rm.open_resource(dev[1])
-        self.PAX1000 = rm.open_resource('USB0::4883::32817::M00559793::0::INSTR')
+        self.PAX1000 = rm.open_resource(dev[1])
 
     def Meassmode(self):
         self.PAX1000.write('SENSe:CALCulate:MODe 5\n')
@@ -92,107 +94,130 @@ def setup(polarimeter):
     polarimeter.Quer()
     polarimeter.RotationFrequenz()
 
-time_lst = []
-azimuth_lst = []
-ellipse_lst = []
-DOP_lst = []  # degree of polarization (how much (in percentage) of incident
 
-
-
-def sample(sample_rate=0.5, sample_time=0.1):
+def sample(polarimeter, time_lst, azimuth_lst, ellipticity_lst, DOP_lst,
+           sample_time=10, sample_rate=1):
     # the func is taking the total sample time in minutes and the
     # sample rate in seconds as arguments.
-    #returning a tuple of (sample time vector, azimuth angle vec, ellipse
+    # returning a tuple of (sample time vector, azimuth angle vec, ellipse
     # angle vec, DOP vec
-
-
     #  light)
     # is polarized
-    sample_time = sample_time * MINUTE
     samples = int(sample_time / sample_rate)
 
     for sample in range(samples):
         temp = polarimeter.Data()
         data = temp[:len(temp) - 1].split(",")
 
-        az = float(data[9]) * (180 / math.pi)
-        azimuth_lst.append(az)
+        azimuth = float(data[9]) * (180 / math.pi)
+        azimuth_lst.append(azimuth)
 
-        pi = float(data[10]) * (180 / math.pi)
-        ellipse_lst.append(pi)
+        ellipticity = float(data[10]) * (180 / math.pi)
+        ellipticity_lst.append(ellipticity)
 
-        DOP_lst.append(round(float(data[11]), 2))
+        dop = round(float(data[11]), 5)
+        DOP_lst.append(dop)
 
-        time_lst.append(sample * sample_rate)
-        time.sleep(sample_time)
+        current_time = sample * sample_rate
 
-    return time_lst, azimuth_lst, ellipse_lst, DOP_lst
+        st = "time=" + str(current_time) + " azimuth=" + str(azimuth) +\
+             " ellipticity=" + str(ellipticity) + " DOP=" + str(dop)
+
+        print(st)
+        time_lst.append(current_time)
+        time.sleep(sample_rate)
+
+    return time_lst, azimuth_lst, ellipticity_lst, DOP_lst
+
+
+def plots(time_lst, azimuth_lst, ellipse_lst, DOP_lst):
+    folder = './measurements/' + time_stump
+    os.mkdir(folder)
+
+    # the func is ploting and saving the vectors that are given to it
+    # Graph of azimuth angle
+    plot_temp = plt.figure(1, figsize=(7, 5), dpi=400)
+
+    plt.plot(time_lst, azimuth_lst, linewidth=LINE_WIDTH)
+    # naming the x axis
+    plt.xlabel(X_LABEL_TIME, fontdict=LABEL_FONT)
+    # naming the y axis
+    plt.ylabel(Y_LABEL_AZIMUTH, fontdict=LABEL_FONT)
+    # giving a title to my graph
+    plt.title(TITLE_LABEL_AZIMUTH, fontdict=TITLE_FONT)
+    # plt.grid()
+    file_name1 = 'azimuth angle_' + MEASUREMENT_TITLE + time_stump
+    plt.savefig(folder + '/' + file_name1 + '.png', dpi=400)
+    plt.savefig(folder + '/' + file_name1 + '.svg', dpi=400)
+    plt.close()
+
+    # Graph of ellipse angle
+    plot2 = plt.figure(2, figsize=(7, 5), dpi=400)
+    plt.plot(time_lst, ellipse_lst, linewidth=LINE_WIDTH)
+    # giving a title to my graph
+    plt.title(TITLE_LABEL_ELLIPSE, fontdict=TITLE_FONT)
+    # naming the x axis
+    plt.xlabel(X_LABEL_TIME, fontdict=LABEL_FONT)
+    # naming the y axis
+    plt.ylabel(Y_LABEL_ELLIPSE, fontdict=LABEL_FONT)
+    file_name2 = 'ellipse angle_' + MEASUREMENT_TITLE + time_stump
+    plt.savefig(folder + '/' + file_name2 + '.png', dpi=400)
+    plt.savefig(folder + '/' + file_name2 + '.svg', dpi=400)
+    plt.close()
+
+    # Graph of DOP angle
+    plot3 = plt.figure(3, figsize=(7, 5), dpi=400)
+    plt.plot(time_lst, DOP_lst, linewidth=LINE_WIDTH)
+    # giving a title to my graph
+    plt.title(TITLE_LABEL_DOP, fontdict=TITLE_FONT)
+    # naming the x axis
+    plt.xlabel(X_LABEL_TIME, fontdict=LABEL_FONT)
+    # naming the y axis
+    plt.ylabel(Y_LABEL_DOP, fontdict=LABEL_FONT)
+    file_name3 = 'DOP_' + MEASUREMENT_TITLE + time_stump
+    plt.savefig(folder + '/' + file_name3 + '.png', dpi=400)
+    plt.savefig(folder + '/' + file_name3 + '.svg', dpi=400)
+    plt.close()
+    # plt.show()
+
+
+def done_sound():
+    for i in range(200, 1200, 50):
+        winsound.Beep(i, 300)
+        time.sleep(0.3)
+
+    winsound.Beep(1200, 2000)
+
 
 polarimeter = PAX1000Controller()
 setup(polarimeter)
 
 
-time_l, azimuth_l, ellipse_l, DOP_l = sample(0.1, 0.02)
+print("start")
+time_lst = []
+azimuth_lst = []
+ellipticity_lst = []
+DOP_lst = []
 
-#def plots(time_lst, azimuth, ellipse, DOP):
-# the func is ploting and saving the vectors that are given to it
-# Graph of azimuth angle
-# plot1 = plt.figure(1)
-# plt.plot(time_l, azimuth_l, linewidth=LINE_WIDTH)
-# file_name1 = 'azimuth angle' + time_stump + '.png'
-# plt.savefig(file_name1)
-# # naming the x axis
-# plt.xlabel(X_LABEL_TIME, fontdict=LABEL_FONT)
-# # naming the y axis
-# plt.ylabel(Y_LABEL_AZIMUTH, fontdict=LABEL_FONT)
-# # giving a title to my graph
-# plt.title(TITLE_LABEL_AZIMUTH, fontdict=TITLE_FONT)
-# plt.grid()
-#
-# # Graph of ellipse angle
-# plot2 = plt.figure(2)
-# plt.plot(time_l, ellipse_l, linewidth=LINE_WIDTH)
-# file_name2 = 'ellipse angle' + time_stump + '.png'
-# plt.savefig(file_name2)
-# # giving a title to my graph
-# plt.title(TITLE_LABEL_ELLIPSE, fontdict=TITLE_FONT)
-# # naming the x axis
-# plt.xlabel(X_LABEL_TIME, fontdict=LABEL_FONT)
-# # naming the y axis
-# plt.ylabel(Y_LABEL_ELLIPSE, fontdict=LABEL_FONT)
-#
-# # Graph of DOP angle
-# plot3 = plt.figure(3)
-# plt.plot(time_l, DOP_l, linewidth=LINE_WIDTH)
-# file_name3 = 'DOP' + time_stump + '.png'
-#
-# plt.savefig(file_name3)
-# # giving a title to my graph
-# plt.title(TITLE_LABEL_DOP, fontdict=TITLE_FONT)
-# # naming the x axis
-# plt.xlabel(X_LABEL_TIME, fontdict=LABEL_FONT)
-# # naming the y axis
-# plt.ylabel(Y_LABEL_DOP, fontdict=LABEL_FONT)
-#
-#
-# plt.show()
-# plt.show()
-# plt.show()
-#
-# print('Done')
-# for i in range(200, 1200, 50):
-#     winsound.Beep(i, 300)
-#     time.sleep(0.3)
-#
-# winsound.Beep(1200, 2000)
+sample(polarimeter, time_lst, azimuth_lst, ellipticity_lst, DOP_lst, SECONDS, 1)
 
-# function to show the plot
+plots(time_lst, azimuth_lst, ellipticity_lst, DOP_lst)
 
 
-print(azimuth_l)
+#done_sound()
+
+# create matrix (table) of the lists
+
+dict_lists = \
+    {
+        "time_list": time_lst,
+        "azimuth_list": azimuth_lst,
+        "ellipse_list": ellipticity_lst,
+        "DOP_list": DOP_lst
+    }
+
+df = pd.DataFrame.from_dict(dict_lists, orient='index').transpose()
+df.to_csv("./measurements/" + time_stump + "/" + time_stump + ".csv")
+
 polarimeter.Close()
-
-
-
-
 
