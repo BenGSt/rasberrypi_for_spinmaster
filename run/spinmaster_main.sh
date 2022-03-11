@@ -45,6 +45,7 @@ startup()
 
     #start telegraf (posts measurements to DB)
     sudo systemctl start telegraf_spinmaster.service
+    sudo systemctl start telegraf_polarimeter.service
 
     #start TEC cooling
       pid_tec.sh --gpio $FM_LEFT_PWM_GPIO --thermistor_num $FM_LEFT_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
@@ -86,6 +87,7 @@ shutdown()
 
     #stop telegraf (posts measurements to DB)
     sudo systemctl stop telegraf_spinmaster.service
+    sudo systemctl stop telegraf_polarimeter.service
 
 
     # issue report
