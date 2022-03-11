@@ -1,15 +1,13 @@
 # polarimeter.py
 # Last modified: 10.03.22 11:00
-
-
 import pyvisa
 import time
 import math
 import matplotlib.pyplot as plt
 from datetime import datetime
-import winsound
+#import winsound
 import os
-import pandas as pd
+#import pandas as pd
 
 
 MEASUREMENT_TITLE = "water_"
@@ -37,42 +35,43 @@ SECONDS = 10  # running time
 
 class PAX1000Controller:
     def __init__(self):
-        rm = pyvisa.ResourceManager()
+        rm = pyvisa.ResourceManager('@py')
         dev = str(rm.list_resources())
         dev = dev.split("\'")
-        print(dev[1], "DEVICE")
-        self.PAX1000 = rm.open_resource(dev[1])
+#        print(dev[1], "DEVICE")
+        # self.PAX1000 = rm.open_resource(dev[1])
+        self.PAX1000 = rm.open_resource('USB0::4883::32817::M00559793::0::INSTR')
 
     def Meassmode(self):
         self.PAX1000.write('SENSe:CALCulate:MODe 5\n')
         time.sleep(5)
         MODEq = self.PAX1000.query('SENSe:CALCulate:MODe?\n')
-        print('The Messmode is:', MODEq)
+#        print('The Messmode is:', MODEq)
 
     def WaveLength(self):
         self.PAX1000.write('SENSe:CORRection:WAVelength 532e-9\n')
         Wavelength = self.PAX1000.query('SENSe:CORRection:WAVelength?\n')
-        print('The Wavelength is:', Wavelength)
+#        print('The Wavelength is:', Wavelength)
 
     def Powermode(self):
         self.PAX1000.write('SENSe:POWer:RANGe:AUTO 1\n')
         Powermode = self.PAX1000.query('SENSe:POWer:RANGe:AUTO?')
-        print('The Powermode is:', Powermode)
+#        print('The Powermode is:', Powermode)
 
     def Nomial(self):
         Nominal = self.PAX1000.query('SENSe:POWer:RANGe:NOMinal? MIN\n')
-        print('Nominal is:', Nominal)
+#        print('Nominal is:', Nominal)
 
     def Rotationstate(self):
         self.PAX1000.write('INPut:ROTation:STATe 1\n')
         Rotation = self.PAX1000.query('INPut:ROTation:STATe?')
-        print('The Rotationstate is:', Rotation)
+#        print('The Rotationstate is:', Rotation)
 
     def RotationFrequenz(self):
         self.PAX1000.write('INPut:ROTation:VELocity 60\n')
         time.sleep(5)
         Velocity = self.PAX1000.query('INPut:ROTation:VELocity?')
-        print('The Rotation Frequenz is:', Velocity)
+#        print('The Rotation Frequenz is:', Velocity)
 
     def Quer(self):
         self.PAX1000.write('SENSe:DATA:PRIMary')
@@ -103,9 +102,9 @@ def sample(polarimeter, time_lst, azimuth_lst, ellipticity_lst, DOP_lst,
     # angle vec, DOP vec
     #  light)
     # is polarized
-    samples = int(sample_time / sample_rate)
-
-    for sample in range(samples):
+#    samples = int(sample_time / sample_rate)
+    sample = 0
+    while(True):
         temp = polarimeter.Data()
         data = temp[:len(temp) - 1].split(",")
 
@@ -126,6 +125,7 @@ def sample(polarimeter, time_lst, azimuth_lst, ellipticity_lst, DOP_lst,
         print(st)
         time_lst.append(current_time)
         time.sleep(sample_rate)
+        sample += 1
 
     return time_lst, azimuth_lst, ellipticity_lst, DOP_lst
 
@@ -193,7 +193,7 @@ polarimeter = PAX1000Controller()
 setup(polarimeter)
 
 
-print("start")
+#print("start")
 time_lst = []
 azimuth_lst = []
 ellipticity_lst = []
@@ -208,16 +208,16 @@ plots(time_lst, azimuth_lst, ellipticity_lst, DOP_lst)
 
 # create matrix (table) of the lists
 
-dict_lists = \
-    {
-        "time_list": time_lst,
-        "azimuth_list": azimuth_lst,
-        "ellipse_list": ellipticity_lst,
-        "DOP_list": DOP_lst
-    }
+#dict_lists = \
+#    {
+#        "time_list": time_lst,
+#        "azimuth_list": azimuth_lst,
+#        "ellipse_list": ellipticity_lst,
+#        "DOP_list": DOP_lst
+#    }
 
-df = pd.DataFrame.from_dict(dict_lists, orient='index').transpose()
-df.to_csv("./measurements/" + time_stump + "/" + time_stump + ".csv")
+#df = pd.DataFrame.from_dict(dict_lists, orient='index').transpose()
+#df.to_csv("./measurements/" + time_stump + "/" + time_stump + ".csv")
 
 polarimeter.Close()
 
