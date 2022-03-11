@@ -201,7 +201,7 @@ DOP_lst = []
 
 sample(polarimeter, time_lst, azimuth_lst, ellipticity_lst, DOP_lst, SECONDS, 1)
 
-plots(time_lst, azimuth_lst, ellipticity_lst, DOP_lst)
+#plots(time_lst, azimuth_lst, ellipticity_lst, DOP_lst)
 
 
 #done_sound()
