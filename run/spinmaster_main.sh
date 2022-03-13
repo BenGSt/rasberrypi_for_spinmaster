@@ -45,6 +45,7 @@ startup()
 
     #start telegraf (posts measurements to DB)
     sudo systemctl start telegraf_spinmaster.service
+    mkfifo /tmp/polarimeter.log #named pipe
     python3 /home/pi/raspberrypi_for_SpinMaster/sensors/polarimeter/polarimeter.py > /tmp/polarimeter.log &
     sudo systemctl start telegraf_polarimeter.service
 
