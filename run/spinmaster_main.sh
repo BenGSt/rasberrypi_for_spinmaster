@@ -52,7 +52,7 @@ startup()
       mkfifo /tmp/polarimeter.log #named pipe
     fi
 
-    python3 /home/pi/raspberrypi_for_SpinMaster/sensors/polarimeter/polarimeter.py > /tmp/polarimeter.log &
+    sudo bash -c "python3 /home/pi/raspberrypi_for_SpinMaster/sensors/polarimeter/polarimeter.py > /tmp/polarimeter.log &"
     sudo systemctl start telegraf_polarimeter.service
     sleep 5
 
