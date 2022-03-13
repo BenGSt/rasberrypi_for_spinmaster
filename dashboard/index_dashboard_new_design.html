@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SpinMaster Dashboard</title>
+    <style>
+      body {
+        background-color: #111217;
+        align-content: center;
+      }
+      h1   {
+        color: #CCCCDD;
+        font-size: 40px;
+        text-align: center;
+      }
+
+
+
+      p  {
+        color: #CCCCDD;
+        font-size: 20px;
+        text-align: left;
+		font-family: david;
+
+      }
+
+      form.form {
+        display: table;
+        text-align: left;
+      
+
+      }
+
+      div.form {
+          display: table-row;
+          color: #FFFFFF;
+          /*padding-right: 10px;*/
+
+      }
+
+      .form label, input {
+          display: table-cell;
+
+          font-size: 20px;
+		  font-family: "david";
+          color: #FFFFFF;
+          /*color: yellow;*/
+      }
+
+     .form  label {
+          /*background-color: #111217;*/
+        font-family: "david";
+
+      }
+
+	
+     .form input {
+        background-color: #2A6BA6;
+		border: 0px;
+		font-family: "david";
+       /*background-color: yellow;*/
+        /*margin-left : 25vw;*/
+        width: auto;
+      }
+
+      iframe {
+        width: 100%;
+      }
+
+      /*Accordian  */
+      .accordion > input[name="collapse"] {
+        display: none;
+      }
+
+      .accordion .content {
+        background: #111217;
+        overflow: hidden;
+        height: 0;
+        /*transition: 0.5s;*/
+        /*box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);*/
+      }
+      /*.accordion label {*/
+      /*  color: #CCCCDD;*/
+      /*  !*cursor: pointer;*!*/
+      /*  !*font-weight: normal;*!*/
+      /*  !*padding: 10px;*!*/
+      /*  !*background: #b0100c;*!*/
+      /*  align-content: center;*/
+      /*  text-align-all: center;*/
+      /*  horiz-align: center;*/
+      /*  !*display: block;*!*/
+      /*}*/
+
+      .accordion  label{
+		width: 350px;
+       // background: #252525;
+        color: #CCCCDD;
+        font-size: 25px;
+        text-align: left;
+        horiz-align: center;
+        display: block;
+      }
+
+
+      .accordion label:hover,
+      .accordion label:focus {
+        background: #CCCCDD;
+        color: black;
+        text-align: left;
+        display: block;
+      }
+
+      /*.accordion .handle label:before {*/
+      /*  font-family: FontAwesome;*/
+      /*  content: "\f107";*/
+      /*  display: inline-block;*/
+      /*  margin-right: 10px;*/
+      /*  font-size: 1em;*/
+      /*  line-height: 1.556em;*/
+      /*  vertical-align: middle;*/
+      /*  horiz-align: center;*/
+      /*  transition: 0.4s;*/
+      /*}*/
+
+      /*.accordion > input[name="collapse"]:checked ~ .handle label:before {*/
+      /*    transform: rotate(180deg);*/
+      /*    transform-origin: center;*/
+      /*    transition: 0.4s;*/
+      /*}*/
+
+      .accordion > input[name="collapse"]:checked ~ .content {
+        height: auto;
+        transition: height 0.5s;
+        text-align: center;
+      }
+
+
+
+	a {
+	  outline: none;
+	  text-decoration: none;
+	  padding: 2px 1px 0;
+	}
+
+	a:link {
+	  color: #5B9BD5;
+	}
+
+	a:visited {
+	  color: #5B9BD5;
+	}
+
+	a:focus {
+	  border-bottom: 1px solid;
+	  
+	}
+
+	a:hover {
+	  border-bottom: 2px solid;
+	}
+
+	a:active {
+	 
+	  color: #98C1FE;
+	}
+    </style>
+  </head>
+<!--  <head><h1 align="center">SpinMaster Web Interface</h1></head>-->
+
+
+  <body>
+  
+  <center>
+	<table width="80%">
+	  <tr>
+		<td width="25%" ><img src="./images/LOGO-W-01.png" alt="HUJI logo" align="left"></td>
+		<td width="30%" ><h1>SpinMaster Dashboard</h1></td>
+		<td width="25%" ><img src="./images/Nano_logo.png" alt="Nano logo" height="150"" align="right"></td>
+	  </tr>
+	  <tr>
+	   <th colspan="3">
+	  <hr style="border-width:1px;color:white" width="100%">
+		</br>
+	   
+
+
+<!--  <iframe src="https://192.168.205.145:4200" scrolling="yes" width="2000" height="400"  frameborder="0"></iframe>-->
+<!--  <br><br><br>-->
+<!--  <iframe src="http://192.168.205.145:3000" scrolling="yes" width="2000" height="3000"  frameborder="0"></iframe>-->
+<!--  <br><br><br>-->
+
+
+
+<!--folding accordion layout for different sections-->
+  <section class="accordion">
+    <input type="checkbox" name="collapse" id="about">
+    <h2 class="handle">
+      <label for="about">
+      About SpinMaster
+      </label>
+    </h2>
+
+    <div class="content">
+      <p>SpinMaster is a machine for the separation of chiral molecule enantiomers, based on selective spin crystallization technology.</p>
+      <p> An undergraduate project by Ben Steinberg, Yoav Silberstein, and Daniel Fuchs,
+        with the guidance of Omer (fill),
+        Dr. Shira (fill), and Prof. Yossi Paltiel. </p>
+      <p> Department of applied physics, The Hebrew University, Jerusalem, Isarel, 2022. </p>
+
+      <br>
+      <p>Sorce code and documentaion can be found at our
+        <a href="https://github.com/BenGSt/raspberrypi_for_SpinMaster/wiki" style=>github repo.</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="accordion">
+    <input type="checkbox" name="collapse" id="set_parameters">
+    <h2 class="handle">
+      <label for="set_parameters">
+       Set Parameters
+      </label>
+    </h2>
+
+    <div class="content">
+      <form action="/cgi-bin/start_spinmaster_service.pl" method="get" class="form">
+			<form_text style="color:#FFFFFF;font-size=10px">
+			<table>
+				<tr>
+					<td>FM target temperature [deg C]:</td>
+					<td><input type="text" name="fm_target_temperature" id="FM target temperature" required></td>
+				</tr>
+				
+				<tr>
+					<td>Reservoir target temperatue [deg C]:</td>
+					<td><input type="text" name="reservoir_target_temperature" id="ReservoirTargetTemp" required></td>
+				</tr>
+				<tr>
+					<td>Flow Rate [?]: </td>
+					<td><input type="text" name="flow_rate" id="FlowRate" required></td>
+				</tr>
+				<tr>
+					<td>Run Time [?]:</td>
+					<td><input type="text" name="flow_rate" id="FlowRate" required></td>
+				</tr>
+
+				<tr>
+					<td>
+						<input type="submit" value="Run">
+					</td>
+					<td>
+						
+					</td>
+				</tr>
+			</table>
+			</form_text>
+		
+		</form>
+		<form action="/cgi-bin/stop_spinmaster_service.pl" method="post" class="form">
+		  <div class="form">
+		  <input type="submit" value="Stop">
+		  </div>
+		</form>
+
+	</section>
+
+	  <section class="accordion">
+		<input type="checkbox" name="collapse" id="terminal">
+		<h2 class="handle">
+		  <label for="terminal">
+		   Terminal
+		  </label>
+		</h2>
+
+		<div class="content">
+		  <iframe src="https://192.168.43.25:4200" scrolling="yes"  height="400" frameborder="0"></iframe>
+		</div>
+	  </section>
+
+	  <section class="accordion">
+		<input type="checkbox" name="collapse" id="dashboard">
+		<h2 class="handle">
+		  <label for="dashboard">
+		   Dashboard
+		  </label>
+		</h2>
+
+		<div class="content">
+		  <iframe src="http://192.168.43.25:3000" scrolling="yes" height="2000" frameborder="0"></iframe>
+		</div>
+	  </section>
+    
+
+  </body>
+</html>
