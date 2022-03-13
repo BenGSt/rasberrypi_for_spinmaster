@@ -45,6 +45,7 @@ startup()
 
     #start telegraf (posts measurements to DB)
     sudo systemctl start telegraf_spinmaster.service
+    sleep 5
 
     if [ ! -e /tmp/polarimeter.log ]
     then
@@ -54,6 +55,7 @@ startup()
 
     python3 /home/pi/raspberrypi_for_SpinMaster/sensors/polarimeter/polarimeter.py > /tmp/polarimeter.log &
     sudo systemctl start telegraf_polarimeter.service
+    sleep 5
 
     #start TEC cooling
       pid_tec.sh --gpio $FM_LEFT_PWM_GPIO --thermistor_num $FM_LEFT_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
