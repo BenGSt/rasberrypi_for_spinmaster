@@ -89,6 +89,8 @@ shutdown()
     echo \################################################
 
     #stop all PWMs
+    sudo killall pid_tec.sh dma_pwm.sh
+
     for pin in $PUMP_PWM_GPIO $FM_LEFT_PWM_GPIO $FM_RIGHT_PWM_GPIO $RESERVOIR_HEATER_PWM_GPIO
     do
       pigs w $pin 0 #write 0 to pin
