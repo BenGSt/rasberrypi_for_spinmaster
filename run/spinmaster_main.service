@@ -1,0 +1,7 @@
+[Unit]
+Description=Main script for SpinMaster run
+
+[Service]
+EnvironmentFile=/home/pi/spinmaster_service_env_file
+ExecStartPre=cat /home/pi/spinmaster_service_env_file
+ExecStart= /home/pi/raspberrypi_for_SpinMaster/run/spinmaster_main.sh --fm_target_temperature ${fm_target_temperature} --reservoir_target_temperature ${reservoir_target_temperature} --flow_rate ${flow_rate} --run_time ${run_time}

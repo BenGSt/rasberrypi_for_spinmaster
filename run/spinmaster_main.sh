@@ -16,9 +16,9 @@ PID_COOLING_Kp=10
 PID_COOLING_Ki=0.2
 PID_COOLING_Kd=0
 
-PID_HEATING_Kp=
-PID_HEATING_Ki=
-PID_HEATING_Kd=
+PID_HEATING_Kp=10
+PID_HEATING_Ki=0.2
+PID_HEATING_Kd=0
 
 PUMP_PWM_FREQUENCY=20000
 #TEC_PWM_FREQUENCY=20000 # this is set in pid_tec.sh
@@ -45,6 +45,9 @@ startup()
 
     #start telegraf (posts measurements to DB)
     sudo systemctl start telegraf_spinmaster.service
+    mkfifo /tmp/polarimeter.log #named pipe
+    python3 /home/pi/raspberrypi_for_SpinMaster/sensors/polarimeter/polarimeter.py > /tmp/polarimeter.log &
+    sudo systemctl start telegraf_polarimeter.service
 
     #start TEC cooling
       pid_tec.sh --gpio $FM_LEFT_PWM_GPIO --thermistor_num $FM_LEFT_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
@@ -86,6 +89,7 @@ shutdown()
 
     #stop telegraf (posts measurements to DB)
     sudo systemctl stop telegraf_spinmaster.service
+    sudo systemctl stop telegraf_polarimeter.service
 
 
     # issue report
