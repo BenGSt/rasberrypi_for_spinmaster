@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 #import winsound
 import os
+import sys
 #import pandas as pd
 
 
@@ -123,6 +124,7 @@ def sample(polarimeter, time_lst, azimuth_lst, ellipticity_lst, DOP_lst,
              " ellipticity=" + str(ellipticity) + " DOP=" + str(dop)
 
         print(st)
+        sys.stdout.flush()
         time_lst.append(current_time)
         time.sleep(sample_rate)
         sample += 1
