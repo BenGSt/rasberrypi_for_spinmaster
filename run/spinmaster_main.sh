@@ -46,7 +46,7 @@ startup()
     #start telegraf (posts measurements to DB)
     sudo systemctl start telegraf_spinmaster.service
 
-    if [ ! -f /tmp/polarimeter.log ]
+    if [ ! -e /tmp/polarimeter.log ]
     then
       mkfifo /tmp/polarimeter.log #named pipe
     fi
