@@ -99,8 +99,7 @@ shutdown_()
       echo pigs w $pin 0 #write 0 to pin
     done
 
-    #stop all PWMs
-    sudo killall pid_tec.sh
+
 
     #stop telegraf (posts measurements to DB)
     sudo systemctl stop telegraf_spinmaster.service
@@ -111,7 +110,10 @@ shutdown_()
     # issue report
 
     influx -execute "SELECT mean(*) FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $ran_time  and time <= now() GROUP BY time($GROUP_BY_TIME_FINAL_REPORT_DATA) fill(null)" -database="home"
-    #save the run's data}
+    #TODO: save the run's data}
+
+        #stop all PWMs
+    sudo killall pid_tec.sh
 }
 
 print_start_message()
