@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -27,14 +26,14 @@
       form.form {
         display: table;
         text-align: left;
-      
+
 
       }
 
       div.form {
           display: table-row;
           color: #FFFFFF;
-          /*padding-right: 10px;*/
+          /padding-right: 10px;/
 
       }
 
@@ -44,22 +43,22 @@
           font-size: 20px;
 		  font-family: "david";
           color: #FFFFFF;
-          /*color: yellow;*/
+          /color: yellow;/
       }
 
      .form  label {
-          /*background-color: #111217;*/
+          /background-color: #111217;/
         font-family: "david";
 
       }
 
-	
+
      .form input {
         background-color: #2A6BA6;
 		border: 0px;
 		font-family: "david";
-       /*background-color: yellow;*/
-        /*margin-left : 25vw;*/
+       /background-color: yellow;/
+        /margin-left : 25vw;/
         width: auto;
       }
 
@@ -76,20 +75,20 @@
         background: #111217;
         overflow: hidden;
         height: 0;
-        /*transition: 0.5s;*/
-        /*box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);*/
+        /transition: 0.5s;/
+        /box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);/
       }
-      /*.accordion label {*/
+      /.accordion label {/
       /*  color: #CCCCDD;*/
-      /*  !*cursor: pointer;*!*/
-      /*  !*font-weight: normal;*!*/
-      /*  !*padding: 10px;*!*/
-      /*  !*background: #b0100c;*!*/
+      /*  !cursor: pointer;!*/
+      /*  !font-weight: normal;!*/
+      /*  !padding: 10px;!*/
+      /*  !background: #b0100c;!*/
       /*  align-content: center;*/
       /*  text-align-all: center;*/
       /*  horiz-align: center;*/
-      /*  !*display: block;*!*/
-      /*}*/
+      /*  !display: block;!*/
+      /}/
 
       .accordion  label{
 		width: 350px;
@@ -110,7 +109,7 @@
         display: block;
       }
 
-      /*.accordion .handle label:before {*/
+      /.accordion .handle label:before {/
       /*  font-family: FontAwesome;*/
       /*  content: "\f107";*/
       /*  display: inline-block;*/
@@ -120,13 +119,13 @@
       /*  vertical-align: middle;*/
       /*  horiz-align: center;*/
       /*  transition: 0.4s;*/
-      /*}*/
+      /}/
 
-      /*.accordion > input[name="collapse"]:checked ~ .handle label:before {*/
+      /.accordion > input[name="collapse"]:checked ~ .handle label:before {/
       /*    transform: rotate(180deg);*/
       /*    transform-origin: center;*/
       /*    transition: 0.4s;*/
-      /*}*/
+      /}/
 
       .accordion > input[name="collapse"]:checked ~ .content {
         height: auto;
@@ -152,7 +151,7 @@
 
 	a:focus {
 	  border-bottom: 1px solid;
-	  
+
 	}
 
 	a:hover {
@@ -160,7 +159,7 @@
 	}
 
 	a:active {
-	 
+
 	  color: #98C1FE;
 	}
     </style>
@@ -169,19 +168,19 @@
 
 
   <body>
-  
+
   <center>
 	<table width="80%">
 	  <tr>
-		<td width="25%" ><img src="./images/LOGO-W-01.png" alt="HUJI logo" align="left"></td>
+		<td width="25%" ><img src="/images/LOGO-W-01.png" alt="HUJI logo" align="left"></td>
 		<td width="30%" ><h1>SpinMaster Dashboard</h1></td>
-		<td width="25%" ><img src="./images/Nano_logo.png" alt="Nano logo" height="150"" align="right"></td>
+		<td width="25%" ><img src="/images/Nano_logo.png" alt="Nano logo" height="150"" align="right"></td>
 	  </tr>
 	  <tr>
 	   <th colspan="3">
 	  <hr style="border-width:1px;color:white" width="100%">
 		</br>
-	   
+
 
 
 <!--  <iframe src="https://192.168.205.145:4200" scrolling="yes" width="2000" height="400"  frameborder="0"></iframe>-->
@@ -230,17 +229,17 @@
 					<td>FM target temperature [deg C]:</td>
 					<td><input type="text" name="fm_target_temperature" id="FM target temperature" required></td>
 				</tr>
-				
+
 				<tr>
 					<td>Reservoir target temperatue [deg C]:</td>
 					<td><input type="text" name="reservoir_target_temperature" id="ReservoirTargetTemp" required></td>
 				</tr>
 				<tr>
-					<td>Flow Rate [?]: </td>
+					<td>Flow Rate [PWM duty cycle]: </td>
 					<td><input type="text" name="flow_rate" id="FlowRate" required></td>
 				</tr>
 				<tr>
-					<td>Run Time [?]:</td>
+					<td>Run Time [Seconds]:</td>
 					<td><input type="text" name="run_time" id="FlowRate" required></td>
 				</tr>
 
@@ -249,12 +248,12 @@
 						<input type="submit" value="Run">
 					</td>
 					<td>
-						
+
 					</td>
 				</tr>
 			</table>
 			</form_text>
-		
+
 		</form>
 		<form action="/cgi-bin/stop_spinmaster_service.pl" method="post" class="form">
 		  <div class="form">
@@ -289,7 +288,7 @@
 		  <iframe src="http://192.168.43.25:3000" scrolling="yes" height="2000" frameborder="0"></iframe>
 		</div>
 	  </section>
-    
+
 
   </body>
 </html>

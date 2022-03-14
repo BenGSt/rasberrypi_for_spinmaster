@@ -16,9 +16,9 @@ PID_COOLING_Kp=120
 PID_COOLING_Ki=0.03
 PID_COOLING_Kd=25
 
-PID_HEATING_Kp=120
-PID_HEATING_Ki=0.03
-PID_HEATING_Kd=25
+PID_HEATING_Kp=15
+PID_HEATING_Ki=0.002
+PID_HEATING_Kd=0.01
 
 PUMP_PWM_FREQUENCY=20000
 #TEC_PWM_FREQUENCY=20000 # this is set in pid_tec.sh
@@ -31,7 +31,7 @@ main()
   set -eE # exit on any command failure
   arg_parse "$@"
   print_start_message
-  trap shutdown EXIT #shutdown executed on exit from the shell
+  trap shutdown_ EXIT #shutdown executed on exit from the shell
   startup
   sleep $RUN_TIME
 #  shutdown
@@ -81,7 +81,7 @@ startup()
 }
 
 
-shutdown()
+shutdown_()
 {
     end_date_time=$(date +%s)
     ran_time=$(($end_date_time - $begin_date_time))
