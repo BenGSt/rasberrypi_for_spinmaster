@@ -95,6 +95,7 @@ shutdown_()
     #echo killall pid_tec.sh
     #killall pid_tec.sh
 
+    echo write 0 to pins
     for pin in $PUMP_PWM_GPIO $FM_LEFT_PWM_GPIO $FM_RIGHT_PWM_GPIO $RESERVOIR_HEATER_PWM_GPIO
     do
       pigs w $pin 0 #write 0 to pin
