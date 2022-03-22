@@ -61,15 +61,15 @@ startup()
      # echo pid_tec.sh --gpio $FM_LEFT_PWM_GPIO --thermistor_num $FM_LEFT_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
       #             --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $FM_TEMP_LEFT -Kp $PID_COOLING_Kp -Ki $PID_COOLING_Ki -Kd $PID_COOLING_Kd
 
-      #pid_tec.sh --gpio $FM_LEFT_PWM_GPIO --thermistor_num $FM_LEFT_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
-       #            --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $FM_TEMP_LEFT -Kp $PID_COOLING_Kp -Ki $PID_COOLING_Ki -Kd $PID_COOLING_Kd &
+      pid_tec.sh --gpio $FM_LEFT_PWM_GPIO --thermistor_num $FM_LEFT_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
+                   --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $FM_TEMP_LEFT -Kp $PID_COOLING_Kp -Ki $PID_COOLING_Ki -Kd $PID_COOLING_Kd &
 
-      #pid_tec.sh --gpio $FM_RIGHT_PWM_GPIO --thermistor_num $FM_RIGHT_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
-       #           --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $FM_TEMP_RIGHT -Kp $PID_COOLING_Kp -Ki $PID_COOLING_Ki -Kd $PID_COOLING_Kd &
+      pid_tec.sh --gpio $FM_RIGHT_PWM_GPIO --thermistor_num $FM_RIGHT_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
+                  --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $FM_TEMP_RIGHT -Kp $PID_COOLING_Kp -Ki $PID_COOLING_Ki -Kd $PID_COOLING_Kd &
 
-    #start TEC heating
-      #pid_tec.sh --gpio $RESERVOIR_HEATER_PWM_GPIO --heating-mode --thermistor_num $RESERVOIR_HEATER_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
-       #           --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $RESERVOIR_TARGET_TEMP -Kp $PID_HEATING_Kp -Ki $PID_HEATING_Ki -Kd $PID_HEATING_Kd &
+#    start TEC heating
+      pid_tec.sh --gpio $RESERVOIR_HEATER_PWM_GPIO --heating-mode --thermistor_num $RESERVOIR_HEATER_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
+                  --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $RESERVOIR_TARGET_TEMP -Kp $PID_HEATING_Kp -Ki $PID_HEATING_Ki -Kd $PID_HEATING_Kd &
 
     #start pump
       #TODO: PUMP_PWM_DUTYCYCLE = f($FLOW_RATE)
