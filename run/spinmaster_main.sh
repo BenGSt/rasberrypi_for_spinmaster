@@ -92,8 +92,8 @@ shutdown_()
     echo \################################################
 
 
-    echo killall pid_tec.sh
-    killall pid_tec.sh
+    #echo killall pid_tec.sh
+    #killall pid_tec.sh
 
     for pin in $PUMP_PWM_GPIO $FM_LEFT_PWM_GPIO $FM_RIGHT_PWM_GPIO $RESERVOIR_HEATER_PWM_GPIO
     do
