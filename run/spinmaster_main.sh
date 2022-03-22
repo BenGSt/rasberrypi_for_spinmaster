@@ -47,12 +47,12 @@ startup()
     sudo systemctl start telegraf_spinmaster.service
     sleep 5
 
-    if [ ! -e /tmp/polarimeter.log ]
+    if [ ! -e /home/pi/polarimeter.log ]
     then
-      mkfifo /tmp/polarimeter.log #named pipe
+      mkfifo /home/pi/polarimeter.log #named pipe
     fi
 
-    sudo bash -c "sudo -u pi python3 /home/pi/raspberrypi_for_SpinMaster/sensors/polarimeter/polarimeter.py > /tmp/polarimeter.log &"
+    python3 /home/pi/raspberrypi_for_SpinMaster/sensors/polarimeter/polarimeter.py > /home/pi/polarimeter.log &
     sudo systemctl start telegraf_polarimeter.service
     sleep 5
 
