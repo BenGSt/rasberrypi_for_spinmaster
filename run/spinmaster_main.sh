@@ -105,7 +105,6 @@ shutdown_()
     sudo systemctl stop telegraf_spinmaster.service
     sudo systemctl stop telegraf_polarimeter.service
 
-    sudo systemctl kill spinmaster_main.service
 
     # issue report
 
@@ -114,6 +113,7 @@ shutdown_()
 
         #stop all PWMs
     sudo killall pid_tec.sh
+    sudo systemctl kill spinmaster_main.service
 }
 
 print_start_message()
