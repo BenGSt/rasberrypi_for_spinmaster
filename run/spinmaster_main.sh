@@ -104,7 +104,7 @@ shutdown_()
 
 
 
-    echo stop telegraf (posts measurements to DB)
+    echo stop telegraf \(posts measurements to DB\)
     sudo systemctl stop telegraf_spinmaster.service
     sudo systemctl stop telegraf_polarimeter.service
 
