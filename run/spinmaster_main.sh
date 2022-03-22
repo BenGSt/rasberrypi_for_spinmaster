@@ -91,9 +91,9 @@ shutdown_()
     echo Thank you for flying SpinMaster, have a nice day!
     echo \################################################
 
-
-    #echo killall pid_tec.sh
-    #killall pid_tec.sh
+    #stop all PWMs
+    echo killall pid_tec.sh
+    killall pid_tec.sh
 
     echo write 0 to pins
     for pin in $PUMP_PWM_GPIO $FM_LEFT_PWM_GPIO $FM_RIGHT_PWM_GPIO $RESERVOIR_HEATER_PWM_GPIO
@@ -114,8 +114,8 @@ shutdown_()
     influx -execute "SELECT mean(*) FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $ran_time  and time <= now() GROUP BY time($GROUP_BY_TIME_FINAL_REPORT_DATA) fill(null)" -database="home"
     #TODO: save the run's data}
 
-        #stop all PWMs
-    sudo systemctl kill spinmaster_main.service
+
+    #sudo systemctl kill spinmaster_main.service
 }
 
 print_start_message()
