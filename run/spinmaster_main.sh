@@ -77,8 +77,8 @@ startup()
 
     #start pump
       #TODO: PUMP_PWM_DUTYCYCLE = f($FLOW_RATE)
-      #PUMP_PWM_DUTYCYCLE=$FLOW_RATE
-      #dma_pwm.sh --frequency $PUMP_PWM_FREQUENCY --duty-cycle $PUMP_PWM_DUTYCYCLE --gpio $PUMP_PWM_GPIO &
+      PUMP_PWM_DUTYCYCLE=$FLOW_RATE
+      dma_pwm.sh --frequency $PUMP_PWM_FREQUENCY --duty-cycle $PUMP_PWM_DUTYCYCLE --gpio $PUMP_PWM_GPIO &
 
 
 
@@ -99,6 +99,12 @@ shutdown_()
       then
         echo killing pid_tec.sh instances
         kill $(ps aux | grep pid_tec.sh | grep -v grep | awk '{print $2}')
+    fi
+
+    if [[ $(ps aux | grep dma_pwm.sh | grep -v grep | awk '{print $2}') ]]
+          then
+            echo killing dma_pwm.sh instances
+            kill $(ps aux | grep dma_pwm.sh | grep -v grep | awk '{print $2}')
     fi
 
     echo writing 0 to pins
