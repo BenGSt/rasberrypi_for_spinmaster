@@ -95,12 +95,6 @@ shutdown_()
     echo Thank you for flying SpinMaster, have a nice day!
     echo \################################################
 
-    #stop all PWMs
-   # killall pid_tec.sh
-
-#    echo sleep 5
-#    sleep 5
-
     echo  ps aux \| grep pid_tec.sh :
     ps aux | grep pid_tec.sh
 
@@ -110,22 +104,18 @@ shutdown_()
         kill $(ps aux | grep pid_tec.sh | grep -v grep | awk '{print $2}')
     fi
 
-    echo write 0 to pins
+    echo writing 0 to pins
     for pin in $PUMP_PWM_GPIO $FM_LEFT_PWM_GPIO $FM_RIGHT_PWM_GPIO $RESERVOIR_HEATER_PWM_GPIO
     do
       pigs w $pin 0 #write 0 to pin
       echo pigs w $pin 0 #write 0 to pin
     done
 
-
-
     echo stop telegraf \(posts measurements to DB\)
     sudo systemctl stop telegraf_spinmaster.service
     sudo systemctl stop telegraf_polarimeter.service
 
-
-    # issue report
-
+    echo getting thermistor logs now() - $ran_time
     influx -execute "SELECT mean(*) FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $ran_time  and time <= now() GROUP BY time($GROUP_BY_TIME_FINAL_REPORT_DATA) fill(null)" -database="home" > $log_dir/thermistors.log
     #TODO: save the run's data}
 
