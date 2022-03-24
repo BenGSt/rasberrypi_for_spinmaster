@@ -94,7 +94,7 @@ shutdown_()
     #stop all PWMs
     echo killing pid_tec.sh instances
    # killall pid_tec.sh
-    ps aux | grep spinmaster_main.sh | awk '{print $2}' | kill
+    ps aux | grep spinmaster_main.sh | awk '{print $2}' |sudo  kill
 
     echo write 0 to pins
     for pin in $PUMP_PWM_GPIO $FM_LEFT_PWM_GPIO $FM_RIGHT_PWM_GPIO $RESERVOIR_HEATER_PWM_GPIO
