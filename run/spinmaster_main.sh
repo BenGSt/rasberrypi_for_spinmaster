@@ -101,11 +101,12 @@ shutdown_()
         kill $(ps aux | grep pid_tec.sh | grep -v grep | awk '{print $2}')
     fi
 
-    if [[ $(ps aux | grep dma_pwm.sh | grep -v grep | awk '{print $2}') ]]
-          then
-            echo killing dma_pwm.sh instances
-            kill $(ps aux | grep dma_pwm.sh | grep -v grep | awk '{print $2}')
-    fi
+# #dont need this block because pwm can be killed by writing 0 to pin once
+#    if [[ $(ps aux | grep dma_pwm.sh | grep -v grep | awk '{print $2}') ]]
+#          then
+#            echo killing dma_pwm.sh instances
+#            kill $(ps aux | grep dma_pwm.sh | grep -v grep | awk '{print $2}')
+#    fi
 
     echo writing 0 to pins
     for pin in $PUMP_PWM_GPIO $FM_LEFT_PWM_GPIO $FM_RIGHT_PWM_GPIO $RESERVOIR_HEATER_PWM_GPIO
@@ -120,7 +121,7 @@ shutdown_()
 
     echo getting thermistor logs now - $ran_time
     influx -execute "SELECT mean(*) FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $ran_time  and time <= now() GROUP BY time($GROUP_BY_TIME_FINAL_REPORT_DATA) fill(null)" -database="home" > $log_dir/thermistors.log
-    #TODO: save the run's data}
+
 
     echo
     echo \################################################
