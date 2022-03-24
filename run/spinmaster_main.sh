@@ -100,9 +100,9 @@ shutdown_()
     echo  ps aux \| grep pid_tec.sh :
     ps aux | grep pid_tec.sh
 
-    echo killing pid_tec.sh instances
     if [[ $(ps aux | grep pid_tec.sh | grep -v grep | awk '{print $2}') ]]
       then
+        echo killing pid_tec.sh instances
         kill $(ps aux | grep pid_tec.sh | grep -v grep | awk '{print $2}')
     fi
 
