@@ -40,6 +40,10 @@ main()
 
 startup()
 {
+    log_dir=$(date | sed 's/ /_/g' | awk '{print "SpinMaster_run_logs_"$0}')
+    mkdir /home/pi/$log_dir
+    log_dir=/home/pi/$log_dir
+
     export PATH="/home/pi/raspberrypi_for_SpinMaster/thermoelectric_cooler_control:$PATH"
     begin_date_time=$(date +%s)
 
@@ -62,14 +66,14 @@ startup()
       #             --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $FM_TEMP_LEFT -Kp $PID_COOLING_Kp -Ki $PID_COOLING_Ki -Kd $PID_COOLING_Kd
 
       pid_tec.sh --gpio $FM_LEFT_PWM_GPIO --thermistor_num $FM_LEFT_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
-                   --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $FM_TEMP_LEFT -Kp $PID_COOLING_Kp -Ki $PID_COOLING_Ki -Kd $PID_COOLING_Kd &
+                   --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $FM_TEMP_LEFT -Kp $PID_COOLING_Kp -Ki $PID_COOLING_Ki -Kd $PID_COOLING_Kd > $log_dir/fm_left_pid.log 2>&1 &
 
       pid_tec.sh --gpio $FM_RIGHT_PWM_GPIO --thermistor_num $FM_RIGHT_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
-                  --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $FM_TEMP_RIGHT -Kp $PID_COOLING_Kp -Ki $PID_COOLING_Ki -Kd $PID_COOLING_Kd &
+                  --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $FM_TEMP_RIGHT -Kp $PID_COOLING_Kp -Ki $PID_COOLING_Ki -Kd $PID_COOLING_Kd > $log_dir/fm_right_pid.log 2>&1 &
 
 #    start TEC heating
       pid_tec.sh --gpio $RESERVOIR_HEATER_PWM_GPIO --heating-mode --thermistor_num $RESERVOIR_HEATER_THERMISTOR_NUM --averaging-time $PID_MEASURMENT_AVG_TIME \
-                  --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $RESERVOIR_TARGET_TEMP -Kp $PID_HEATING_Kp -Ki $PID_HEATING_Ki -Kd $PID_HEATING_Kd &
+                  --time_element_dt $PID_TIME_ELEMENT_DT --desired_temperature $RESERVOIR_TARGET_TEMP -Kp $PID_HEATING_Kp -Ki $PID_HEATING_Ki -Kd $PID_HEATING_Kd > $log_dir/heater_pid.log 2>&1 &
 
     #start pump
       #TODO: PUMP_PWM_DUTYCYCLE = f($FLOW_RATE)
@@ -122,7 +126,7 @@ shutdown_()
 
     # issue report
 
-    influx -execute "SELECT mean(*) FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $ran_time  and time <= now() GROUP BY time($GROUP_BY_TIME_FINAL_REPORT_DATA) fill(null)" -database="home"
+    influx -execute "SELECT mean(*) FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $ran_time  and time <= now() GROUP BY time($GROUP_BY_TIME_FINAL_REPORT_DATA) fill(null)" -database="home" > thermistors.log
     #TODO: save the run's data}
 
 
