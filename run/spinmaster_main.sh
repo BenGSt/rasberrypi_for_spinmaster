@@ -89,11 +89,8 @@ shutdown_()
 {
     end_date_time=$(date +%s)
     ran_time=$(($end_date_time - $begin_date_time))
-    echo
-    echo \################################################
-    echo Finished spinmaster run. Ran for: $ran_time sec
-    echo Thank you for flying SpinMaster, have a nice day!
-    echo \################################################
+    cp /home/pi/spinmaster_service_env_file $log_dir/run_params.log
+
 
     echo  ps aux \| grep pid_tec.sh :
     ps aux | grep pid_tec.sh
@@ -119,8 +116,12 @@ shutdown_()
     influx -execute "SELECT mean(*) FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $ran_time  and time <= now() GROUP BY time($GROUP_BY_TIME_FINAL_REPORT_DATA) fill(null)" -database="home" > $log_dir/thermistors.log
     #TODO: save the run's data}
 
+    echo
+    echo \################################################
+    echo Finished spinmaster run. Ran for: $ran_time sec
+    echo Thank you for flying SpinMaster, have a nice day!
+    echo \################################################
 
-    #sudo systemctl kill spinmaster_main.service
 }
 
 print_start_message()
