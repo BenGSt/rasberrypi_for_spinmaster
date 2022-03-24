@@ -93,6 +93,10 @@ shutdown_()
 
     #stop all PWMs
    # killall pid_tec.sh
+
+    echo sleep 5
+    sleep 5
+
     echo  ps aux \| grep spinmaster_main.sh :
     ps aux | grep spinmaster_main.sh
 
