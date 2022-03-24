@@ -47,6 +47,8 @@ startup()
     export PATH="/home/pi/raspberrypi_for_SpinMaster/thermoelectric_cooler_control:$PATH"
     begin_date_time=$(date +%s)
 
+    echo SPINMASTER_RUNNING=1 > /home/pi/raspberrypi_for_SpinMaster/spinmaster_lcd/enviroment_variables_for_lcd_service
+
     #start telegraf (posts measurements to DB)
     sudo systemctl start telegraf_spinmaster.service
     sleep 5
@@ -122,6 +124,7 @@ shutdown_()
     echo getting thermistor logs now - $ran_time
     influx -execute "SELECT mean(*) FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $(echo $ran_time"s")  and time <= now() GROUP BY time($GROUP_BY_TIME_FINAL_REPORT_DATA) fill(null)" -database="home" > $log_dir/thermistors.log
 
+    echo SPINMASTER_RUNNING=0 > /home/pi/raspberrypi_for_SpinMaster/spinmaster_lcd/enviroment_variables_for_lcd_service
 
     echo
     echo \################################################
