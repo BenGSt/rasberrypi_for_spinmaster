@@ -94,8 +94,8 @@ shutdown_()
     #stop all PWMs
    # killall pid_tec.sh
 
-    echo sleep 5
-    sleep 5
+#    echo sleep 5
+#    sleep 5
 
     echo  ps aux \| grep pid_tec.sh :
     ps aux | grep pid_tec.sh
