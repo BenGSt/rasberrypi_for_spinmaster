@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 
+N_TIMES_TRY_GET_TEMP=5
 #dma_pwm_script=thermoelectric_cooler_control/dma_pwm.sh
 dma_pwm_script=/home/pi/raspberrypi_for_SpinMaster/thermoelectric_cooler_control/dma_pwm.sh
 pwm_frequency=20000
@@ -43,15 +44,23 @@ main()
   integral=0
   max_pwm_duty_cycle=100
 
-#  i=3
+  err_count=0
   while [[ 1 ]]
     do
       measured_temp=`influx -execute "SELECT mean(\"Tc_thermistor$THERMISTOR_NUM\") FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $AVG_TIME and time <= now() GROUP BY time(1m) fill(null)" -database="home" |awk 'NR==4 {printf("%.1f", $2)}'`
       echo measured_temp=$measured_temp
+
       if [[ !($measured_temp) ]]
         then
-        echo Error: $(echo $0 | awk -F / '{print $NF}'): No measured temp, check ADC and thermistors. \(exit 1\)
-        exit 1
+          if [[ $err_count == $N_TIMES_TRY_GET_TEMP ]]
+            then
+              echo Error: $(echo $0 | awk -F / '{print $NF}'): No measured temp, check ADC and thermistors. \(exit 1\)
+              exit 1
+            else #if [[ $err_count < $N_TIMES_TRY_GET_TEMP ]]
+              echo Error: $(echo $0 | awk -F / '{print $NF}'): No measured temp, will use previous temp (try $err_count out of $N_TIMES_TRY_GET_TEMP)
+          fi
+        else # if [[ $measured_temp ]]
+          err_count=0
       fi
 
       if [[ $HEATING_MODE == 1 ]]
