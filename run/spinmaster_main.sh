@@ -92,8 +92,11 @@ shutdown_()
     echo \################################################
 
     #stop all PWMs
-    echo killing pid_tec.sh instances
    # killall pid_tec.sh
+    echo  ps aux \| grep spinmaster_main.sh :
+    ps aux | grep spinmaster_main.sh
+
+    echo killing pid_tec.sh instances
     ps aux | grep spinmaster_main.sh | awk '{print $2}' |sudo  kill
 
     echo write 0 to pins
