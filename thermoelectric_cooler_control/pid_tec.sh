@@ -47,6 +47,7 @@ main()
   err_count=0
   while [[ 1 ]]
     do
+      previous_temp=$measured_temp
       measured_temp=`influx -execute "SELECT mean(\"Tc_thermistor$THERMISTOR_NUM\") FROM \"exe_thermistors_logfmt\" WHERE time >= now() - $AVG_TIME and time <= now() GROUP BY time(1m) fill(null)" -database="home" |awk 'NR==4 {printf("%.1f", $2)}'`
       echo measured_temp=$measured_temp
 
@@ -58,6 +59,7 @@ main()
               exit 1
             else #if [[ $err_count < $N_TIMES_TRY_GET_TEMP ]]
               echo Error: $(echo $0 | awk -F / '{print $NF}'): No measured temp, will use previous temp \(try $err_count out of $N_TIMES_TRY_GET_TEMP\)
+              measured_temp=$previous_temp
           fi
         else # if [[ $measured_temp ]]
           err_count=0
