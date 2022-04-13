@@ -115,7 +115,11 @@ shutdown_()
     echo writing 0 to pins
     for pin in $PUMP_PWM_GPIO $FM_LEFT_PWM_GPIO $FM_RIGHT_PWM_GPIO $RESERVOIR_HEATER_PWM_GPIO
     do
-      pigs w $pin 0 #write 0 to pin
+      while ! pigs w $pin 0 ; do #write 0 to pin
+          sudo pigpiod -s 2
+          echo pigpiod failed - restarting it
+      done
+
       echo pigs w $pin 0 #write 0 to pin
     done
 
