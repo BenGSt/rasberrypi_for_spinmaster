@@ -38,8 +38,8 @@ EOF
 
 main()
 {
-  #TODO: turn off pwm when exiting script
   arg_parse "$@"
+  trap shutdown_ EXIT #turn off pwm when exiting script
   previous_error=0
   integral=0
   max_pwm_duty_cycle=100
@@ -173,5 +173,11 @@ arg_parse()
     esac
   done
 }
+shutdown_()
+{
+      pigs w $pwm_gpio0 #write 0 to pin
+      echo pid_tec.sh: pigs w $pwm_gpio 0 #write 0 to pin
+}
+
 
 main "$@"
