@@ -47,7 +47,9 @@ startup()
     export PATH="/home/pi/raspberrypi_for_SpinMaster/thermoelectric_cooler_control:$PATH"
     begin_date_time=$(date +%s)
 
+    #write info to file for LCD display
     echo SPINMASTER_RUNNING=1 > /home/pi/raspberrypi_for_SpinMaster/spinmaster_lcd/enviroment_variables_for_lcd_service
+    cat  /home/pi/spinmaster_service_env_file >> /home/pi/raspberrypi_for_SpinMaster/spinmaster_lcd/enviroment_variables_for_lcd_service
 
     #start telegraf (posts measurements to DB)
     sudo systemctl start telegraf_spinmaster.service
