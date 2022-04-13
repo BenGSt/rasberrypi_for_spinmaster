@@ -56,7 +56,7 @@ try:
     if "SPINMASTER_RUNNING" in os.environ and int(os.environ.get("SPINMASTER_RUNNING")) != 0:
         display.lcd_display_string("    Running    ", 2)
         sleep(2)
-        display.lcd_display_string("fm_target_temperature " + str(os.environ.get("fm_target_temperature")), 2)
+        display.lcd_display_string("fm_T=" + str(os.environ.get("fm_target_temperature")), 2)
         sleep(2)
         display.lcd_display_string("    Running    ", 2)
         sleep(2)
