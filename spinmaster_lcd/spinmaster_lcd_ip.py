@@ -56,9 +56,17 @@ try:
     if "SPINMASTER_RUNNING" in os.environ and int(os.environ.get("SPINMASTER_RUNNING")) != 0:
         display.lcd_display_string("    Running    ", 2)
         sleep(2)
-        display.lcd_display_string("fm_T=" + str(os.environ.get("fm_target_temperature")), 2)
+        display.lcd_display_string("                ", 2)
+        display.lcd_display_string("fm_target_T=" + str(os.environ.get("fm_target_temperature")), 2)
         sleep(2)
-        display.lcd_display_string("    Running    ", 2)
+        display.lcd_display_string("                ", 2)
+        display.lcd_display_string("res_target_T=" + str(os.environ.get("reservoir_target_temperature")), 2)
+        sleep(2)
+        display.lcd_display_string("                ", 2)
+        display.lcd_display_string("flow_rate_DC=" + str(os.environ.get("flow_rate")), 2)
+        sleep(2)
+        display.lcd_display_string("                ", 2)
+        display.lcd_display_string("run_time=" + str(os.environ.get("run_time")), 2)
         sleep(2)
 
     else:
