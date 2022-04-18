@@ -7,6 +7,7 @@ RESERVOIR_HEATER_PWM_GPIO=22
 
 shutdown_()
 {
+  #TODO:print output to some log
   sudo systemctl stop spinmaster_main.service
   echo  ps aux \| grep spinmaster_main.sh :
   ps aux | grep spinmaster_main.sh
@@ -53,7 +54,7 @@ shutdown_()
 
     echo
     echo \################################################
-    echo Finished spinmaster run. Ran for: $ran_time sec
+    echo This is spinmaster emergency fail safe shutdown
     echo Thank you for flying SpinMaster, have a nice day!
     echo \################################################
 
