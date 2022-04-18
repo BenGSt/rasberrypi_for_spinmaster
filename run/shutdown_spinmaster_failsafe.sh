@@ -54,7 +54,7 @@ shutdown_()
 
     echo
     echo \################################################
-    echo This is spinmaster emergency fail safe shutdown
+    echo This is spinmaster emergency fail-safe shutdown
     echo Thank you for flying SpinMaster, have a nice day!
     echo \################################################
 
