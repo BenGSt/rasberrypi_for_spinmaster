@@ -60,6 +60,7 @@ main()
             else #if [[ $err_count < $N_TIMES_TRY_GET_TEMP ]]
               echo Error: $(echo $0 | awk -F / '{print $NF}'): No measured temp, will use previous temp \(try $err_count out of $N_TIMES_TRY_GET_TEMP\)
               measured_temp=$previous_temp
+              err_count=$(($err_count + 1))
           fi
         else # if [[ $measured_temp ]]
           err_count=0
